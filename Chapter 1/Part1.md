@@ -22,19 +22,23 @@ Processes:
 
 What do these things have in common.  One is you can assign a fixed set of traits to them.  You can enumerate them.  For example:
 
+```
 Car 1
 Make: Honda
 Model: Civic
 Color: White
 MPG: 24
 Engine Size: 2.0L
+```
 
+```
 Car 2:
 Make: Honda
 Model: Civic
 Color: Grey
 MPG: 24
 Engine Size: 2.0L
+```
 
 Both cars have the same traits.  Each car represents one type of car.  In SQL databases, we represent a dataset with the concept of a table.  The fixed traits are represented by columns and each car is represented by a row.  Below, we have a table without data.  You can see the columns as fixed traits:
 
