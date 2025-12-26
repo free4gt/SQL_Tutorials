@@ -6,6 +6,10 @@ This course will emphasize two topics: Structured Query Language (SQL) and Relat
 
 Counterintuitively, I will not mention any SQL in the first three chapters.  I want the audience to have an intuition for how SQL databases are used without focusing on computer language syntax.  This will help the audience understand why SQL databases are used and what type of operations are common to SQL databases.  Hopefully, this will provide more context when writing SQL itself.  The first chapter will talk about how datasets are built.  The second chapter will talk about how databases are used to answer business questions.  The 3rd chapter will talk about what a SQL database actually is.  This chapter will be dedicated to talking about what a computer is and what a SQL database looks like under the cover.  I provide this "look" into database as software to prevent the feeling that you are working with a black box.  Chapter 4 and beyond will focus on translating the first two chapters into SQL statements.  These sections really benefit from dedicated practice.
 
+## What is a Database?
+
+... TBD
+
 ## Table of Contents:
 
 1. Chapter 1 - web application viewpoint
