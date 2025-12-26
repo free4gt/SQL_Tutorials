@@ -149,9 +149,11 @@ The table this data targets is as follows:
 Table: CarModel  
 | model_id | make | model | engine_size | mpg |
 |:----------|:------|:-------|:-------------|:----|
+```
 
 After the web app processes the form and updates the database, we have the following result:
 
+```
 Table: CarModel  
 | model_id | make   | model | engine_size  | mpg |
 |:----------|:-------|:------|:--------------|:----|
