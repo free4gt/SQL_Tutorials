@@ -104,6 +104,70 @@ Typically, SQL databases can have dozen to hundreds of tables.  Each designed to
 
 When working with databases, it is often worth learning about different tables by looking at the data.  It's also worth trying to understand how different tables are related.   How that data gets used in real life.  How people interact with that data often in the form of software or web applications.  Knowledge is power.
 
+## Relationships
+
+Let's look at our original Car table, but add 3 new cars:
+
+Car Table:
+
+| Car ID | Make   | Model   | Color | Engine Size | MPG |
+|:-------|:-------|:--------|:------|:------------|:----|
+| 1      | Honda  | Civic   | White | 2.0L        | 24  |
+| 2      | Honda  | Civic   | Grey  | 2.0L        | 24  |
+| 3      | Toyota | Corolla | Blue  | 1.8L        | 32  |
+| 4      | Toyota | Corolla | Red   | 1.8L        | 33  |
+| 5      | Ford   | Mustang | Black | 5.0L        | 18  |
+
+We note that their are two Civics, two Corollas and one Mustang.  
+
+One thing we should notice is that two of the attributes: Engine Size and MPG are dependent on the Model column.  If we, for example, add two new Civics, we would end up repeating values for Engine Size => 2.0L and MPG => 24.  This creates a lot of redundant data.  We could instead produce two tables:
+
+Car Table:
+
+| Car ID | Model ID | Color |
+|:-------|:--------|:------|
+| 1      | 1       | White |
+| 2      | 1       | Grey  |
+| 3      | 2       | Blue  |
+| 4      | 2       | Red   |
+| 5      | 3       | Black |
+
+Car Model Table
+
+| Model ID | Make   | Model   | Engine Size | MPG |
+|:--------|:-------|:--------|:------------|:----|
+| 1       | Honda  | Civic   | 2.0L        | 24  |
+| 2       | Toyota | Corolla | 1.8L        | 32  |
+| 3       | Ford   | Mustang | 5.0L        | 18  |
+
+The Car and Car Model table both share a new Model ID column.  In the Car Model table the Model ID is a primary key and is unique per row.  Primary key is the row's identity.  In the Car Table Model ID is a reference to the Car Model Table.  A key that references another table is called a foreign key.  This can have duplicates since two cars can have the same car model aka both are Civics.
+
+The foreign key can be used to re-create the previous Car table.  We just choose the new Car Table, go down the Model ID column selecting each value and matching it with the corresponding Model ID in the Car Model Table.  When we have a match, we copy over all the attributes in that row.  The result can be seen below:
+
+| Car ID | Color | Model ID | Model ID | Make   | Model   | Engine Size | MPG |
+|:-------|:------|:----------|:----------|:-------|:--------|:------------|:----|
+| 1      | White | 1         | 1         | Honda  | Civic   | 2.0L        | 24  |
+| 2      | Grey  | 1         | 1         | Honda  | Civic   | 2.0L        | 24  |
+| 3      | Blue  | 2         | 2         | Toyota | Corolla | 1.8L        | 32  |
+| 4      | Red   | 2         | 2         | Toyota | Corolla | 1.8L        | 32  |
+| 5      | Black | 3         | 3         | Ford   | Mustang | 5.0L        | 18  |
+
+Note the two Model ID columns are matching and bringing in the fields from the Car Model Table on the right.  After removing our Model ID from the table, we get the original table:
+
+| Car ID | Color | Make   | Model   | Engine Size | MPG |
+|:-------|:------|:-------|:--------|:------------|:----|
+| 1      | White | Honda  | Civic   | 2.0L        | 24  |
+| 2      | Grey  | Honda  | Civic   | 2.0L        | 24  |
+| 3      | Blue  | Toyota | Corolla | 1.8L        | 32  |
+| 4      | Red   | Toyota | Corolla | 1.8L        | 32  |
+| 5      | Black | Ford   | Mustang | 5.0L        | 18  |
+
+The ability to store data separately and combine them when needed is an excellent trait of SQL Databases.  This operation is called a join.  Two matching columns are joined on.  Note, we will get deeper into joins in the joins section.
+
+One might ask, why does this matter?  The answer is data storage.  Each Car Model has 4 attributes: Make, Model, Engine Size and MPG.  A foreign key has only 1 attribute: Model ID.  The Model ID is a number, which is much cheaper to store than text values: Make, Model and Engine Size.  This doesn't make much of a difference when you only have 5 cars.  When you have a few million cars the extra redundant data starts to add up.  You might have to upgrade your data storage space.
+
+It's also very inefficient.  Let's say I discover my Civic actually has 26 MPG instead of 24 MPG.  If all data is in a single table, I have to find every single Civic in the table and update the MPG value from 24 to 26.  If I split the table into Car and Car Model, then I only have to update one value in the Car Model Table.  The Car Model table will only have one unique row associated with Civics.
+
 ## Next Section
 
 In the next section, we will take on the role of a software engineer.  We will explore how the software engineer through a web app manipulates different SQL tables.  No knowledge of software engineering is required.  There won't be any code.  Instead we study their interaction with the system.  We will do so by using a methodology called: CRUD. CRUD stands for:
