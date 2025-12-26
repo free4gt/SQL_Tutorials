@@ -145,6 +145,7 @@ An example user form is in markdown language above (I'll add image in future).  
 
 The table this data targets is as follows:
 
+```
 Table: CarModel  
 | model_id | make | model | engine_size | mpg |
 |:----------|:------|:-------|:-------------|:----|
