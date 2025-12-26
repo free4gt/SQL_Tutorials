@@ -1,4 +1,4 @@
-# Understanding Tables
+# How data gets generated 
 
 ## Introduction
 
