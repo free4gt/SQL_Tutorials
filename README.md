@@ -21,3 +21,7 @@ This course is taught by going through real world processes and showing how SQL 
 ## Data Cycle
 
 This course will show how people interact with SQL Databases.  It will also show how data can flow between two SQL Databases.  We do this in a minimalistic way by exclusively providing SQL.  SQL and SQL Databases are often embedded in other processes that are not SQL or SQL database centered.  We will provide limited context on these processes, while emphasizing SQL and SQL Databases role within the greater system.  We hope the additional context will be helpful.
+
+## Computers and Software
+
+During the set-up chapter, I will have two sections.  The first section will explain how to install a SQL Database.  The second section will give a 40,000 foot view of what a database is.  The later section can be viewed more as a reference.  I provide it, because I find it valuable.  My philosophy is to not hide things.  If this section feels confusing or jargon heavy, feel free to skip it.  It has no baring on the rest of the course.
