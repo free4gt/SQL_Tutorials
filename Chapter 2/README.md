@@ -1,4 +1,0 @@
-# Setting up Databases
-
-## Introduction
-
