@@ -18,14 +18,6 @@ This course is taught by going through real world processes and showing how SQL 
 | Modifying Data   | We discuss modifying data and deleting data                                     |
 | Analyzing Data   | We discuss viewing and analyzing data                                           |
 
-During this course, I will show a simplified view of how different teams use SQL Databases.  We will discuss tasks typically associated with: 
+## Data Cycle
 
-* Software Engineer managing a Web Application
-* Call center employee using a user form
-* Data Engineer moving data between two systems
-* Business Intelligence Developer generating data insights reports
-* Business Analyst supporting presentations for senior executives
-
-When discussing these roles, I might introduce topics outside of SQL Databases.  The emphasis will be how all these groups interact with the SQL Database.
-
-Data in this course will be modeled on a Car Manufacturer.  I'm no expert on this domain.  It represents a real world object and system.  That makes it practical.
+This course will show how people interact with SQL Databases.  It will also show how data can flow between two SQL Databases.  We do this in a minimalistic way by exclusively providing SQL.  SQL and SQL Databases are often embedded in other processes that are not SQL or SQL database centered.  We will provide limited context on these processes, while emphasizing SQL and SQL Databases role within the greater system.  We hope the additional context will be helpful.
