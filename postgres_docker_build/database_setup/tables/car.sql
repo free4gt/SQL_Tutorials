@@ -1,8 +1,11 @@
--- Simple car table for tutorials
 CREATE TABLE cars (
-    id SERIAL PRIMARY KEY,
-    make VARCHAR(50) NOT NULL,
-    model VARCHAR(50) NOT NULL,
-    price_usd DECIMAL(10,2) CHECK (price_usd > 0),
-    color VARCHAR(30)
+    car_id INT PRIMARY KEY,
+    make VARCHAR(50),
+    model VARCHAR(50),
+    color VARCHAR(30),
+    trim VARCHAR(50),
+    production_cost DECIMAL(10,2),
+    retail_cost DECIMAL(10,2),
+    production_date DATE,
+    quantity INT
 );

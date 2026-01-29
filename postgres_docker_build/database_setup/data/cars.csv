@@ -1,9 +1,6 @@
-make|model|price_usd|color
-Toyota|Camry|28500.00|Silver
-Honda|Civic|24500.00|Blue
-Ford|F-150|42500.00|Red
-Tesla|Model 3|38900.00|White
-Chevrolet|Silverado|36500.00|Black
-BMW|X5|55000.00|Gray
-Mercedes|GLE|62000.00|Black
-Nissan|Altima|25900.00|White
+car_id|make|model|color|trim|production_cost|retail_cost|production_date|quantity
+1|Toyota|Corolla|Silver|LE|18000|23000|2025-02-15|500
+2|Toyota|Camry|White|XSE|22000|29000|2025-03-15|500
+3|Toyota|RAV4|Blue|XLE|25000|33000|2025-04-15|300
+4|Toyota|Tacoma|Red|TRD Off|27000|37000|2025-05-15|500
+5|Toyota|Highlander|Black|Limited|32000|43000|2025-06-15|300
