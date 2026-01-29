@@ -1,5 +1,5 @@
 \c car_factory
 
-COPY cars (make, model, price_usd, color) 
-FROM '/database_setup/data/cars.csv'  -- Capital D
+COPY cars (car_id, make, model, color, trim, production_cost, retail_cost, production_date, quantity)
+FROM '/database_setup/data/cars.csv'
 WITH (FORMAT csv, DELIMITER '|', HEADER true);
