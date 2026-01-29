@@ -10,6 +10,10 @@ For this tutorial, we will focus on Relational Database Management Systems (RDBM
 
 The folders are lessons, practice and postgres_build.  Lessons is lectures I'm working on.  I might have two sets: my version and a more basic version (we will see).  practice is a folder that will have practice problems in it.  These will either be sets to practice on or case studies.  postgres_build is made for administrators.  It's a very basic set of scripts used by the content creators to create a template database you can download online.  This database comes pre-fabricated with data.  It uses docker to start.  This will be explained later on.
 
+## Public Docker image with pre-fabricated data
+
+We will push a public postgres 17.7 image with pre-fabricated data at free4life/free-sql:latest docker hub public repo.  Currently, it only includes cars data set with 5 cars total.  Work in progress.
+
 ## Course Overview
 
 This course is taught by going through real world processes and showing how SQL and SQL Databases fit into that process.  The content covered is listed below:
