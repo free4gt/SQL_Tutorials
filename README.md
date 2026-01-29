@@ -6,6 +6,10 @@ This course will cover SQL - Structured Query Language.  SQL is a computer langu
 
 For this tutorial, we will focus on Relational Database Management Systems (RDBMS).  I would say almost all RDBMS use SQL.  I can't think of one that doesn't.  For this reason, RDBMS are often referred to as SQL databases.  We will use this shorthand during this course (RDBMS are not the only SQL Databases, but they are easily the most common).  I might cover other databases or technologies when discussing data analysis.
 
+## Folders 
+
+The folders are lessons, practice and postgres_build.  Lessons is lectures I'm working on.  I might have two sets: my version and a more basic version (we will see).  practice is a folder that will have practice problems in it.  These will either be sets to practice on or case studies.  postgres_build is made for administrators.  It's a very basic set of scripts used by the content creators to create a template database you can download online.  This database comes pre-fabricated with data.  It uses docker to start.  This will be explained later on.
+
 ## Course Overview
 
 This course is taught by going through real world processes and showing how SQL and SQL Databases fit into that process.  The content covered is listed below:
