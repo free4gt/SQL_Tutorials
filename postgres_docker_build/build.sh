@@ -1,1 +1,3 @@
-docker build -t free-sql:latest .
+#!/bin/bash
+
+docker build --no-cache -t free-sql:latest .
