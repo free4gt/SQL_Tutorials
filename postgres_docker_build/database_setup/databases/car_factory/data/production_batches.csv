@@ -1,0 +1,6 @@
+batch_id|model_id|color_id|trim_id|planned_date|planned_quantity|status
+1|1|1|1|2025-02-15|500|complete
+2|2|2|2|2025-03-15|500|complete
+3|3|3|3|2025-04-15|300|complete
+4|4|4|4|2025-05-15|500|complete
+5|5|5|5|2025-06-15|300|complete
