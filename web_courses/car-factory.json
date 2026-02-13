@@ -2,29 +2,24 @@
   "name": "Intro Course - Car Factory",
   "lessons": [
     {
-      "id": "ExWOMwBez34",
+      "id": "M0HYcnwMIjQ",
       "title": "1. Tesla Factory Tour - Full Process",
       "notes": "<h3>Tesla Gigafactory Tour</h3><p>Complete look at Tesla's massive Gigafactory. Watch raw aluminum castings turn into finished Model Y cars in under 2 hours through casting, press shop, bodying, painting, and general assembly.</p><ul><li>6000-ton casting machines</li><li>4000 robotic welders</li><li>1.2 million cars/year capacity</li></ul>"
     },
     {
-      "id": "iMQ1fNY8TbA",
+      "id": "VuSy4-69bAY",
       "title": "2. BMW Body Shop Robots",
       "notes": "<h3>BMW Body Shop - Robotic Welding</h3><p>Watch 500+ robots weld BMW car bodies with micron-level precision. Each body gets 4500+ weld points in complete darkness for quality control.</p><ul><li>Spot welding, MIG welding, laser welding</li><li>Zero human contact during welding</li><li>Body-in-white ready for paint shop</li></ul>"
     },
     {
-      "id": "pF4FOv9hZtc", 
+      "id": "KI6UHGiK2vE", 
       "title": "3. Porsche Paint Shop",
       "notes": "<h3>Porsche Paint Shop - 9 Stage Process</h3><p>Inside Porsche's state-of-the-art paint facility. Cars go through 9 separate paint layers including cathodic dip coating, primer, base coat, and 3 clear coats - all robotically applied.</p><ul><li>140°F baking between layers</li><li>Zero defects tolerance</li><li>Custom color mixing on-demand</li></ul>"
     },
     {
-      "id": "zLrzCe93vJk",
+      "id": "dXRRF8I3SZs",
       "title": "4. Toyota Final Assembly",
       "notes": "<h3>Toyota Final Assembly Line</h3><p>Final assembly where engines, transmissions, seats, wiring, and interiors get installed. Famous Toyota Production System with kanban cards and just-in-time delivery.</p><ul><li>1.7 minutes per car station time</li><li>Andon cord stops line instantly</li><li>100+ quality checks per vehicle</li></ul>"
-    },
-    {
-      "id": "KL5UWoIgJIM",
-      "title": "5. Ferrari Quality Control",
-      "notes": "<h3>Ferrari Final Inspection</h3><p>Every Ferrari gets hand-inspected by master technicians. 400+ point checklist including engine dyno testing, suspension alignment, and aesthetic perfection.</p><ul><li>LED light tunnels for paint defects</li><li>48-hour final quality hold</li><li>Owner delivery preparation</li></ul>"
     }
   ]
 }
