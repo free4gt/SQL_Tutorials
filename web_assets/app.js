@@ -10,7 +10,6 @@ createApp({
     const errorMessage = ref('');
     const courseList = ref([]);
     
-    // Load table of contents
     const loadCourseList = async () => {
       try {
         const response = await fetch('./web_courses/table-of-contents.json');
@@ -19,13 +18,7 @@ createApp({
       } catch (error) {
         console.error('Failed to load table of contents:', error);
         courseList.value = [];
-      }
-    };
-
-    const initApp = async () => {
-      await loadCourseList();
-      if (courseList.value.length > 0) {
-        await selectCourse(0);
+        errorMessage.value = 'Failed to load course list';
       }
     };
 
@@ -44,7 +37,7 @@ createApp({
         errorMessage.value = `Failed to load ${courseList.value[courseIndex]?.name || 'course'}`;
         console.error('Failed to load course:', error);
       } finally {
-        isLoading.value = false;
+        isLoading.loading = false;
       }
     };
 
@@ -53,11 +46,12 @@ createApp({
       const lesson = currentCourse.value?.lessons?.[index];
       if (lesson) {
         currentVideoId.value = lesson.id;
-        currentNotes.value = lesson.notes;
+        currentNotes.value = lesson.notes || '<p>No notes available</p>';
       }
     };
 
-    initApp();
+    // Load courses on startup
+    loadCourseList();
 
     return {
       currentCourse,
