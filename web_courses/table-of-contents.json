@@ -1,4 +1,4 @@
 [
-  { "name": "Intro Course - Car Factory", "file": "car-factory.json" },
-  { "name": "Practice", "file": "practice.json" }
+  { "name": "Intro Course", "file": "car-factory.json" },
+  { "name": "Beginner Practice", "file": "practice.json" }
 ]
