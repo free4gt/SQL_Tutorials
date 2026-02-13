@@ -37,7 +37,7 @@ createApp({
         errorMessage.value = `Failed to load ${courseList.value[courseIndex]?.name || 'course'}`;
         console.error('Failed to load course:', error);
       } finally {
-        isLoading.loading = false;
+        isLoading.value = false;  // ✅ FIXED
       }
     };
 
@@ -50,8 +50,14 @@ createApp({
       }
     };
 
-    // Load courses on startup
-    loadCourseList();
+    // Auto-load first course + video on startup ✅
+    const initApp = async () => {
+      await loadCourseList();
+      if (courseList.value.length > 0) {
+        await selectCourse(0);  // Auto-plays first video!
+      }
+    };
+    initApp();
 
     return {
       currentCourse,
