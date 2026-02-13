@@ -1,25 +1,25 @@
 {
   "name": "Practice",
   "lessons": [
-   {
+    {
       "id": "M0HYcnwMIjQ",
-      "title": "1. Tesla Factory Tour - Full Process",
-      "notes": "<h3>Tesla Gigafactory Tour</h3><p>Complete look at Tesla's massive Gigafactory. Watch raw aluminum castings turn into finished Model Y cars in under 2 hours through casting, press shop, bodying, painting, and general assembly.</p><ul><li>6000-ton casting machines</li><li>4000 robotic welders</li><li>1.2 million cars/year capacity</li></ul>"
+      "title": "Medieval Tiny Realm",
+      "notes": "<h3>Medieval Tiny Realm</h3><p>Tiny Realms creates stunning Generative AI videos of miniature historical worlds. This medieval scene captures the essence of feudal Europe around 1100-1400 AD.</p><p>Watch knights in full plate armor patrol castle walls while peasant villages bustle around watermills and Gothic cathedrals rise in the distance. Ox-plows till muddy fields as monks copy manuscripts by candlelight.</p>"
     },
     {
       "id": "VuSy4-69bAY",
-      "title": "2. BMW Body Shop Robots",
-      "notes": "<h3>BMW Body Shop - Robotic Welding</h3><p>Watch 500+ robots weld BMW car bodies with micron-level precision. Each body gets 4500+ weld points in complete darkness for quality control.</p><ul><li>Spot welding, MIG welding, laser welding</li><li>Zero human contact during welding</li><li>Body-in-white ready for paint shop</li></ul>"
+      "title": "Industrial Tiny Realm",
+      "notes": "<h3>Industrial Tiny Realm</h3><p>Tiny Realms produces mesmerizing Generative AI content showing miniature historical eras. This industrial scene recreates 19th-century factory towns during the peak of the Industrial Revolution (1830-1900).</p><p>Steam engines drive massive ironworks while child laborers tend spinning jennies. Smokestacks darken the sky as railroads connect grimy factory districts to distant coalfields.</p>"
     },
     {
-      "id": "KI6UHGiK2vE", 
-      "title": "3. Porsche Paint Shop",
-      "notes": "<h3>Porsche Paint Shop - 9 Stage Process</h3><p>Inside Porsche's state-of-the-art paint facility. Cars go through 9 separate paint layers including cathodic dip coating, primer, base coat, and 3 clear coats - all robotically applied.</p><ul><li>140°F baking between layers</li><li>Zero defects tolerance</li><li>Custom color mixing on-demand</li></ul>"
+      "id": "KI6UHGiK2vE",
+      "title": "Feudal Japan Tiny Realm",
+      "notes": "<h3>Feudal Japan Tiny Realm</h3><p>Tiny Realms crafts beautiful Generative AI reconstructions of historical micro-worlds. This video depicts Sengoku-era Japan (1467-1603) during the Warring States period.</p><p>Samurai in lacquered armor clash with naginata spears while ninja scale castle walls. Rice paddies surround fortified yamashiros as Buddhist temples ring with war drums.</p>"
     },
     {
       "id": "dXRRF8I3SZs",
-      "title": "4. Toyota Final Assembly",
-      "notes": "<h3>Toyota Final Assembly Line</h3><p>Final assembly where engines, transmissions, seats, wiring, and interiors get installed. Famous Toyota Production System with kanban cards and just-in-time delivery.</p><ul><li>1.7 minutes per car station time</li><li>Andon cord stops line instantly</li><li>100+ quality checks per vehicle</li></ul>"
+      "title": "Chernobyl Tiny Realm",
+      "notes": "<h3>Chernobyl Tiny Realm</h3><p>Tiny Realms generates haunting Generative AI depictions of significant historical moments. This scene recreates Pripyat, Ukraine in April 1986 immediately after the Chernobyl nuclear disaster.</p><p>Ferris wheels stand frozen mid-turn in abandoned amusement parks. Reactor 4's graphite fire glows while firefighters in inadequate gear battle invisible radiation in khaki Soviet uniforms.</p>"
     }
   ]
 }
