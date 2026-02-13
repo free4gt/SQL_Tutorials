@@ -1,0 +1,25 @@
+{
+  "name": "Practice",
+  "lessons": [
+    {
+      "id": "2kOTltapYNI",
+      "title": "1. Practice: Welding Robot Programming",
+      "notes": "<h3>Robot Welding Practice</h3><p>Hands-on programming of industrial welding robots. Learn teach pendant operation, path planning, and weld parameter settings used in real car factories.</p><ul><li>6-axis robot kinematics</li><li>Weld seam tracking</li><li>Safety interlocks & fencing</li></ul>"
+    },
+    {
+      "id": "XJ7q9YkL5pM", 
+      "title": "2. Practice: Paint Booth Operations",
+      "notes": "<h3>Paint Shop Practice</h3><p>Automotive paint booth operations including spray gun handling, booth ventilation, and quality inspection. Practice on training panels before real cars.</p><ul><li>HVLP spray techniques</li><li>Orange peel prevention</li><li>Paint defect identification</li></ul>"
+    },
+    {
+      "id": "b8RVWca2RxU",
+      "title": "3. Practice: Assembly Line Timing",
+      "notes": "<h3>Assembly Line Practice</h3><p>Toyota-style assembly line simulation. Practice 90-second takt time per station with real tools and sequential part installation.</p><ul><li>Kanban card system</li><li>Andon cord procedures</li><li>Line stop authority</li></ul>"
+    },
+    {
+      "id": "9vJrnm5Xm8Q",
+      "title": "4. Quality Control Inspection",
+      "notes": "<h3>QC Inspection Practice</h3><p>Learn 100+ point vehicle inspection checklist. Practice gap measurements, panel alignment, and functional testing used by every manufacturer.</p><ul><li>0.5mm gap tolerance</li><li>LED paint defect detection</li><li>NVH testing procedures</li></ul>"
+    }
+  ]
+}
