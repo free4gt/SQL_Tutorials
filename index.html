@@ -11,19 +11,20 @@
     <div id="app">
         <!-- Navigation -->
         <nav class="navbar">
-            <div class="dropdown">
-                <span>Courses</span>
+            <div class="navbar-brand">SQL Tutorial</div>
+            <div class="dropdown" style="margin-left: auto;">
+                <span class="dropdown-toggle">Courses ▼</span>
                 <div class="dropdown-content">
                     <a v-for="(course, index) in courseList" 
-                       :key="index"
-                       href="#" 
-                       @click.prevent="selectCourse(index)">
+                    :key="index"
+                    href="#" 
+                    @click.prevent="selectCourse(index)">
                         {{ course.name }}
                     </a>
                 </div>
             </div>
         </nav>
-
+        
         <!-- Main content -->
         <div class="main-content">
             <!-- Left: Video + Notes -->

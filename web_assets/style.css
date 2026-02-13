@@ -1,3 +1,6 @@
+web_assets/style.css (Complete YouTube-style + SQL Tutorial navbar)
+
+css
 body { 
     margin: 0; 
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
@@ -13,24 +16,47 @@ body {
     padding: 12px 20px;
     border-bottom: 1px solid #333;
     font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.navbar-brand {
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
 }
 
 .dropdown {
     position: relative;
     display: inline-block;
+    margin-left: auto;
+}
+
+.dropdown-toggle {
     cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: background 0.15s ease;
+    color: #fff;
+    font-weight: 500;
+}
+
+.dropdown-toggle:hover {
+    background: #2a2a2a;
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
+    right: 0;
     background: #fff;
     min-width: 220px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.3);
     z-index: 1000;
     border-radius: 8px;
     top: 100%;
-    left: 0;
     margin-top: 4px;
 }
 
@@ -169,5 +195,9 @@ body {
         flex: none;
         max-width: none;
         min-height: 300px;
+    }
+    
+    .navbar {
+        justify-content: space-between;
     }
 }
