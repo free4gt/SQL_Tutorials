@@ -28,7 +28,7 @@ createApp({
       const courseFile = courseList.value[courseIndex].file;
       
       try {
-        const response = await fetch(`./web_courses/${courseFile}`);
+        const response = await fetch(`./web_courses/course_content/${courseFile}`);
         if (!response.ok) throw new Error('Course not found');
         currentCourse.value = await response.json();
         currentIndex.value = 0;
