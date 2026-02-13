@@ -8,22 +8,32 @@ createApp({
     const currentNotes = ref('<p>Select a course...</p>');
     const isLoading = ref(false);
     const errorMessage = ref('');
+    const courseList = ref([]);
     
-    const courseList = [
-      { name: 'Intro Course - Car Factory', file: 'car-factory.json' },
-      { name: 'Practice', file: 'practice.json' },
-      { name: 'SQL Tutorials', file: 'sql-tutorials.json' }
-    ];
+    // Load table of contents
+    const loadCourseList = async () => {
+      try {
+        const response = await fetch('./web_courses/table-of-contents.json');
+        if (!response.ok) throw new Error('Table of contents not found');
+        courseList.value = await response.json();
+      } catch (error) {
+        console.error('Failed to load table of contents:', error);
+        courseList.value = [];
+      }
+    };
 
-    // Auto-load Car Factory on startup (index 0)
     const initApp = async () => {
-      await selectCourse(0); // Car Factory first
+      await loadCourseList();
+      if (courseList.value.length > 0) {
+        await selectCourse(0);
+      }
     };
 
     const selectCourse = async (courseIndex) => {
       isLoading.value = true;
       errorMessage.value = '';
-      const courseFile = courseList[courseIndex].file;
+      const courseFile = courseList.value[courseIndex].file;
+      
       try {
         const response = await fetch(`./web_courses/${courseFile}`);
         if (!response.ok) throw new Error('Course not found');
@@ -31,7 +41,7 @@ createApp({
         currentIndex.value = 0;
         playLesson(0);
       } catch (error) {
-        errorMessage.value = `Failed to load ${courseList[courseIndex].name}`;
+        errorMessage.value = `Failed to load ${courseList.value[courseIndex]?.name || 'course'}`;
         console.error('Failed to load course:', error);
       } finally {
         isLoading.value = false;
@@ -40,12 +50,13 @@ createApp({
 
     const playLesson = (index) => {
       currentIndex.value = index;
-      const lesson = currentCourse.value.lessons[index];
-      currentVideoId.value = lesson.id;
-      currentNotes.value = lesson.notes;
+      const lesson = currentCourse.value?.lessons?.[index];
+      if (lesson) {
+        currentVideoId.value = lesson.id;
+        currentNotes.value = lesson.notes;
+      }
     };
 
-    // Initialize app on startup
     initApp();
 
     return {
