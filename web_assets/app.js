@@ -11,8 +11,14 @@ createApp({
     
     const courseList = [
       { name: 'Intro Course - Car Factory', file: 'car-factory.json' },
-      { name: 'Practice', file: 'practice.json' }
+      { name: 'Practice', file: 'practice.json' },
+      { name: 'SQL Tutorials', file: 'sql-tutorials.json' }
     ];
+
+    // Auto-load Car Factory on startup (index 0)
+    const initApp = async () => {
+      await selectCourse(0); // Car Factory first
+    };
 
     const selectCourse = async (courseIndex) => {
       isLoading.value = true;
@@ -38,6 +44,9 @@ createApp({
       currentVideoId.value = lesson.id;
       currentNotes.value = lesson.notes;
     };
+
+    // Initialize app on startup
+    initApp();
 
     return {
       currentCourse,
