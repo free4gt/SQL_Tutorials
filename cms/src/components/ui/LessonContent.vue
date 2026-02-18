@@ -81,4 +81,11 @@ function getBlockProps(block) {
   .block-container.block-video { flex: 0 0 82%; }
   .block-container.block-paragraph { flex: 0 0 13%; }
 }
+
+/* Smallest: remove top margin on first block so content sits flush under navbar */
+@media (max-width: 480px) {
+  .block-container:first-child :deep(.base-block) {
+    margin-top: 0;
+  }
+}
 </style>

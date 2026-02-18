@@ -50,7 +50,16 @@
   flex-direction: column;
 }
 
-/* Tablet: between phone and desktop */
+/* Smallest tablet: give lesson list more width so container-query font is readable */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .main-content {
+    padding-top: 6.5rem;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* Tablet / desktop */
 @media (min-width: 769px) {
   .main-content {
     padding-top: 6.5rem;
@@ -61,6 +70,8 @@
 @media (min-width: 1025px) {
   .main-content {
     padding-top: 7rem;
+    grid-template-columns: 3fr 1fr;
+    gap: 2rem;
   }
 }
 
@@ -86,20 +97,26 @@
   .main-content {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr auto;
-    padding: 6rem 1rem 1rem 1rem;
+    padding: 6.25rem 1rem 1rem 1rem; /* second-smallest: more top so content clears navbar */
     gap: 1rem;
   }
   .lesson-list-area {
     order: 2;
-    max-height: 300px;
+    max-height: 180px; /* compact but show at least 2 lesson buttons */
     overflow-y: auto;
     position: sticky;
     bottom: 0;
   }
 }
 
+/* Lowest mobile: navbar is compact – match content top to navbar height */
 @media (max-width: 480px) {
-  .main-content { padding: 6rem 0.75rem 0.5rem 0.75rem; }
+  .main-content {
+    padding-top: 2.75rem;
+    padding-right: 0.75rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.75rem;
+  }
   .lesson-content-area {
     padding-bottom: 1rem;
   }
