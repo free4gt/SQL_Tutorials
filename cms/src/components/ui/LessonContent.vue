@@ -1,24 +1,18 @@
 <template>
   <div class="lesson-content">
-    <div 
-      v-for="(block, index) in normalizedBlocks" 
-      :key="`${block.type}-${index}`"
-      class="block-container"
-      :class="`block-${block.type}`"
-    >
-      <BaseBlock v-if="block.type && blockComponents[block.type]">
-        <component 
-          :is="blockComponents[block.type]" 
-          v-bind="getBlockProps(block)"
-        />
-      </BaseBlock>
-    </div>
+    <template v-for="(block, index) in normalizedBlocks" :key="`${block.type}-${index}`">
+      <component
+        v-if="block.type && blockComponents[block.type]"
+        :is="blockComponents[block.type]"
+        v-bind="getBlockProps(block)"
+      />
+    </template>
   </div>
 </template>
 
 <script setup>
 import { computed } from 'vue'
-import { blockComponents, BaseBlock } from '../blocks'
+import { blockComponents } from '../blocks'
 
 const props = defineProps(['blocks'])
 
@@ -32,59 +26,33 @@ function getBlockProps(block) {
 </script>
 
 <style scoped>
-.lesson-content { 
-  height: 100%;
-  display: flex; 
-  flex-direction: column; 
-  padding: 0;
-  min-height: 0;
-  overflow-y: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.lesson-content::-webkit-scrollbar {
-  display: none;
-}
-
-.block-container { 
-  animation: fadeIn 0.5s ease-in;
-  min-height: 0;
-  overflow: hidden;
+.lesson-content {
+  min-height: 100%;
   display: flex;
   flex-direction: column;
+  padding: 0;
 }
 
-.block-container.block-header {
-  flex: 0 0 5%;
-}
-
-.block-container.block-video {
-  flex: 0 0 82%;
-}
-
-.block-container.block-paragraph {
-  flex: 0 0 13%;
-}
-
-.block-container:not(.block-header):not(.block-video):not(.block-paragraph) {
+/* Generic block layout: each block component roots with .block-container */
+.lesson-content > :deep(.block-container) {
+  animation: fadeIn 0.5s ease-in;
   flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0.5rem 0;
+  box-sizing: border-box;
 }
 
-@keyframes fadeIn { 
-  from { opacity: 0; transform: translateY(10px); } 
-  to { opacity: 1; transform: translateY(0); } 
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-@media (max-width: 768px) {
-  .block-container.block-header { flex: 0 0 5%; }
-  .block-container.block-video { flex: 0 0 82%; }
-  .block-container.block-paragraph { flex: 0 0 13%; }
-}
-
-/* Smallest: remove top margin on first block so content sits flush under navbar */
 @media (max-width: 480px) {
-  .block-container:first-child :deep(.base-block) {
+  .lesson-content > :deep(.block-container:first-child) {
     margin-top: 0;
   }
 }

@@ -1,6 +1,8 @@
 <template>
-  <div class="image-block">
-    <img :src="imageSrc" :alt="alt ?? ''" class="lesson-image" />
+  <div class="block-container block-image">
+    <div class="image-block">
+      <img :src="imageSrc" :alt="alt ?? ''" class="lesson-image" />
+    </div>
   </div>
 </template>
 
@@ -16,6 +18,10 @@ const imageSrc = computed(() => {
 </script>
 
 <style scoped>
+.block-image {
+  flex: 0 0 auto;
+}
+
 .image-block {
   margin-bottom: 0.75rem;
 }

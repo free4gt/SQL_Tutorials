@@ -48,6 +48,13 @@
   min-height: 0;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.lesson-content-area::-webkit-scrollbar {
+  display: none;
 }
 
 /* Smallest tablet: give lesson list more width so container-query font is readable */
@@ -76,8 +83,8 @@
 }
 
 .lesson-content-area > * {
-  flex: 1 1 0;
-  min-height: 0;
+  flex: 0 0 auto;
+  min-height: 100%;
 }
 
 .lesson-list-area {
@@ -97,7 +104,7 @@
   .main-content {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr auto;
-    padding: 6.25rem 1rem 1rem 1rem; /* second-smallest: more top so content clears navbar */
+    padding: 7rem 1rem 1rem 1rem; /* more top so content clears fixed navbar */
     gap: 1rem;
   }
   .lesson-list-area {
@@ -109,10 +116,10 @@
   }
 }
 
-/* Lowest mobile: navbar is compact – match content top to navbar height; shorter lesson list */
+/* Lowest mobile: more top space so content clears navbar comfortably */
 @media (max-width: 480px) {
   .main-content {
-    padding-top: 2.75rem;
+    padding-top: 5rem;
     padding-right: 0.75rem;
     padding-bottom: 0.5rem;
     padding-left: 0.75rem;
