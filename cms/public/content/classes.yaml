@@ -1,0 +1,9 @@
+classes:
+  - class:
+      name: 'intro'
+      title: 'Intro to Web'
+      lessonsYaml: 'intro.yaml'
+  - class:
+      name: 'practice'
+      title: 'Practice Projects'
+      lessonsYaml: 'practice.yaml'

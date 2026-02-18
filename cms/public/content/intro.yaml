@@ -1,0 +1,127 @@
+lessons:
+  - lesson:
+      button:
+        text: 'What is HTML?'
+      blocks:
+        - header:
+            text: 'Lesson 1: HTML Basics'
+        - video:
+            src: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
+        - paragraph:
+            text: 'HTML structures web pages with tags like <div>, <p>, and <h1>.'
+        - header:
+            text: 'Lesson 1: HTML Basics'
+        - video:
+            src: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
+        - paragraph:
+            text: 'HTML structures web pages with tags like <div>, <p>, and <h1>.'
+  - lesson:
+      button:
+        text: 'CSS Basics'
+      blocks:
+        - header:
+            text: 'Lesson 2: CSS Introduction'
+        - video:
+            src: 'https://www.youtube.com/embed/abc123CSSvideo'
+        - paragraph:
+            text: 'CSS adds styles, colors, and layouts.'
+  - lesson:
+      button:
+        text: 'What is HTML?'
+      blocks:
+        - header:
+            text: 'Lesson 1: HTML Basics'
+        - video:
+            src: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
+        - paragraph:
+            text: 'HTML structures web pages with tags like <div>, <p>, and <h1>.'
+  - lesson:
+      button:
+        text: 'CSS Basics'
+      blocks:
+        - header:
+            text: 'Lesson 2: CSS Introduction'
+        - video:
+            src: 'https://www.youtube.com/embed/abc123CSSvideo'
+        - paragraph:
+            text: 'CSS adds styles, colors, and layouts.'
+  - lesson:
+      button:
+        text: 'What is HTML?'
+      blocks:
+        - header:
+            text: 'Lesson 1: HTML Basics'
+        - video:
+            src: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
+        - paragraph:
+            text: 'HTML structures web pages with tags like <div>, <p>, and <h1>.'
+  - lesson:
+      button:
+        text: 'CSS Basics'
+      blocks:
+        - header:
+            text: 'Lesson 2: CSS Introduction'
+        - video:
+            src: 'https://www.youtube.com/embed/abc123CSSvideo'
+        - paragraph:
+            text: 'CSS adds styles, colors, and layouts.'
+  - lesson:
+      button:
+        text: 'What is HTML?'
+      blocks:
+        - header:
+            text: 'Lesson 1: HTML Basics'
+        - video:
+            src: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
+        - paragraph:
+            text: 'HTML structures web pages with tags like <div>, <p>, and <h1>.'
+  - lesson:
+      button:
+        text: 'CSS Basics'
+      blocks:
+        - header:
+            text: 'Lesson 2: CSS Introduction'
+        - video:
+            src: 'https://www.youtube.com/embed/abc123CSSvideo'
+        - paragraph:
+            text: 'CSS adds styles, colors, and layouts.'
+  - lesson:
+      button:
+        text: 'What is HTML?'
+      blocks:
+        - header:
+            text: 'Lesson 1: HTML Basics'
+        - video:
+            src: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
+        - paragraph:
+            text: 'HTML structures web pages with tags like <div>, <p>, and <h1>.'
+  - lesson:
+      button:
+        text: 'CSS Basics'
+      blocks:
+        - header:
+            text: 'Lesson 2: CSS Introduction'
+        - video:
+            src: 'https://www.youtube.com/embed/abc123CSSvideo'
+        - paragraph:
+            text: 'CSS adds styles, colors, and layouts.'
+  - lesson:
+      button:
+        text: 'What is HTML?'
+      blocks:
+        - header:
+            text: 'Lesson 1: HTML Basics'
+        - video:
+            src: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
+        - paragraph:
+            text: 'HTML structures web pages with tags like <div>, <p>, and <h1>.'
+  - lesson:
+      button:
+        text: 'CSS Basics'
+      blocks:
+        - header:
+            text: 'Lesson 2: CSS Introduction'
+        - video:
+            src: 'https://www.youtube.com/embed/abc123CSSvideo'
+        - paragraph:
+            text: 'CSS adds styles, colors, and layouts.'
