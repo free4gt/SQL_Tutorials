@@ -1,6 +1,9 @@
 <template>
   <div class="lesson-list">
-    <h3>{{ store.currentClass?.class?.title || 'Lessons' }}</h3>
+    <h3 class="lesson-list__title">
+      <BookOpen class="lesson-list__icon" aria-hidden />
+      {{ store.currentClass?.class?.title || 'Lessons' }}
+    </h3>
     <div v-if="lessons.length" class="lessons-container">
       <button 
         v-for="(lesson, index) in lessons" 
@@ -9,6 +12,7 @@
         :class="{ active: store.currentLessonIndex === index }"
         class="lesson-button"
       >
+        <Play class="lesson-button__icon" aria-hidden />
         {{ lesson.button?.text ?? 'Untitled' }}
       </button>
     </div>
@@ -17,6 +21,7 @@
 </template>
 
 <script setup>
+import { BookOpen, Play } from 'lucide-vue-next'
 import { useClassroomStore } from '../../stores/classroom.js'
 const store = useClassroomStore()
 defineEmits(['select-lesson'])
@@ -31,24 +36,46 @@ defineProps(['lessons'])
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-h3 { margin-bottom: 1rem; color: #333; font-size: 1.1rem; }
+.lesson-list__title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: #333;
+  font-size: 1.1rem;
+}
+.lesson-list__icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #666;
+  flex-shrink: 0;
+}
+.lesson-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  border: 1px solid #eee;
+  background: white;
+  text-align: left;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 1rem;
+}
+.lesson-button__icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: #666;
+  flex-shrink: 0;
+}
+
 .lessons-container { 
   display: flex; 
   flex-direction: column; 
   gap: 0.5rem; 
   max-height: 100%; 
   overflow-y: auto;
-}
-
-.lesson-button { 
-  padding: 1rem; 
-  border: 1px solid #eee; 
-  background: white; 
-  text-align: left; 
-  border-radius: 6px; 
-  cursor: pointer; 
-  transition: all 0.2s; 
-  font-size: 1rem;
 }
 
 .lesson-button:hover, .lesson-button.active { 

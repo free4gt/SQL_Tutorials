@@ -1,8 +1,8 @@
 classes:
   - class:
-      name: 'intro'
-      title: 'Intro to Web'
-      lessonsYaml: 'intro.yaml'
+      name: 'sql-intro'
+      title: 'Introduction to SQL'
+      lessonsYaml: 'sql-intro.yaml'
   - class:
       name: 'practice'
       title: 'Practice Projects'

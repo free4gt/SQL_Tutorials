@@ -2,12 +2,14 @@
   <nav class="w-full bg-white text-black shadow-sm border-b border-gray-200 px-4 py-3 sm:px-6 sm:py-4">
     <div class="flex flex-wrap items-center justify-between gap-4">
       <!-- Title - Left Side -->
-      <h1 class="text-3xl md:text-4xl font-black bg-gradient-to-r from-gray-900 to-black bg-clip-text text-transparent tracking-tight leading-tight">
+      <h1 class="flex items-center gap-2 text-3xl md:text-4xl font-black bg-gradient-to-r from-gray-900 to-black bg-clip-text text-transparent tracking-tight leading-tight">
+        <BookOpen class="size-8 md:size-9 text-gray-700 shrink-0" aria-hidden />
         SQL Tutorial
       </h1>
       
       <!-- Dropdown - Right Side -->
-      <div class="flex items-center">
+      <div class="flex items-center gap-2">
+        <LayoutList class="size-6 text-gray-500 shrink-0" aria-hidden />
         <select 
           v-model="selectedClassName"
           @change="$emit('select-class', selectedClassName)"
@@ -28,7 +30,8 @@
 </template>
 
 <script setup>
-import { computed, ref, watch, nextTick } from 'vue'
+import { ref, watch } from 'vue'
+import { BookOpen, LayoutList } from 'lucide-vue-next'
 import { useClassroomStore } from '../../stores/classroom.js'
 
 const store = useClassroomStore()
