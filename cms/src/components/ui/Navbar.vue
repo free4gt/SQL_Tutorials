@@ -2,18 +2,18 @@
   <nav class="w-full bg-white text-black shadow-sm border-b border-gray-200 px-4 py-3 sm:px-6 sm:py-4">
     <div class="flex flex-wrap items-center justify-between gap-4">
       <!-- Title - Left Side -->
-      <h1 class="flex items-center gap-2 text-3xl md:text-4xl font-black bg-gradient-to-r from-gray-900 to-black bg-clip-text text-transparent tracking-tight leading-tight">
-        <BookOpen class="size-8 md:size-9 text-gray-700 shrink-0" aria-hidden />
+      <h1 class="flex items-center gap-2 text-sm sm:text-3xl md:text-4xl font-black bg-gradient-to-r from-gray-900 to-black bg-clip-text text-transparent tracking-tight leading-tight">
+        <BookOpen class="size-5 sm:size-8 md:size-9 text-gray-700 shrink-0" aria-hidden />
         SQL Tutorial
       </h1>
       
       <!-- Dropdown - Right Side -->
       <div class="flex items-center gap-2">
-        <LayoutList class="size-6 text-gray-500 shrink-0" aria-hidden />
+        <LayoutList class="size-5 sm:size-6 text-gray-500 shrink-0" aria-hidden />
         <select 
           v-model="selectedClassName"
           @change="$emit('select-class', selectedClassName)"
-          class="bg-white border-2 border-gray-200 hover:border-black focus:border-black focus:ring-4 focus:ring-gray-100 rounded-2xl px-6 py-4 text-xl font-semibold text-gray-900 min-w-[260px] md:min-w-[300px] transition-all duration-200 shadow-md hover:shadow-xl focus:shadow-xl focus:outline-none appearance-none cursor-pointer"
+          class="bg-white border-2 border-gray-200 hover:border-black focus:border-black focus:ring-4 focus:ring-gray-100 rounded-lg sm:rounded-2xl px-2 py-1.5 sm:px-6 sm:py-4 text-xs sm:text-xl font-semibold text-gray-900 min-w-[5rem] sm:min-w-[260px] md:min-w-[300px] transition-all duration-200 shadow-md hover:shadow-xl focus:shadow-xl focus:outline-none appearance-none cursor-pointer"
         >
           <option 
             v-for="classItem in classes" 
