@@ -30,13 +30,6 @@ defineProps(['src'])
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-@media (min-width: 1025px) {
-  .video-container {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-}
-
 @media (max-width: 768px) {
   .video-container {
     max-height: 50vh;

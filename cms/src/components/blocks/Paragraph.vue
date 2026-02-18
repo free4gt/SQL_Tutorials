@@ -11,6 +11,8 @@ defineProps(['text'])
 <style scoped>
 .block-paragraph {
   flex: 0 0 auto;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .lesson-paragraph {
