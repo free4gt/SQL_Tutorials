@@ -12,7 +12,8 @@ export default defineConfig({
     tailwindcss(),
     vueDevTools(),
   ],
-  base: '/cms/',
+  // GitHub Pages project site: deploy cms/dist → site is https://<user>.github.io/SQL_Tutorials/
+  base: '/SQL_Tutorials/',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
