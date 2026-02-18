@@ -93,7 +93,10 @@ defineProps(['lessons'])
   font-size: clamp(0.8125rem, 0.4rem + 2cqw, 1rem);
 }
 
+/* Hide header on small viewports (single-column / mobile layout) */
 @media (max-width: 768px) {
-  .lesson-button { padding: 0.75rem; }
+  .lesson-list .lesson-list__title {
+    display: none;
+  }
 }
 </style>
