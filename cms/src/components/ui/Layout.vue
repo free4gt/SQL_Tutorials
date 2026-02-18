@@ -102,14 +102,14 @@
   }
   .lesson-list-area {
     order: 2;
-    max-height: 180px; /* compact but show at least 2 lesson buttons */
+    max-height: 120px; /* compact but show at least 2 lesson buttons */
     overflow-y: auto;
     position: sticky;
     bottom: 0;
   }
 }
 
-/* Lowest mobile: navbar is compact – match content top to navbar height */
+/* Lowest mobile: navbar is compact – match content top to navbar height; shorter lesson list */
 @media (max-width: 480px) {
   .main-content {
     padding-top: 2.75rem;

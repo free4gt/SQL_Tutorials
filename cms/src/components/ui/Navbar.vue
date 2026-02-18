@@ -13,13 +13,12 @@
         <select 
           v-model="selectedClassName"
           @change="$emit('select-class', selectedClassName)"
-          class="bg-white border-2 border-gray-200 hover:border-black focus:border-black focus:ring-4 focus:ring-gray-100 rounded-lg sm:rounded-2xl px-2 py-1.5 sm:px-6 sm:py-4 text-xs sm:text-xl font-semibold text-gray-900 min-w-[5rem] sm:min-w-[260px] md:min-w-[300px] transition-all duration-200 shadow-md hover:shadow-xl focus:shadow-xl focus:outline-none appearance-none cursor-pointer"
+          class="nav-select bg-white border-2 border-gray-200 hover:border-black focus:border-black focus:ring-4 focus:ring-gray-100 rounded-lg sm:rounded-2xl px-2 py-1.5 sm:px-6 sm:py-4 font-semibold text-gray-900 min-w-[5rem] sm:min-w-[260px] md:min-w-[300px] transition-all duration-200 shadow-md hover:shadow-xl focus:shadow-xl focus:outline-none appearance-none cursor-pointer"
         >
           <option 
             v-for="classItem in classes" 
             :key="classItem.class.name"
             :value="classItem.class.name"
-            class="text-gray-900 font-semibold hover:bg-gray-50 text-lg py-3 px-2"
           >
             {{ classItem.class.title }}
           </option>
@@ -77,3 +76,20 @@ watch(selectedClassName, (newVal) => {
   }
 })
 </script>
+
+<style scoped>
+.nav-select {
+  font-size: 0.7rem;
+}
+.nav-select option {
+  font-size: 0.7rem;
+}
+@media (min-width: 641px) {
+  .nav-select {
+    font-size: 1.25rem;
+  }
+  .nav-select option {
+    font-size: 1rem;
+  }
+}
+</style>
