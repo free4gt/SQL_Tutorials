@@ -73,12 +73,16 @@
   }
 }
 
-/* Desktop */
+/* Desktop / laptop: content area has 5% margin each side, middle is 80% */
 @media (min-width: 1025px) {
   .main-content {
     padding-top: 7rem;
     grid-template-columns: 3fr 1fr;
     gap: 2rem;
+  }
+  .lesson-content-area {
+    padding-left: 10%;
+    padding-right: 10%;
   }
 }
 

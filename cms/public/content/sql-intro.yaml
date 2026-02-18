@@ -10,6 +10,12 @@ lessons:
             src: 'https://www.youtube.com/embed/M0HYcnwMIjQ'
         - paragraph:
             text: 'Tiny Realms creates stunning Generative AI videos of miniature historical worlds. This medieval scene captures the essence of feudal Europe around 1100-1400 AD. Watch knights in full plate armor patrol castle walls while peasant villages bustle around watermills and Gothic cathedrals rise in the distance. Ox-plows till muddy fields as monks copy manuscripts by candlelight.'
+        - header:
+            text: 'Medieval Tiny Realm'
+        - video:
+            src: 'https://www.youtube.com/embed/M0HYcnwMIjQ'
+        - paragraph:
+            text: 'Tiny Realms creates stunning Generative AI videos of miniature historical worlds. This medieval scene captures the essence of feudal Europe around 1100-1400 AD. Watch knights in full plate armor patrol castle walls while peasant villages bustle around watermills and Gothic cathedrals rise in the distance. Ox-plows till muddy fields as monks copy manuscripts by candlelight.'
   - lesson:
       button:
         text: 'Industrial Tiny Realm'
