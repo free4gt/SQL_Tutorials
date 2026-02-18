@@ -34,9 +34,11 @@ export function useYamlLoader(store) {
   const currentLessons = ref([])
   const currentBlocks = ref([])
 
+  const base = import.meta.env.BASE_URL
+
   async function loadClasses() {
     try {
-      const response = await fetch('/cms/content/classes.yaml')
+      const response = await fetch(`${base}content/classes.yaml`)
       const text = await response.text()
       const yamlData = yaml.load(text)
       classes.value = yamlData.classes
@@ -56,7 +58,7 @@ export function useYamlLoader(store) {
       const classData = store.classes?.find(c => c.class.name === className)
       if (!classData) return
       
-      const response = await fetch(`/cms/content/${classData.class.lessonsYaml}`) 
+      const response = await fetch(`${base}content/${classData.class.lessonsYaml}`) 
       const text = await response.text()
       const yamlData = yaml.load(text)
       
