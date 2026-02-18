@@ -1,5 +1,7 @@
 <template>
-  <p class="lesson-paragraph">{{ text }}</p>
+  <div class="block-container block-paragraph">
+    <p class="lesson-paragraph">{{ text }}</p>
+  </div>
 </template>
 
 <script setup>
@@ -7,7 +9,10 @@ defineProps(['text'])
 </script>
 
 <style scoped>
-/* Override BaseBlock center adjustment: left-align paragraph only */
+.block-paragraph {
+  flex: 0 0 auto;
+}
+
 .lesson-paragraph {
   height: 100%;
   overflow-y: auto;
