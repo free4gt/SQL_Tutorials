@@ -36,6 +36,12 @@ defineProps(['src'])
   }
 }
 
+@media (min-width: 769px) {
+  .video-container {
+    max-height: 60vh;
+  }
+}
+
 .youtube-player {
   position: absolute;
   top: 0;
