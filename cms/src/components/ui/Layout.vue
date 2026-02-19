@@ -18,6 +18,8 @@
 </script>
 
 <style scoped>
+
+ /* main layout */
 .app-layout { 
   display: flex;
   flex-direction: column;
@@ -25,6 +27,7 @@
   background: #f5f7fa; 
 }
 
+ /* navbar area */
 .navbar-area { 
   flex-shrink: 0;
   position: fixed;
@@ -35,15 +38,14 @@
   width: 100%;
 }
 
-.main-content { 
+ /* main content area */
+ .main-content { 
   flex: 1;
   min-height: 0;
   display: grid; 
-  grid-template-columns: 3fr 1fr; 
-  gap: 2rem; 
-  padding: 6rem 0 2rem 2rem; /* top = below fixed navbar (phone default) */
 }
 
+/* lesson content area */
 .lesson-content-area {
   min-height: 0;
   display: flex;
@@ -51,39 +53,6 @@
   overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
-}
-
-.lesson-content-area::-webkit-scrollbar {
-  display: none;
-}
-
-/* Smallest tablet: give lesson list more width so container-query font is readable */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .main-content {
-    padding-top: 6.5rem;
-    grid-template-columns: 2fr 1fr;
-    gap: 1.5rem;
-  }
-}
-
-/* Tablet / desktop */
-@media (min-width: 769px) {
-  .main-content {
-    padding-top: 6.5rem;
-  }
-}
-
-/* Desktop / laptop: content area has 5% margin each side, middle is 80% */
-@media (min-width: 1025px) {
-  .main-content {
-    padding-top: 7rem;
-    grid-template-columns: 3fr 1fr;
-    gap: 2rem;
-  }
-  .lesson-content-area {
-    padding-left: 10%;
-    padding-right: 10%;
-  }
 }
 
 .lesson-content-area > * {
@@ -103,13 +72,16 @@
   display: none; /* Chrome, Safari, Edge */
 }
 
-/* MOBILE RESPONSIVE – equal left/right margin */
+/* Mobile Phones (portrait) */
 @media (max-width: 768px) {
   .main-content {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr auto;
-    padding: 7rem 1rem 1rem 1rem; /* more top so content clears fixed navbar */
+    padding: 4.25rem .5rem .5rem .5rem; 
     gap: 1rem;
+  }
+  .lesson-content-area {
+    padding-bottom: 1rem;
   }
   .lesson-list-area {
     order: 2;
@@ -119,17 +91,36 @@
     bottom: 0;
   }
 }
-
-/* Lowest mobile: more top space so content clears navbar comfortably */
-@media (max-width: 480px) {
+/* Mobile phones (landscape) — only when actually landscape so portrait doesn’t get overridden */
+@media (max-height: 768px) and (orientation: landscape) {
   .main-content {
-    padding-top: 5rem;
-    padding-right: 0.75rem;
-    padding-bottom: 0.5rem;
-    padding-left: 0.75rem;
+    grid-template-columns: 3fr 1fr;
+    padding: 4.25rem .5rem .5rem .5rem; 
+    gap: 1.5rem;
   }
-  .lesson-content-area {
-    padding-bottom: 1rem;
+  .lesson-list-area {
+    max-height: none; /* allow list to use full column so it doesn’t cut off */
+    position: static;
+    order: unset;
   }
 }
+
+/* Small tablets (portrait) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .main-content {
+    grid-template-columns: 2fr 1fr;
+    padding: 4.75rem 1rem 1rem 1rem; 
+    gap: 1.5rem;
+  }
+}
+/* large tablets/laptops/monitors (landscape) */
+@media (min-width: 1024px) { 
+  .main-content {
+    padding-top: 7rem;
+    grid-template-columns: 3fr 1fr;
+    padding: 5rem 1rem 1rem 1rem; 
+    gap: 2rem;
+  }
+}
+
 </style>
