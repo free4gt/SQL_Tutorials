@@ -1,19 +1,19 @@
 <template>
-  <nav class="w-full bg-white text-black shadow-sm border-b border-gray-200 px-4 py-3 sm:px-6 sm:py-4">
-    <div class="flex flex-wrap items-center justify-between gap-4">
+  <nav class="w-full h-[3.75rem] sm:h-16 md:h-[4.25rem] lg:h-[4.5rem] bg-white text-black shadow-sm border-b border-gray-200 px-4 py-3 sm:px-6 sm:py-2 flex flex-col justify-center">
+    <div class="flex flex-wrap items-center justify-between gap-4 h-full min-h-0">
       <!-- Title - Left Side -->
-      <h1 class="flex items-center gap-2 text-sm sm:text-3xl md:text-4xl font-black bg-gradient-to-r from-gray-900 to-black bg-clip-text text-transparent tracking-tight leading-tight">
-        <BookOpen class="size-5 sm:size-8 md:size-9 text-gray-700 shrink-0" aria-hidden />
+      <h1 class="flex items-center gap-2 text-base sm:text-2xl md:text-3xl lg:text-4xl font-black bg-gradient-to-r from-gray-900 to-black bg-clip-text text-transparent tracking-tight leading-none">
+        <BookOpen class="size-6 sm:size-6 md:size-7 lg:size-8 text-gray-700 shrink-0" aria-hidden />
         SQL Tutorial
       </h1>
       
       <!-- Dropdown - Right Side -->
       <div class="flex items-center gap-2">
-        <LayoutList class="size-5 sm:size-6 text-gray-500 shrink-0" aria-hidden />
+        <LayoutList class="size-6 sm:size-6 md:size-7 lg:size-7 text-gray-500 shrink-0" aria-hidden />
         <select 
           v-model="selectedClassName"
           @change="$emit('select-class', selectedClassName)"
-          class="nav-select bg-white border-2 border-gray-200 hover:border-black focus:border-black focus:ring-4 focus:ring-gray-100 rounded-lg sm:rounded-2xl px-2 py-1.5 sm:px-6 sm:py-4 font-semibold text-gray-900 min-w-[5rem] sm:min-w-[260px] md:min-w-[300px] transition-all duration-200 shadow-md hover:shadow-xl focus:shadow-xl focus:outline-none appearance-none cursor-pointer"
+          class="bg-white border-2 border-gray-200 hover:border-black focus:border-black focus:ring-4 focus:ring-gray-100 rounded-lg sm:rounded-2xl px-2 py-2 sm:px-6 sm:py-2 md:py-2.5 lg:py-3 text-base sm:text-base md:text-lg lg:text-xl font-semibold text-gray-900 min-w-[5rem] sm:min-w-[260px] md:min-w-[300px] transition-all duration-200 shadow-md hover:shadow-xl focus:shadow-xl focus:outline-none appearance-none cursor-pointer"
         >
           <option 
             v-for="classItem in classes" 
@@ -78,18 +78,4 @@ watch(selectedClassName, (newVal) => {
 </script>
 
 <style scoped>
-.nav-select {
-  font-size: 0.7rem;
-}
-.nav-select option {
-  font-size: 0.7rem;
-}
-@media (min-width: 641px) {
-  .nav-select {
-    font-size: 1.25rem;
-  }
-  .nav-select option {
-    font-size: 1rem;
-  }
-}
 </style>
