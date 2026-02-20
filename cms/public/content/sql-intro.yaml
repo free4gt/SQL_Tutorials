@@ -12,6 +12,46 @@ lessons:
             text: 'Tiny Realms creates stunning Generative AI videos of miniature historical worlds. This medieval scene captures the essence of feudal Europe around 1100-1400 AD. Watch knights in full plate armor patrol castle walls while peasant villages bustle around watermills and Gothic cathedrals rise in the distance. Ox-plows till muddy fields as monks copy manuscripts by candlelight.'
         - paragraph:
             text: 'Example with math: the integral \( \int_0^1 x^2 \, dx = \frac{1}{3} \) gives the area under the curve.'
+        - chart:
+            chartType: line
+            data:
+              labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May']
+              datasets:
+                - label: 'Views'
+                  data: [12, 19, 8, 15, 22]
+                  borderColor: 'rgb(75, 192, 192)'
+                  backgroundColor: 'rgba(75, 192, 192, 0.2)'
+                  tension: 0.3
+            options:
+              plugins:
+                title:
+                  display: true
+                  text: 'Monthly Views'
+        - chart:
+            chartType: bar
+            data:
+              labels: ['SQL', 'Python', 'JS', 'Rust']
+              datasets:
+                - label: 'Students'
+                  data: [65, 49, 72, 28]
+                  backgroundColor: ['rgba(54, 162, 235, 0.6)', 'rgba(255, 99, 132, 0.6)', 'rgba(255, 206, 86, 0.6)', 'rgba(75, 192, 192, 0.6)']
+            options:
+              plugins:
+                title:
+                  display: true
+                  text: 'Students by Language'
+        - chart:
+            chartType: pie
+            data:
+              labels: ['Completed', 'In progress', 'Not started']
+              datasets:
+                - data: [45, 30, 25]
+                  backgroundColor: ['#4ade80', '#fbbf24', '#94a3b8']
+            options:
+              plugins:
+                title:
+                  display: true
+                  text: 'Lesson Progress'
   - lesson:
       button:
         text: 'Industrial Tiny Realm'
