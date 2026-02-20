@@ -1,6 +1,6 @@
 <template>
   <div class="block-container block-header">
-    <h1 class="lesson-header">{{ text }}</h1>
+    <h1 class="lesson-header" v-katex>{{ text }}</h1>
   </div>
 </template>
 
@@ -21,5 +21,10 @@ defineProps(['text'])
   color: #1a1a1a;
   margin: 0;
   line-height: 1.2;
+}
+
+/* Space around KaTeX so math doesn’t sit flush with text */
+.lesson-header :deep(.katex) {
+  margin: 0 0.15em;
 }
 </style>
