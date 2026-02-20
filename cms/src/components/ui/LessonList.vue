@@ -4,28 +4,50 @@
       <BookOpen class="lesson-list__icon" aria-hidden />
       {{ store.currentClass?.class?.title || 'Lessons' }}
     </h3>
-    <div v-if="lessons.length" class="lessons-container">
-      <button 
-        v-for="(lesson, index) in lessons" 
-        :key="`${store.currentClass?.class?.name ?? ''}-${index}-${lesson.button?.text ?? index}`"
-        @click="$emit('select-lesson', index)"
-        :class="{ active: store.currentLessonIndex === index }"
-        class="lesson-button"
-      >
-        <Play class="lesson-button__icon" aria-hidden />
-        <span v-katex>{{ lesson.button?.text ?? 'Untitled' }}</span>
-      </button>
+    <div v-if="hasItems" class="lessons-container">
+      <template v-for="(item, i) in effectiveList" :key="listKey(i, item)">
+        <div v-if="item.type === 'category'" class="lesson-list__category">
+          {{ item.text }}
+        </div>
+        <button
+          v-else
+          class="lesson-button"
+          :class="{ active: store.currentLessonIndex === item.lessonIndex }"
+          @click="$emit('select-lesson', item.lessonIndex)"
+        >
+          <Play class="lesson-button__icon" aria-hidden />
+          <span v-katex>{{ item.lesson?.button?.text ?? 'Untitled' }}</span>
+        </button>
+      </template>
     </div>
     <div v-else class="no-lessons">No lessons available</div>
   </div>
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import { BookOpen, Play } from 'lucide-vue-next'
 import { useClassroomStore } from '../../stores/classroom.js'
+
 const store = useClassroomStore()
 defineEmits(['select-lesson'])
-defineProps(['lessons'])
+const props = defineProps(['lessons', 'displayList'])
+
+const effectiveList = computed(() => {
+  if (props.displayList?.length) return props.displayList
+  return (props.lessons ?? []).map((lesson, index) => ({
+    type: 'lesson',
+    lesson,
+    lessonIndex: index
+  }))
+})
+
+const hasItems = computed(() => effectiveList.value.length > 0)
+
+function listKey(i, item) {
+  if (item.type === 'category') return `cat-${i}-${item.text}`
+  return `${store.currentClass?.class?.name ?? ''}-${item.lessonIndex}-${item.lesson?.button?.text ?? item.lessonIndex}`
+}
 </script>
 
 <style scoped>
@@ -71,6 +93,20 @@ defineProps(['lessons'])
   height: clamp(0.875rem, 0.5rem + 1.5cqw, 1.125rem);
   color: #666;
   flex-shrink: 0;
+}
+
+.lesson-list__category {
+  font-size: clamp(0.7rem, 0.35rem + 1.8cqw, 0.875rem);
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: clamp(0.5rem, 0.25rem + 1.5cqw, 0.75rem) 0 clamp(0.25rem, 0.5cqw, 0.35rem);
+  margin-top: 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+.lesson-list__category:first-child {
+  margin-top: 0;
 }
 
 .lessons-container {

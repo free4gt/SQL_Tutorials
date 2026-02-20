@@ -20,7 +20,7 @@
   height: 100%;
   min-height: 0;
   margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   display: flex;
   justify-content: center;
   align-items: center;

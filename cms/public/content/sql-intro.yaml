@@ -52,6 +52,8 @@ lessons:
                 title:
                   display: true
                   text: 'Lesson Progress'
+  - lesson_category:
+      text: 'Industrial Era'
   - lesson:
       button:
         text: 'Industrial Tiny Realm'
@@ -62,6 +64,8 @@ lessons:
             src: 'https://www.youtube.com/embed/VuSy4-69bAY'
         - paragraph:
             text: 'Tiny Realms produces mesmerizing Generative AI content showing miniature historical eras. This industrial scene recreates 19th-century factory towns during the peak of the Industrial Revolution (1830-1900). Steam engines drive massive ironworks while child laborers tend spinning jennies. Smokestacks darken the sky as railroads connect grimy factory districts to distant coalfields.'
+  - lesson_category:
+      text: 'World History'
   - lesson:
       button:
         text: 'Feudal Japan Tiny Realm'

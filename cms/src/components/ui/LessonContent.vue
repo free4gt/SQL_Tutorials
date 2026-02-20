@@ -30,6 +30,7 @@ function getBlockProps(block) {
   min-height: 100%;
   display: flex;
   flex-direction: column;
+  gap: 1rem;
   padding: 0;
 }
 
@@ -42,7 +43,7 @@ function getBlockProps(block) {
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin: 0.5rem 0;
+  margin: 0;
   box-sizing: border-box;
 }
 
@@ -52,8 +53,8 @@ function getBlockProps(block) {
 }
 
 @media (max-width: 480px) {
-  .lesson-content > :deep(.block-container:first-child) {
-    margin-top: 0;
+  .lesson-content {
+    gap: 0.75rem;
   }
 }
 </style>
