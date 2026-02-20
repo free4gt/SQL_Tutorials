@@ -1,6 +1,6 @@
 <template>
   <div class="block-container block-paragraph">
-    <p class="lesson-paragraph">{{ text }}</p>
+    <p class="lesson-paragraph" v-katex>{{ text }}</p>
   </div>
 </template>
 
@@ -16,14 +16,15 @@ defineProps(['text'])
 }
 
 .lesson-paragraph {
-  height: 100%;
-  overflow-y: auto;
   font-size: clamp(0.8125rem, 2vw, 1rem);
   line-height: 1.5;
   color: #333;
   margin: 0;
   text-align: left;
-  justify-content: flex-start;
-  align-items: flex-start;
+}
+
+/* Slight space around KaTeX in paragraphs */
+.lesson-paragraph :deep(.katex) {
+  margin: 0 0.15em;
 }
 </style>

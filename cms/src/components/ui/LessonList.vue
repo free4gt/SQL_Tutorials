@@ -1,6 +1,6 @@
 <template>
   <div class="lesson-list">
-    <h3 class="lesson-list__title">
+    <h3 class="lesson-list__title" v-katex>
       <BookOpen class="lesson-list__icon" aria-hidden />
       {{ store.currentClass?.class?.title || 'Lessons' }}
     </h3>
@@ -13,7 +13,7 @@
         class="lesson-button"
       >
         <Play class="lesson-button__icon" aria-hidden />
-        {{ lesson.button?.text ?? 'Untitled' }}
+        <span v-katex>{{ lesson.button?.text ?? 'Untitled' }}</span>
       </button>
     </div>
     <div v-else class="no-lessons">No lessons available</div>

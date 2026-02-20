@@ -11,9 +11,11 @@ import { computed } from 'vue'
 
 const props = defineProps(['src', 'alt'])
 
+const base = import.meta.env.BASE_URL
 const imageSrc = computed(() => {
-  const s = props.src ?? ''
-  return s.startsWith('/') ? s : `/${s}`
+  const s = (props.src ?? '').trim()
+  if (!s) return ''
+  return `${base}images/${s.replace(/^\//, '')}`
 })
 </script>
 
@@ -25,7 +27,6 @@ const imageSrc = computed(() => {
 .image-container {
   position: relative;
   width: 100%;
-  max-height: 70vh;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -40,6 +41,7 @@ const imageSrc = computed(() => {
   width: auto;
   height: auto;
   object-fit: contain;
+  object-position: center;
   border-radius: 8px;
   display: block;
 }
@@ -47,6 +49,12 @@ const imageSrc = computed(() => {
 @media (max-width: 768px) {
   .image-container {
     max-height: 50vh;
+  }
+}
+
+@media (min-width: 769px) {
+  .image-container {
+    max-height: 60vh;
   }
 }
 </style>

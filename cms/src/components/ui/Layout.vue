@@ -109,7 +109,7 @@
 @media (min-width: 768px) and (max-width: 1023px) {
   .main-content {
     grid-template-columns: 2fr 1fr;
-    padding: 4.75rem 1rem 1rem 1rem; 
+    padding: 4.75rem 1rem 2rem 1rem; 
     gap: 1.5rem;
   }
 }
@@ -118,8 +118,20 @@
   .main-content {
     padding-top: 7rem;
     grid-template-columns: 3fr 1fr;
+    padding: 5rem 1rem 2rem 1rem; 
+    gap: 2rem;
+  }
+}
+
+@media (min-width: 1300px) { 
+  .main-content {
+    padding-top: 7rem;
+    grid-template-columns: 3fr 1fr;
     padding: 5rem 1rem 1rem 1rem; 
     gap: 2rem;
+  }
+  .lesson-content-area {
+    padding: 0 10% 2rem 10%; 
   }
 }
 

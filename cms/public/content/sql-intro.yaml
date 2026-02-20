@@ -2,14 +2,16 @@
 lessons:
   - lesson:
       button:
-        text: 'Medieval Tiny Realm'
+        text: 'Medieval \( x^2 \) Tiny Realm'
       blocks:
         - header:
-            text: 'Medieval Tiny Realm'
+            text: 'Medieval \( x^2 \) + \( y^2 \) = \( z^2 \) Tiny Realm'
         - video:
             src: 'https://www.youtube.com/embed/M0HYcnwMIjQ'
         - paragraph:
             text: 'Tiny Realms creates stunning Generative AI videos of miniature historical worlds. This medieval scene captures the essence of feudal Europe around 1100-1400 AD. Watch knights in full plate armor patrol castle walls while peasant villages bustle around watermills and Gothic cathedrals rise in the distance. Ox-plows till muddy fields as monks copy manuscripts by candlelight.'
+        - paragraph:
+            text: 'Example with math: the integral \( \int_0^1 x^2 \, dx = \frac{1}{3} \) gives the area under the curve.'
   - lesson:
       button:
         text: 'Industrial Tiny Realm'
