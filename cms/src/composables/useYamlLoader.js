@@ -62,20 +62,35 @@ export function useYamlLoader(store) {
       const text = await response.text()
       const yamlData = yaml.load(text)
       
-      // blocks: array [ { type, ...props }, ... ] — any number of any type, rendered in order
-      const lessons = yamlData.lessons || []
-      const lessonsWithArrayBlocks = lessons.map(lesson => {
-        const lessonData = lesson.lesson || lesson
-        const blocks = normalizeBlocks(lessonData.blocks)
-        return {
-          title: lessonData.button?.text || lessonData.title || 'Untitled',
-          ...lessonData,
-          blocks
+      // lessons: mixed array of { lesson: {...} } and { lesson_category: { text: '...' } }
+      const rawItems = yamlData.lessons || []
+      const lessonsWithArrayBlocks = []
+      const displayList = []
+
+      for (const item of rawItems) {
+        if (!item || typeof item !== 'object') continue
+        if (item.lesson != null) {
+          const lessonData = item.lesson
+          const blocks = normalizeBlocks(lessonData.blocks)
+          const processed = {
+            title: lessonData.button?.text || lessonData.title || 'Untitled',
+            ...lessonData,
+            blocks
+          }
+          const lessonIndex = lessonsWithArrayBlocks.length
+          lessonsWithArrayBlocks.push(processed)
+          displayList.push({ type: 'lesson', lesson: processed, lessonIndex })
+        } else if (item.lesson_category != null || item.category != null) {
+          const cat = item.lesson_category ?? item.category
+          const text = typeof cat === 'object' && cat !== null
+            ? (cat.text ?? cat.label ?? 'Section')
+            : String(cat)
+          displayList.push({ type: 'category', text })
         }
-      })
-      
+      }
+
       currentLessons.value = lessonsWithArrayBlocks
-      store.setCurrentLessons(lessonsWithArrayBlocks)
+      store.setCurrentLessons(lessonsWithArrayBlocks, displayList)
       if (lessonsWithArrayBlocks.length > 0) {
         loadLesson(0)
       }

@@ -4,7 +4,11 @@
       <Navbar :classes="classes" @select-class="loadClass" />
     </template>
     <template #lesson-list>
-      <LessonList :lessons="currentLessons" @select-lesson="loadLesson" />
+      <LessonList
+        :lessons="currentLessons"
+        :display-list="store.currentClass?.displayList ?? []"
+        @select-lesson="loadLesson"
+      />
     </template>
     <template #lesson-content>
       <LessonContent :blocks="currentBlocks" />

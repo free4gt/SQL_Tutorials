@@ -20,9 +20,10 @@ export const useClassroomStore = defineStore('classroom', {
       this.currentClass = this.classes.find(c => c.class.name === className)
     },
     
-    setCurrentLessons(lessons) {
+    setCurrentLessons(lessons, displayList = null) {
       if (this.currentClass) {
         this.currentClass.lessons = lessons
+        this.currentClass.displayList = displayList ?? null
       }
     },
     
