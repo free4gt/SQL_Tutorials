@@ -11,7 +11,10 @@
       />
     </template>
     <template #lesson-content>
-      <LessonContent :blocks="currentBlocks" />
+      <LessonContent
+        :blocks="currentBlocks"
+        :lesson-key="`${store.currentClass?.class?.name ?? ''}-${store.currentLessonIndex ?? -1}`"
+      />
     </template>
   </Layout>
 </template>

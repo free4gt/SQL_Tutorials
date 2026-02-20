@@ -1,10 +1,10 @@
 <template>
-  <div class="lesson-list">
+  <div ref="rootRef" class="lesson-list">
     <h3 class="lesson-list__title" v-katex>
       <BookOpen class="lesson-list__icon" aria-hidden />
       {{ store.currentClass?.class?.title || 'Lessons' }}
     </h3>
-    <div v-if="hasItems" class="lessons-container">
+    <div v-if="hasItems" ref="lessonsContainerRef" class="lessons-container">
       <template v-for="(item, i) in effectiveList" :key="listKey(i, item)">
         <div v-if="item.type === 'category'" class="lesson-list__category">
           {{ item.text }}
@@ -25,13 +25,31 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref, computed, watch, nextTick } from 'vue'
 import { BookOpen, Play } from 'lucide-vue-next'
 import { useClassroomStore } from '../../stores/classroom.js'
 
 const store = useClassroomStore()
 defineEmits(['select-lesson'])
 const props = defineProps(['lessons', 'displayList'])
+
+const rootRef = ref(null)
+const lessonsContainerRef = ref(null)
+
+function scrollLessonListToTop() {
+  if (lessonsContainerRef.value) lessonsContainerRef.value.scrollTop = 0
+  // On mobile the aside (.lesson-list-area) is the scrollable container, not the inner div
+  const aside = rootRef.value?.parentElement
+  if (aside && typeof aside.scrollTop !== 'undefined') aside.scrollTop = 0
+}
+
+// When class changes, scroll lesson list to top (e.g. mobile so first lesson is visible)
+watch(
+  () => store.currentClass?.class?.name,
+  () => {
+    nextTick(() => scrollLessonListToTop())
+  }
+)
 
 const effectiveList = computed(() => {
   if (props.displayList?.length) return props.displayList

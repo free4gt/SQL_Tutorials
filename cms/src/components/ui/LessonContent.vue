@@ -1,6 +1,6 @@
 <template>
   <div class="lesson-content">
-    <template v-for="(block, index) in normalizedBlocks" :key="`${block.type}-${index}`">
+    <template v-for="(block, index) in normalizedBlocks" :key="`${lessonKey}-${block.type}-${index}`">
       <component
         v-if="block.type && blockComponents[block.type]"
         :is="blockComponents[block.type]"
@@ -14,7 +14,7 @@
 import { computed } from 'vue'
 import { blockComponents } from '../blocks'
 
-const props = defineProps(['blocks'])
+const props = defineProps(['blocks', 'lessonKey'])
 
 // blocks from loader: array of { type, ...props } (array format from YAML, rendered in order)
 const normalizedBlocks = computed(() => Array.isArray(props.blocks) ? props.blocks : [])
