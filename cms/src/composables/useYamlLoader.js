@@ -41,11 +41,11 @@ export function useYamlLoader(store) {
       const response = await fetch(`${base}content/classes.yaml`)
       const text = await response.text()
       const yamlData = yaml.load(text)
-      classes.value = yamlData.classes
+      classes.value = Array.isArray(yamlData?.classes) ? yamlData.classes : []
       store.setClasses(classes.value)
-      
-      if (classes.value.length > 0) {
-        await loadClass(classes.value[0].class.name)
+
+      if (classes.value.length > 0 && store.currentClass?.class?.name) {
+        await loadClass(store.currentClass.class.name)
       }
     } catch (error) {
       console.error('Failed to load classes:', error)
@@ -92,7 +92,12 @@ export function useYamlLoader(store) {
       currentLessons.value = lessonsWithArrayBlocks
       store.setCurrentLessons(lessonsWithArrayBlocks, displayList)
       if (lessonsWithArrayBlocks.length > 0) {
-        loadLesson(0)
+        const lessonIndex = store.getLastLessonIndex(className, lessonsWithArrayBlocks.length)
+        loadLesson(lessonIndex)
+      } else {
+        // Class has no lessons: clear lesson state so we don't show stale content
+        store.setCurrentLesson(0)
+        currentBlocks.value = []
       }
     } catch (error) {
       console.error('Failed to load class:', error)
@@ -101,9 +106,8 @@ export function useYamlLoader(store) {
 
   function loadLesson(lessonIndex) {
     store.setCurrentLesson(lessonIndex)
-    if (store.currentClass?.lessons[lessonIndex]) {
-      currentBlocks.value = store.currentClass.lessons[lessonIndex].blocks
-    }
+    const lesson = store.currentClass?.lessons?.[lessonIndex]
+    currentBlocks.value = Array.isArray(lesson?.blocks) ? lesson.blocks : []
   }
 
   return {
