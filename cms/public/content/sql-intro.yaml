@@ -135,10 +135,10 @@ lessons:
       text: 'Industrial Era'
   - lesson:
       button:
-        text: 'Industrial Tiny Realm'
+        text: 'Industrialz Tiny Realm'
       blocks:
         - header:
-            text: 'Industrial Tiny Realm'
+            text: 'Industrialz Tiny Realm'
         - video:
             src: 'https://www.youtube.com/embed/VuSy4-69bAY'
         - paragraph:

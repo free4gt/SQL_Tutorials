@@ -146,9 +146,10 @@ const lessonListCollapsed = ref(false)
 @media (max-width: 768px) {
   .main-content {
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr auto;
-    padding: 4.25rem .5rem .5rem .5rem; 
+    grid-template-rows: minmax(0, 1fr) auto;
+    padding: 4.25rem .5rem .5rem .5rem;
     gap: 1rem;
+    overflow: hidden;
   }
   .main-content--list-collapsed {
     grid-template-columns: 1fr;
@@ -156,13 +157,16 @@ const lessonListCollapsed = ref(false)
   }
   .lesson-content-area {
     padding-bottom: 1rem;
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
   .lesson-list-area {
     order: 2;
+    flex-shrink: 0;
     max-height: 11.5rem; /* ~collapse area + 2 lesson buttons, extra so bottom isn't obscured */
     overflow-y: auto;
-    position: sticky;
-    bottom: 0;
+    min-height: 0;
   }
   .lesson-list-toggle {
     top: 0.125rem;
