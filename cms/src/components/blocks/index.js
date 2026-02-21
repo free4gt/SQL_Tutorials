@@ -6,6 +6,7 @@ import Image from './Image.vue'
 import ChartBlock from './ChartBlock.vue'
 import TableBlock from './TableBlock.vue'
 import SQLInterpreterBlock from './SQLInterpreterBlock.vue'
+import DividerBlock from './DividerBlock.vue'
 
 export { BaseBlock }
 export const blockComponents = {
@@ -15,5 +16,6 @@ export const blockComponents = {
   image: Image,
   chart: ChartBlock,
   table: TableBlock,
-  sql: SQLInterpreterBlock
+  sql: SQLInterpreterBlock,
+  divider: DividerBlock
 }

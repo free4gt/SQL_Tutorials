@@ -87,6 +87,8 @@ lessons:
               Use the Table dropdown to inspect each table's columns.
               Then write a JOIN: link knights.realm to realms.realm_name.
             solution: "SELECT k.name, r.population FROM knights k JOIN realms r ON k.realm = r.realm_name;"
+        - divider:
+            caption: 'Charts section'
         - paragraph:
             text: 'Example with math: the integral \( \int_0^1 x^2 \, dx = \frac{1}{3} \) gives the area under the curve.'
         - chart:
