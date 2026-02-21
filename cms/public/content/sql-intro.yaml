@@ -10,6 +10,83 @@ lessons:
             src: 'https://www.youtube.com/embed/M0HYcnwMIjQ'
         - paragraph:
             text: 'Tiny Realms creates stunning Generative AI videos of miniature historical worlds. This medieval scene captures the essence of feudal Europe around 1100-1400 AD. Watch knights in full plate armor patrol castle walls while peasant villages bustle around watermills and Gothic cathedrals rise in the distance. Ox-plows till muddy fields as monks copy manuscripts by candlelight.'
+        - table:
+            caption: 'Sample data — Knights and realms'
+            headers: ['Name', 'Realm', 'Year']
+            rows:
+              - ['Sir Aldric', 'Northmarch', '1124']
+              - ['Dame Elara', 'Rivershire', '1156']
+              - ['Sir Cedric', 'Northmarch', '1131']
+              - ['Lady Maren', 'Eastfold', '1142']
+              - ['Sir Torvald', 'Rivershire', '1160']
+            footer: ['—', '5 knights', '—']
+            sortable: true
+            filterable: true
+        - sql:
+            tableName: knights
+            columns:
+              - name: name
+                type: text
+              - name: realm
+                type: text
+              - name: year
+                type: integer
+            rows:
+              - ['Sir Aldric', 'Northmarch', 1124]
+              - ['Dame Elara', 'Rivershire', 1156]
+              - ['Sir Cedric', 'Northmarch', 1131]
+              - ['Lady Maren', 'Eastfold', 1142]
+              - ['Sir Torvald', 'Rivershire', 1160]
+            instructions: |
+              Click Start, then try:
+              1. SELECT * FROM knights;
+              2. Filter by realm: add WHERE realm = 'Northmarch'
+              Check the Solution tab for the expected query.
+            solution: "SELECT name, realm FROM knights WHERE realm = 'Northmarch';"
+        - paragraph:
+            text: '**Two interpreters:** Only one SQL client is active at a time. Click Start on the block below — the one above will show Start again.'
+        - sql:
+            tableName: realms
+            columns:
+              - name: realm_name
+                type: text
+              - name: population
+                type: integer
+            rows:
+              - ['Northmarch', 12000]
+              - ['Rivershire', 8000]
+              - ['Eastfold', 9500]
+            solution: "SELECT realm_name, population FROM realms WHERE population > 9000;"
+        - paragraph:
+            text: '**Multiple tables:** This block has two tables. Use the Table dropdown to switch; columns update for the selected table. You can write queries that use both (e.g. JOIN).'
+        - sql:
+            tables:
+              - tableName: knights
+                columns:
+                  - name: name
+                    type: text
+                  - name: realm
+                    type: text
+                  - name: year
+                    type: integer
+                rows:
+                  - ['Sir Aldric', 'Northmarch', 1124]
+                  - ['Dame Elara', 'Rivershire', 1156]
+                  - ['Sir Cedric', 'Northmarch', 1131]
+              - tableName: realms
+                columns:
+                  - name: realm_name
+                    type: text
+                  - name: population
+                    type: integer
+                rows:
+                  - ['Northmarch', 12000]
+                  - ['Rivershire', 8000]
+                  - ['Eastfold', 9500]
+            instructions: |
+              Use the Table dropdown to inspect each table's columns.
+              Then write a JOIN: link knights.realm to realms.realm_name.
+            solution: "SELECT k.name, r.population FROM knights k JOIN realms r ON k.realm = r.realm_name;"
         - paragraph:
             text: 'Example with math: the integral \( \int_0^1 x^2 \, dx = \frac{1}{3} \) gives the area under the curve.'
         - chart:

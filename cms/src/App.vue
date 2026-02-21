@@ -26,12 +26,15 @@ import Navbar from './components/ui/Navbar.vue'
 import LessonList from './components/ui/LessonList.vue'
 import LessonContent from './components/ui/LessonContent.vue'
 import { useClassroomStore } from './stores/classroom.js'
+import { useSqlInterpreterStore } from './stores/sqlInterpreter.js'
 import { useYamlLoader } from './composables/useYamlLoader.js'
 
 const store = useClassroomStore()
+const sqlStore = useSqlInterpreterStore()
 const { classes, currentLessons, currentBlocks, loadClasses, loadClass, loadLesson } = useYamlLoader(store)
 
 onMounted(() => {
+  sqlStore.initDb()
   loadClasses()
 })
 </script>
