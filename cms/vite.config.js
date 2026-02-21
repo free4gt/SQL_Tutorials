@@ -12,6 +12,9 @@ export default defineConfig({
     tailwindcss(),
     vueDevTools(),
   ],
+  optimizeDeps: {
+    exclude: ['@electric-sql/pglite'],
+  },
   // GitHub Pages project site: deploy cms/dist → site is https://<user>.github.io/SQL_Tutorials/
   base: '/SQL_Tutorials/',
   resolve: {

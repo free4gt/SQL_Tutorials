@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, toRaw } from 'vue'
 import { blockComponents } from '../blocks'
 
 const props = defineProps(['blocks', 'lessonKey'])
@@ -20,7 +20,15 @@ const props = defineProps(['blocks', 'lessonKey'])
 const normalizedBlocks = computed(() => Array.isArray(props.blocks) ? props.blocks : [])
 
 function getBlockProps(block) {
-  const { type, ...rest } = block
+  const raw = toRaw(block)
+  const { type, ...rest } = raw
+  if (type === 'sql') {
+    try {
+      return JSON.parse(JSON.stringify(rest))
+    } catch (_) {
+      return rest
+    }
+  }
   return rest
 }
 </script>
