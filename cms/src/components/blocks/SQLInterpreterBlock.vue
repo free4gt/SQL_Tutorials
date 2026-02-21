@@ -3,13 +3,24 @@
     <div class="sql-block__container">
       <header class="sql-block__header">
         <span class="sql-block__header-title">Postgres SQL client</span>
-        <div
-          class="sql-block__status"
-          :class="{ 'sql-block__status--ready': store.ready }"
-          :title="store.ready ? 'PGLite waitReady resolved — client can run queries. (No polling.)' : 'Waiting for PGLite to finish loading (waitReady).'"
-        >
-          <span class="sql-block__status-dot" aria-hidden="true" />
-          <span class="sql-block__status-text">{{ store.ready ? 'Ready' : 'Loading…' }}</span>
+        <div class="sql-block__status-row">
+          <div
+            class="sql-block__status"
+            :class="{ 'sql-block__status--ready': store.ready }"
+            :title="store.ready ? 'Database ready' : 'Waiting for PGLite (waitReady).'"
+          >
+            <span class="sql-block__status-dot" aria-hidden="true" />
+            <span class="sql-block__status-text">{{ store.ready ? 'Database' : 'Loading…' }}</span>
+          </div>
+          <div
+            v-if="isActive"
+            class="sql-block__status"
+            :class="solutionStatusClass"
+            :title="solutionStatusTitle"
+          >
+            <span class="sql-block__status-dot" aria-hidden="true" />
+            <span class="sql-block__status-text">{{ solutionStatusText }}</span>
+          </div>
         </div>
       </header>
       <!-- Mobile portrait: 4 tabs (Instructions, Table, Query, Solution) share one central pane -->
@@ -50,8 +61,34 @@
         </div>
         <div class="sql-block__mobile-central">
           <div v-show="mobileCentralTab === 'instructions'" class="sql-block__mobile-pane">
-            <h4 class="sql-block__instructions-title">Instructions</h4>
-            <div class="sql-block__instructions-body">{{ instructions || ' ' }}</div>
+            <div class="sql-block__instructions-tabs">
+              <button
+                type="button"
+                class="sql-block__instructions-tab"
+                :class="{ 'sql-block__instructions-tab--active': instructionsSectionTab === 'instructions' }"
+                @click="instructionsSectionTab = 'instructions'"
+              >
+                Instructions
+              </button>
+              <button
+                type="button"
+                class="sql-block__instructions-tab"
+                :class="{ 'sql-block__instructions-tab--active': instructionsSectionTab === 'output' }"
+                @click="instructionsSectionTab = 'output'"
+              >
+                Output
+              </button>
+            </div>
+            <div v-show="instructionsSectionTab === 'instructions'" class="sql-block__instructions-content">
+              <div class="sql-block__instructions-body">{{ instructions || ' ' }}</div>
+            </div>
+            <div v-show="instructionsSectionTab === 'output'" class="sql-block__instructions-content sql-block__instructions-output">
+              <p class="sql-block__output-intro"><strong>Expected columns</strong> (case-insensitive).</p>
+              <p v-if="solutionOutputColumns.length === 0" class="sql-block__output-empty">Run Start to see expected column names here.</p>
+              <ul v-else class="sql-block__output-columns">
+                <li v-for="(col, i) in solutionOutputColumns" :key="i" class="sql-block__output-column">{{ col }}</li>
+              </ul>
+            </div>
           </div>
           <div v-show="mobileCentralTab === 'table'" class="sql-block__mobile-pane sql-block__mobile-pane--schema">
             <template v-if="tablesList.length > 1">
@@ -102,6 +139,15 @@
             </template>
             <template v-else>
               <div class="sql-block__mobile-query-actions">
+                <button
+                  type="button"
+                  class="sql-block__copy-solution-btn sql-block__copy-solution-btn--mobile"
+                  :disabled="!solutionTrimmed"
+                  title="Copy the solution into your query"
+                  @click="onCopySolution"
+                >
+                  Copy solution
+                </button>
                 <button
                   type="button"
                   class="sql-block__run-btn sql-block__run-btn--mobile"
@@ -196,14 +242,25 @@
                   >
                     Solution
                   </button>
-                  <button
-                    type="button"
-                    class="sql-block__run-btn"
-                    :disabled="store.isQueryRunning"
-                    @click="onRun"
-                  >
-                    {{ store.isQueryRunning ? 'Running…' : 'Run' }}
-                  </button>
+                  <div class="sql-block__tabs-actions">
+                    <button
+                      type="button"
+                      class="sql-block__copy-solution-btn"
+                      :disabled="!solutionTrimmed"
+                      title="Copy the solution into your query"
+                      @click="onCopySolution"
+                    >
+                      Copy solution
+                    </button>
+                    <button
+                      type="button"
+                      class="sql-block__run-btn"
+                      :disabled="store.isQueryRunning"
+                      @click="onRun"
+                    >
+                      {{ store.isQueryRunning ? 'Running…' : 'Run' }}
+                    </button>
+                  </div>
                 </div>
                 <div class="sql-block__editor-wrap">
                   <textarea
@@ -218,15 +275,45 @@
                 </div>
               </div>
               <div class="sql-block__instructions-half">
-                <h4 class="sql-block__instructions-title">Instructions</h4>
-                <div class="sql-block__instructions-body">{{ instructions || ' ' }}</div>
+                <div class="sql-block__instructions-tabs">
+                  <button
+                    type="button"
+                    class="sql-block__instructions-tab"
+                    :class="{ 'sql-block__instructions-tab--active': instructionsSectionTab === 'instructions' }"
+                    @click="instructionsSectionTab = 'instructions'"
+                  >
+                    Instructions
+                  </button>
+                  <button
+                    type="button"
+                    class="sql-block__instructions-tab"
+                    :class="{ 'sql-block__instructions-tab--active': instructionsSectionTab === 'output' }"
+                    @click="instructionsSectionTab = 'output'"
+                  >
+                    Output
+                  </button>
+                </div>
+                <div v-show="instructionsSectionTab === 'instructions'" class="sql-block__instructions-content">
+                  <div class="sql-block__instructions-body">{{ instructions || ' ' }}</div>
+                </div>
+                <div v-show="instructionsSectionTab === 'output'" class="sql-block__instructions-content sql-block__instructions-output">
+                  <p class="sql-block__output-intro"><strong>Expected columns</strong> (case-insensitive).</p>
+                  <p v-if="solutionOutputColumns.length === 0" class="sql-block__output-empty">Run Start to see expected column names here.</p>
+                  <ul v-else class="sql-block__output-columns">
+                    <li v-for="(col, i) in solutionOutputColumns" :key="i" class="sql-block__output-column">{{ col }}</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </template>
         </div>
       </div>
       <div class="sql-block__divider" aria-hidden="true" />
+      <div v-if="validationMessage" class="sql-block__validation" :class="validationStatusClass" role="status">
+        {{ validationMessage }}
+      </div>
       <div class="sql-block__results">
+        <h4 class="sql-block__results-header">Query results</h4>
         <div v-if="hasRunOnce && resultError" class="sql-block__error">{{ resultError }}</div>
         <template v-else-if="hasRunOnce">
           <div v-if="resultRows.length > 0" class="sql-block__table-wrap">
@@ -247,12 +334,20 @@
                 v-for="(row, rowIndex) in resultRows"
                 :key="rowIndex"
                 class="sql-block__tr"
+                :class="{ 'sql-block__tr--issue': rowHasIssue(rowIndex) }"
               >
                 <td
                   v-for="(colName, cellIndex) in resultColumns"
                   :key="cellIndex"
                   class="sql-block__td"
+                  :class="{ 'sql-block__td--first': cellIndex === 0 }"
                 >
+                  <span
+                    v-if="cellIndex === 0 && rowHasIssue(rowIndex)"
+                    class="sql-block__row-issue-dot"
+                    title="Row has a count or content issue vs solution"
+                    aria-label="Issue"
+                  />
                   {{ row[colName] }}
                 </td>
               </tr>
@@ -314,11 +409,13 @@ const store = useSqlInterpreterStore()
 const queryText = ref('')
 const activeTab = ref('query')
 const mobileCentralTab = ref('instructions')
+const instructionsSectionTab = ref('instructions')
 const selectedTableIndex = ref(0)
 const resultRows = ref([])
 const resultColumns = ref([])
 const resultError = ref(null)
 const hasRunOnce = ref(false)
+const solutionOutputColumns = ref([])
 
 const tablesList = computed(() => {
   if (Array.isArray(props.tables) && props.tables.length > 0) {
@@ -344,8 +441,10 @@ const displayColumns = computed(() => {
 
 const isActive = computed(() => store.isActive(blockId))
 
+const solutionTrimmed = computed(() => (props.solution ?? '').trim())
+
 const formattedSolution = computed(() => {
-  const raw = (props.solution ?? '').trim()
+  const raw = solutionTrimmed.value
   if (!raw) return ''
   try {
     return format(raw, { language: 'postgresql', keywordCase: 'upper', tabWidth: 2 })
@@ -354,18 +453,65 @@ const formattedSolution = computed(() => {
   }
 })
 
+function onCopySolution() {
+  queryText.value = formattedSolution.value
+  activeTab.value = 'query'
+  mobileCentralTab.value = 'query'
+}
+
+const SOLUTION_TIMEOUT_MS = 30000
+
 async function onStart() {
   const payload = toPlainLessonPayload(props)
   await store.startLesson(blockId, payload)
+  queryText.value = ''
   resultRows.value = []
   resultColumns.value = []
   resultError.value = null
   hasRunOnce.value = false
+  solutionOutputColumns.value = []
+  const solutionSql = (props.solution ?? '').trim()
+  if (solutionSql) {
+    try {
+      const result = await Promise.race([
+        store.runQuery(solutionSql),
+        new Promise((_, reject) =>
+          setTimeout(() => reject(new Error('Query timed out')), SOLUTION_TIMEOUT_MS)
+        )
+      ])
+      const { rows, columns, error } = result
+      if (error) {
+        store.setSolutionFailed(error)
+        return
+      }
+      if (store.hasDuplicateColumnNames(columns)) {
+        store.setSolutionDuplicateColumns()
+        return
+      }
+      store.setSolutionOk()
+      store.setExpectedFromResult(columns, rows?.length ?? 0)
+      const solutionResult = await store.computeResultFingerprint(rows ?? [], columns ?? [])
+      if (solutionResult) {
+        store.setExpectedFingerprint(solutionResult.fingerprint, solutionResult.hashCounts)
+      }
+      solutionOutputColumns.value = Array.isArray(columns) ? [...columns] : []
+    } catch (e) {
+      store.setSolutionFailed(e?.message ?? 'Query timed out')
+    }
+  } else {
+    store.setSolutionOk()
+  }
 }
 
 async function onRun() {
   const sql = queryText.value.trim()
-  if (!sql) return
+  if (!sql) {
+    hasRunOnce.value = true
+    resultError.value = 'No SQL present.'
+    resultRows.value = []
+    resultColumns.value = []
+    return
+  }
   hasRunOnce.value = true
   resultError.value = null
   const { rows, columns, error } = await store.runQuery(sql)
@@ -377,8 +523,53 @@ async function onRun() {
     resultError.value = null
     resultRows.value = rows
     resultColumns.value = Array.isArray(columns) && columns.length > 0 ? columns : (rows.length > 0 ? Object.keys(rows[0]) : [])
+    const userResult = await store.computeResultFingerprint(rows, resultColumns.value)
+    if (userResult) {
+      store.setUserResultFingerprint(userResult.fingerprint, userResult.rowHashes)
+    }
   }
 }
+
+const solutionStatusClass = computed(() => {
+  const s = store.solutionStatus
+  if (s === 'ok') return 'sql-block__status--ready'
+  if (s === 'failed' || s === 'duplicate_columns') return 'sql-block__status--error'
+  return 'sql-block__status--pending'
+})
+const solutionStatusTitle = computed(() => {
+  const s = store.solutionStatus
+  if (s === 'ok') return 'Solution ran successfully; no duplicate columns.'
+  if (s === 'failed') return 'Solution query did not complete.'
+  if (s === 'duplicate_columns') return 'Solution result has duplicate column names.'
+  return 'Solution not run yet.'
+})
+const solutionStatusText = computed(() => {
+  const s = store.solutionStatus
+  if (s === 'ok') return 'Solution'
+  if (s === 'failed') return 'Solution'
+  if (s === 'duplicate_columns') return 'Solution'
+  return 'Solution…'
+})
+
+const validationMessage = computed(() => {
+  if (!hasRunOnce.value || resultError.value) return null
+  return store.getValidationMessage(resultColumns.value, resultRows.value?.length ?? 0)
+})
+
+function rowHasIssue(rowIndex) {
+  if (validationMessage.value !== "Result values don't match solution.") return false
+  if (!store.userRowHashes || store.userRowHashes.length === 0) return false
+  const flags = store.userRowIssueFlags
+  return Array.isArray(flags) && flags[rowIndex] === true
+}
+
+const validationStatusClass = computed(() => {
+  const msg = validationMessage.value
+  if (!msg) return ''
+  if (msg.startsWith('success:')) return 'sql-block__validation--match'
+  if (store.solutionStatus === 'failed' || store.solutionStatus === 'duplicate_columns') return 'sql-block__validation--error'
+  return 'sql-block__validation--mismatch'
+})
 
 onMounted(() => {
   store.initDb()
@@ -479,14 +670,17 @@ onMounted(() => {
 .sql-block__mobile-pane--schema .sql-block__schema-label {
   margin-top: 0;
 }
-.sql-block__mobile-pane .sql-block__instructions-title {
-  flex-shrink: 0;
-  margin: 0 0 0.35rem 0;
+.sql-block__mobile-pane .sql-block__instructions-tabs {
+  margin: 0 -0.75rem 0.35rem -0.75rem;
+  padding: 0 0.75rem;
 }
-.sql-block__mobile-pane .sql-block__instructions-body {
+.sql-block__mobile-pane .sql-block__instructions-content {
   flex: 1;
   min-height: 0;
   overflow: auto;
+}
+.sql-block__mobile-pane .sql-block__instructions-body {
+  min-height: 0;
 }
 .sql-block__mobile-pane--schema {
   overflow: auto;
@@ -501,6 +695,9 @@ onMounted(() => {
 .sql-block__mobile-query-actions {
   flex-shrink: 0;
   margin-bottom: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: stretch;
 }
 .sql-block__mobile-pane .sql-block__editor-wrap {
   flex: 1 1 auto;
@@ -517,7 +714,7 @@ onMounted(() => {
 .sql-block__run-btn--mobile {
   margin-left: 0;
   margin-right: 0;
-  width: 100%;
+  flex: 1;
 }
 
 /* Mobile only: hide scrollbars on SQL interpreter */
@@ -526,6 +723,7 @@ onMounted(() => {
   .sql-block__mobile-central,
   .sql-block__mobile-pane .sql-block__editor-wrap,
   .sql-block__mobile-pane .sql-block__instructions-body,
+  .sql-block__mobile-pane .sql-block__instructions-content,
   .sql-block__mobile-pane--schema,
   .sql-block__results {
     scrollbar-width: none;
@@ -579,6 +777,12 @@ onMounted(() => {
   min-width: 0;
 }
 
+.sql-block__status-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .sql-block__status {
   display: flex;
   align-items: center;
@@ -597,6 +801,14 @@ onMounted(() => {
 
 .sql-block__status--ready .sql-block__status-dot {
   background: #2e7d32;
+}
+
+.sql-block__status--error .sql-block__status-dot {
+  background: #c62828;
+}
+
+.sql-block__status--pending .sql-block__status-dot {
+  background: #9e9e9e;
 }
 
 .sql-block__status-text {
@@ -708,6 +920,81 @@ onMounted(() => {
   background: #f5f7fa;
 }
 
+.sql-block__instructions-tabs {
+  flex-shrink: 0;
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid #e2e8f0;
+  background: #e8eef4;
+}
+.sql-block__instructions-tab {
+  padding: 0.4rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  background: transparent;
+  color: #555;
+  cursor: pointer;
+}
+.sql-block__instructions-tab--active {
+  background: #f5f7fa;
+  border-bottom-color: #2196f3;
+  color: #1a1a1a;
+}
+
+.sql-block__instructions-content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.sql-block__instructions-body {
+  flex: 1;
+  padding: 0.6rem;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: #334155;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.sql-block__instructions-output {
+  padding: 0.6rem;
+}
+.sql-block__output-intro {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: #334155;
+}
+.sql-block__output-intro strong {
+  font-weight: 700;
+  color: #1e293b;
+}
+.sql-block__output-empty {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #64748b;
+  font-style: italic;
+}
+.sql-block__output-columns {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.8125rem;
+  font-family: ui-monospace, monospace;
+  color: #334155;
+}
+.sql-block__output-column {
+  padding: 0.25rem 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+.sql-block__output-column:last-child {
+  border-bottom: none;
+}
+
 .sql-block__instructions-title {
   flex-shrink: 0;
   margin: 0;
@@ -718,17 +1005,6 @@ onMounted(() => {
   text-transform: uppercase;
   letter-spacing: 0.04em;
   border-bottom: 1px solid #e2e8f0;
-}
-
-.sql-block__instructions-body {
-  flex: 1;
-  padding: 0.6rem;
-  font-size: 0.75rem;
-  line-height: 1.45;
-  color: #334155;
-  white-space: pre-wrap;
-  word-break: break-word;
-  overflow-y: auto;
 }
 
 .sql-block__start-wrap {
@@ -824,10 +1100,43 @@ onMounted(() => {
   flex: 1;
 }
 
-.sql-block__run-btn {
+.sql-block__tabs-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
   margin-left: auto;
-  margin-right: 0;
   margin-bottom: -1px;
+}
+
+.sql-block__copy-solution-btn {
+  margin-right: 0;
+  margin-bottom: 0;
+  padding: 0.4rem 0.875rem;
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border: 1px solid #0ea5e9;
+  background: #e0f2fe;
+  color: #0369a1;
+  cursor: pointer;
+}
+.sql-block__copy-solution-btn:hover:not(:disabled) {
+  background: #bae6fd;
+  border-color: #0284c7;
+  color: #075985;
+}
+.sql-block__copy-solution-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.sql-block__copy-solution-btn--mobile {
+  margin-right: 0;
+}
+
+.sql-block__run-btn {
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 0;
   padding: 0.4rem 1rem;
   border-radius: 6px;
   font-size: 0.875rem;
@@ -854,6 +1163,30 @@ onMounted(() => {
   border-top: 1px solid #c5d0de;
 }
 
+/* Results validation status bar — above results, shows match vs solution */
+.sql-block__validation {
+  flex-shrink: 0;
+  padding: 0.4rem 1rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  border-bottom: 1px solid #e2e8f0;
+}
+.sql-block__validation--match {
+  background: #dcfce7;
+  color: #166534;
+  border-bottom-color: #bbf7d0;
+}
+.sql-block__validation--mismatch {
+  background: #fef3c7;
+  color: #92400e;
+  border-bottom-color: #fde68a;
+}
+.sql-block__validation--error {
+  background: #fee2e2;
+  color: #991b1b;
+  border-bottom-color: #fecaca;
+}
+
 /* Results pane — 40% of container height */
 .sql-block__results {
   flex: 5 1 0;
@@ -861,6 +1194,15 @@ onMounted(() => {
   padding: 0.75rem 1rem;
   background: #fafafa;
   overflow: auto;
+}
+
+.sql-block__results-header {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .sql-block__error {
@@ -871,6 +1213,7 @@ onMounted(() => {
 
 .sql-block__table-wrap {
   overflow-x: auto;
+  padding-left: 1.5rem;
 }
 
 .sql-block__table {
@@ -890,10 +1233,26 @@ onMounted(() => {
 .sql-block__tr {
   border-bottom: 1px solid #eee;
 }
+.sql-block__tr--issue {
+  background: #fef2f2;
+}
 
 .sql-block__td {
   padding: 0.4rem 0.6rem;
   border: 1px solid #eee;
+}
+.sql-block__td--first {
+  position: relative;
+}
+.sql-block__row-issue-dot {
+  position: absolute;
+  left: -1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #dc2626;
 }
 
 .sql-block__empty {

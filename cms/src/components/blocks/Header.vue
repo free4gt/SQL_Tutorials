@@ -15,8 +15,11 @@ defineProps(['text'])
 
 .lesson-header {
   height: 100%;
+  width: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
+  text-align: center;
   font-size: clamp(0.9rem, 2.5vw, 1.35rem);
   color: #1a1a1a;
   margin: 0;
