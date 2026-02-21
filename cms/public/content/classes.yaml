@@ -9,5 +9,5 @@ classes:
       lessonsYaml: 'practice.yaml'
   - class:
       name: 'demo'
-      title: 'Block showcase'
+      title: 'Content type explanation'
       lessonsYaml: 'demo.yaml'
