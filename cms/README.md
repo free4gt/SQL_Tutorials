@@ -1,6 +1,6 @@
 # Free Learning Content Management System
 
-A free, open learning content management system for courses and lessons. Content is driven by YAML files in the **`public`** section: you configure **classes** (e.g. “Introduction to SQL”, “Block showcase”) and **lesson YAML files** that list lessons and their **blocks**. Block types include: **header**, **paragraph**, **video**, **image**, **chart**, **table**, **sql** (interpreter), **divider**, **tabs**, **list**, **text_section**, and **callout**. This README explains the two configuration files and all **block options** you can use.
+A free, open learning content management system for courses and lessons. Content is driven by YAML files in the **`public`** section: you configure **classes** (e.g. “Introduction to SQL”, “Content type explanation”) and **lesson YAML files** that list lessons and their **blocks**. Block types include: **header**, **paragraph**, **video**, **image**, **chart**, **table**, **sql** (interpreter), **divider**, **tabs**, **list**, **text_section**, and **callout**. This README explains the two configuration files and all **block options** you can use.
 
 ---
 
@@ -30,7 +30,7 @@ classes:
       lessonsYaml: 'practice.yaml'
   - class:
       name: 'demo'
-      title: 'Block showcase'
+      title: 'Content type explanation'
       lessonsYaml: 'demo.yaml'
 ```
 
@@ -395,9 +395,9 @@ A callout (aside) with an optional title and inner blocks. Allowed inner types: 
 
 ---
 
-## Block showcase (demo class)
+## Content type explanation (demo class)
 
-The **demo** class (`demo.yaml`) has one lesson, **All blocks**, that demonstrates every block type in order and ends with **3 tab examples**. The second tab contains **3 sub-tabs, each with its own SQL editor**. Use the **Block showcase** class in the app to see all blocks in one place.
+The **demo** class (`demo.yaml`) explains each content block type in its own lesson, from easy to complex: **Intro** (what is a content block), **Header**, **Paragraph**, **List**, **Divider**, **Text section**, **Table** (one example per option, max 5), **Chart**, **Callout**, **Video**, **SQL interpreter** (Postgres in the browser, reset on Start, properties), and **Tabs** (multiple examples, including 3 tabs each with a SQL editor). Use the **Content type explanation** class in the app.
 
 ---
 

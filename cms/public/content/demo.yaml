@@ -1,70 +1,172 @@
-# Demo class: one lesson that showcases every block type (no Image), with narration and dividers.
-# Ending: 3 tab examples, one of which has 3 sub-tabs each with a SQL editor.
+# Content type explanation: one lesson per block type, easy to complex.
+# Class title: "Content type explanation" (see classes.yaml).
 lessons:
+  # --- Intro ---
   - lesson:
       button:
-        text: 'All blocks'
+        text: 'Intro'
       blocks:
         - header:
-            text: 'Block showcase'
+            text: 'Intro'
         - paragraph:
-            text: 'This lesson walks through every block type. Each section is separated by a divider and narrated so you know where one demo starts and ends.'
+            text: 'This program is a learning content management system. It hosts courses and lessons: you pick a class (e.g. SQL intro, practice), then a lesson. Each lesson is built from content blocks—headings, paragraphs, lists, tables, charts, video embeds, and SQL interpreters that run in the browser. Content is defined in YAML files; no backend database is required for the lessons themselves.'
+        - paragraph:
+            text: 'The app is fully responsive. It works on phones, tablets, and desktops. Layout and controls adapt to the screen size so you can read and use the SQL editor on any device.'
+        - paragraph:
+            text: 'What is a content block? Lessons are made of content blocks. Each block is one type of content: a heading, a paragraph, a list, a table, a chart, an SQL editor, and so on. You arrange blocks in order in the lesson YAML; they appear in that order on the page.'
+        - paragraph:
+            text: 'The next lessons go through each block type with examples and options, from simple to more advanced.'
 
-        - divider:
-            caption: 'Header'
-        - paragraph:
-            text: 'The block above this paragraph is a header — the main title for the lesson or section.'
+  - lesson_category:
+      text: 'Text type'
+  # --- Header ---
+  - lesson:
+      button:
+        text: 'Header'
+      blocks:
         - header:
-            text: 'Example header'
-
-        - divider:
-            caption: 'Paragraph'
+            text: 'Header block'
         - paragraph:
-            text: 'This block type is paragraph: body text. You can use multiple paragraphs in a row.'
-
-        - divider:
-            caption: 'List'
+            text: 'A header is a section or lesson title. Keep it short.'
+        - header:
+            text: 'Example title'
         - paragraph:
-            text: 'A list block shows bullet points. Useful for steps or key points.'
+            text: 'You can use KaTeX for math in headers. Example below.'
+        - header:
+            text: 'Formula: \( E = mc^2 \)'
+
+  # --- Paragraph ---
+  - lesson:
+      button:
+        text: 'Paragraph'
+      blocks:
+        - header:
+            text: 'Paragraph block'
+        - paragraph:
+            text: 'Paragraphs are body text. Use one block per paragraph.'
+        - paragraph:
+            text: 'You can render math with KaTeX. Inline: \( a^2 + b^2 = c^2 \). Display: \[ \int_0^1 x^2 \, dx = \frac{1}{3}. \] Use single-quoted strings in YAML when you include backslashes or quotes.'
+
+  # --- List ---
+  - lesson:
+      button:
+        text: 'List'
+      blocks:
+        - header:
+            text: 'List block'
+        - paragraph:
+            text: 'A list shows bullet points. Good for steps or key points.'
         - list:
             items:
-              - 'First list item'
-              - 'Second list item'
-              - 'Third list item'
-
-        - divider:
-            caption: 'Text section'
+              - 'First item'
+              - 'Second item'
+              - 'Third item'
         - paragraph:
-            text: 'A text section groups header, paragraph, and list blocks inside a bordered box. Only those three block types are allowed inside.'
+            text: 'List items support KaTeX as well.'
+        - list:
+            items:
+              - 'Point \( n \)'
+              - 'Next point'
+
+  # --- Divider ---
+  - lesson:
+      button:
+        text: 'Divider'
+      blocks:
+        - header:
+            text: 'Divider block'
+        - paragraph:
+            text: 'A divider is a horizontal line. Use it to separate sections. You can add an optional caption above the line.'
+        - divider:
+            caption: 'Section break'
+        - paragraph:
+            text: 'Content after the divider.'
+
+  # --- Text section ---
+  - lesson:
+      button:
+        text: 'Text section'
+      blocks:
+        - header:
+            text: 'Text section block'
+        - paragraph:
+            text: 'A text section groups header, paragraph, and list blocks inside a bordered box. Only those three types are allowed inside.'
         - text_section:
             blocks:
               - header:
                   text: 'Inside the box'
               - paragraph:
-                  text: 'This content is inside the text section.'
+                  text: 'Grouped content here.'
               - list:
                   items:
                     - 'Item A'
                     - 'Item B'
 
-        - divider:
-            caption: 'Table'
+  - lesson_category:
+      text: 'Tables and charts'
+  # --- Table ---
+  - lesson:
+      button:
+        text: 'Table'
+      blocks:
+        - header:
+            text: 'Table block'
         - paragraph:
-            text: 'The table block renders a data table. You can add a caption, and optionally make columns sortable or filterable.'
+            text: 'Tables have options: caption, headers, rows, footer, sortable, filterable. Below: one example per option (max 5).'
+        - paragraph:
+            text: '1. Basic table (headers + rows).'
         - table:
-            caption: 'Sample table'
+            headers: ['A', 'B']
+            rows:
+              - ['1', '2']
+              - ['3', '4']
+        - paragraph:
+            text: '2. With caption.'
+        - table:
+            caption: 'Scores'
             headers: ['Name', 'Score']
             rows:
               - ['Alice', '95']
               - ['Bob', '87']
-              - ['Carol', '92']
-            sortable: true
-            filterable: true
-
-        - divider:
-            caption: 'Chart'
         - paragraph:
-            text: 'The chart block shows a Chart.js chart. Supported types: line, bar, pie. Below is a simple line chart.'
+            text: '3. Sortable (click column headers).'
+        - table:
+            caption: 'Sortable'
+            headers: ['Name', 'Score']
+            rows:
+              - ['Alice', '95']
+              - ['Bob', '87']
+            sortable: true
+        - paragraph:
+            text: '4. Filterable (type in filter row).'
+        - table:
+            caption: 'Filterable'
+            headers: ['Name', 'Score']
+            rows:
+              - ['Alice', '95']
+              - ['Bob', '87']
+            filterable: true
+        - paragraph:
+            text: '5. With footer row.'
+        - table:
+            caption: 'With footer'
+            headers: ['Item', 'Qty']
+            rows:
+              - ['Apples', '10']
+              - ['Oranges', '5']
+            footer: ['Total', '15']
+
+  # --- Chart ---
+  - lesson:
+      button:
+        text: 'Chart'
+      blocks:
+        - header:
+            text: 'Chart block'
+        - paragraph:
+            text: 'Charts use Chart.js. Types: line, bar, pie. Options: chartType, data (labels + datasets), options.'
+        - paragraph:
+            text: 'Line chart.'
         - chart:
             chartType: 'line'
             data:
@@ -72,32 +174,52 @@ lessons:
               datasets:
                 - label: 'Series 1'
                   data: [10, 20, 15]
-
-        - divider:
-            caption: 'Callout'
         - paragraph:
-            text: 'A callout is an aside with an optional title. It can contain paragraphs, lists, tables, charts, and even nested tabs (no video or SQL inside).'
-        - callout:
-            title: 'Callout example'
-            blocks:
-              - paragraph:
-                  text: 'This is inside the callout. Use it for tips, notes, or side content.'
-              - list:
-                  items:
-                    - 'Point one'
-                    - 'Point two'
-
-        - divider:
-            caption: 'Video'
+            text: 'Bar chart.'
+        - chart:
+            chartType: 'bar'
+            data:
+              labels: ['A', 'B', 'C']
+              datasets:
+                - label: 'Count'
+                  data: [12, 19, 8]
         - paragraph:
-            text: 'The video block embeds a video in a 16∶9 container. Typically you use a YouTube or other embed URL.'
+            text: 'Pie chart.'
+        - chart:
+            chartType: 'pie'
+            data:
+              labels: ['X', 'Y', 'Z']
+              datasets:
+                - data: [30, 50, 20]
+                  backgroundColor: ['#94a3b8', '#64748b', '#475569']
+
+  - lesson_category:
+      text: 'Interactive content'
+  # --- Video ---
+  - lesson:
+      button:
+        text: 'Video'
+      blocks:
+        - header:
+            text: 'Video block'
+        - paragraph:
+            text: 'The video block embeds a video in a 16∶9 container. Use an embed URL (e.g. YouTube embed).'
         - video:
             src: 'https://www.youtube.com/embed/M0HYcnwMIjQ'
 
-        - divider:
-            caption: 'SQL interpreter'
+  # --- SQL interpreter ---
+  - lesson:
+      button:
+        text: 'SQL interpreter'
+      blocks:
+        - header:
+            text: 'SQL interpreter block'
         - paragraph:
-            text: 'The SQL interpreter block gives learners a schema (one or more tables) and a solution query. They click Start, then write and run SQL. Validation checks columns, row count, and result values against the solution. Below: a single table "products" with columns id, name, price. Try: SELECT * FROM products.'
+            text: 'The SQL interpreter runs Postgres in the browser (PGlite). There is no server: the database lives in the page. When you click Start, the lesson schema (tables and rows from YAML) is loaded and the solution query is run to set the expected result. The database is reset every time you click Start, so each run starts from a clean state.'
+        - paragraph:
+            text: 'Properties you can set in YAML: tableName, columns, rows (single table), or tables (multiple tables). Also solution (the query that defines the correct result) and instructions (text shown in the block).'
+        - paragraph:
+            text: 'Example: one table, three rows. Click Start, then run SELECT * FROM products to match the solution.'
         - sql:
             tableName: 'products'
             columns: ['id', 'name', 'price']
@@ -108,75 +230,106 @@ lessons:
             solution: 'SELECT * FROM products'
             instructions: 'Run a query that matches the solution (e.g. SELECT * FROM products).'
 
-        - divider:
-            caption: 'Tabs (3 examples)'
+  - lesson_category:
+      text: 'Content containers'
+  # --- Callout ---
+  - lesson:
+      button:
+        text: 'Callout'
+      blocks:
+        - header:
+            text: 'Callout block'
         - paragraph:
-            text: 'The tabs block shows multiple panels; each tab has a name and a list of blocks. Below are 3 tab examples. The first is plain content; the second has 3 sub-tabs, each with its own SQL editor; the third is a summary table.'
+            text: 'A callout is an aside with an optional title. It can contain header, paragraph, list, table, chart, image, divider, tabs, text_section (no video or SQL inside).'
+        - callout:
+            title: 'Tip'
+            blocks:
+              - paragraph:
+                  text: 'Use callouts for tips, notes, or side content.'
+              - list:
+                  items:
+                    - 'Point one'
+                    - 'Point two'
+
+  # --- Tabs ---
+  - lesson:
+      button:
+        text: 'Tabs'
+      blocks:
+        - header:
+            text: 'Tabs block'
+        - paragraph:
+            text: 'A tabs block shows multiple panels. Each tab has a name and a list of blocks. You can nest tabs. Below: several examples, including one with 3 tabs each containing a SQL editor.'
+        - paragraph:
+            text: 'Example 1: two tabs, plain content.'
         - tabs:
             tabs:
               - tab:
-                  name: 'Example 1'
+                  name: 'Tab A'
                   blocks:
-                    - header:
-                        text: 'First example'
                     - paragraph:
-                        text: 'Plain content in the first tab: text and a list.'
+                        text: 'Content in tab A.'
+              - tab:
+                  name: 'Tab B'
+                  blocks:
                     - list:
                         items:
-                          - 'Item A'
-                          - 'Item B'
+                          - 'Item 1'
+                          - 'Item 2'
+        - paragraph:
+            text: 'Example 2: three tabs, each with its own SQL editor.'
+        - tabs:
+            tabs:
               - tab:
-                  name: 'Example 2'
+                  name: 'Query 1'
+                  blocks:
+                    - sql:
+                        tableName: 't1'
+                        columns: ['id', 'x']
+                        rows:
+                          - ['1', 'a']
+                          - ['2', 'b']
+                        solution: 'SELECT * FROM t1'
+                        instructions: 'Run SELECT * FROM t1.'
+              - tab:
+                  name: 'Query 2'
+                  blocks:
+                    - sql:
+                        tableName: 't2'
+                        columns: ['id', 'y']
+                        rows:
+                          - ['1', 'p']
+                          - ['2', 'q']
+                        solution: 'SELECT * FROM t2'
+                        instructions: 'Run SELECT * FROM t2.'
+              - tab:
+                  name: 'Query 3'
+                  blocks:
+                    - sql:
+                        tableName: 't3'
+                        columns: ['id', 'z']
+                        rows:
+                          - ['1', 'm']
+                          - ['2', 'n']
+                        solution: 'SELECT * FROM t3'
+                        instructions: 'Run SELECT * FROM t3.'
+        - paragraph:
+            text: 'Example 3: tabs with mixed content (header, paragraph, table).'
+        - tabs:
+            tabs:
+              - tab:
+                  name: 'Text'
                   blocks:
                     - header:
-                        text: 'Three SQL editors'
+                        text: 'First tab'
                     - paragraph:
-                        text: 'This tab has 3 sub-tabs; each sub-tab has a SQL editor with its own table. Click Start in each, then run the solution query.'
-                    - tabs:
-                        tabs:
-                          - tab:
-                              name: 'Editor 1'
-                              blocks:
-                                - sql:
-                                    tableName: 't1'
-                                    columns: ['id', 'x']
-                                    rows:
-                                      - ['1', 'a']
-                                      - ['2', 'b']
-                                    solution: 'SELECT * FROM t1'
-                                    instructions: 'Query table t1.'
-                          - tab:
-                              name: 'Editor 2'
-                              blocks:
-                                - sql:
-                                    tableName: 't2'
-                                    columns: ['id', 'y']
-                                    rows:
-                                      - ['1', 'p']
-                                      - ['2', 'q']
-                                    solution: 'SELECT * FROM t2'
-                                    instructions: 'Query table t2.'
-                          - tab:
-                              name: 'Editor 3'
-                              blocks:
-                                - sql:
-                                    tableName: 't3'
-                                    columns: ['id', 'z']
-                                    rows:
-                                      - ['1', 'm']
-                                      - ['2', 'n']
-                                    solution: 'SELECT * FROM t3'
-                                    instructions: 'Query table t3.'
+                        text: 'Some text here.'
               - tab:
-                  name: 'Example 3'
+                  name: 'Table'
                   blocks:
-                    - header:
-                        text: 'Third example'
                     - table:
                         caption: 'Summary'
-                        headers: ['Type', 'Count']
+                        headers: ['Key', 'Value']
                         rows:
-                          - ['Examples', '3']
-                          - ['SQL editors in Example 2', '3']
-                        sortable: true
-                        filterable: true
+                          - ['A', '1']
+                          - ['B', '2']
