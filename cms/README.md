@@ -1,6 +1,6 @@
 # Free Learning Content Management System
 
-A free, open learning content management system for courses and lessons. Content is driven by YAML files in the **`public`** section: you configure **classes** (e.g. “Introduction to SQL”) and **lesson YAML files** that list lessons and their **blocks** (header, paragraph, video, image, chart). This README explains the two configuration files and all **block options** you can use.
+A free, open learning content management system for courses and lessons. Content is driven by YAML files in the **`public`** section: you configure **classes** (e.g. “Introduction to SQL”, “Block showcase”) and **lesson YAML files** that list lessons and their **blocks**. Block types include: **header**, **paragraph**, **video**, **image**, **chart**, **table**, **sql** (interpreter), **divider**, **tabs**, **list**, **text_section**, and **callout**. This README explains the two configuration files and all **block options** you can use.
 
 ---
 
@@ -28,6 +28,10 @@ classes:
       name: 'practice'
       title: 'Practice Projects'
       lessonsYaml: 'practice.yaml'
+  - class:
+      name: 'demo'
+      title: 'Block showcase'
+      lessonsYaml: 'demo.yaml'
 ```
 
 ### 2. The lesson YAML file (e.g. `public/content/sql-intro.yaml`)
@@ -223,12 +227,186 @@ Renders a Chart.js chart (line, bar, or pie). Options are merged with Chart.js d
 
 ---
 
+### `table`
+
+Renders a data table with optional caption, sortable columns, and filterable columns.
+
+| Option      | Type    | Description |
+|-------------|---------|-------------|
+| `caption`  | string  | Optional. Table caption. |
+| `headers`  | array   | Column headers. |
+| `rows`     | array   | Array of rows (each row an array of cell values). |
+| `footer`   | array   | Optional. Single footer row. |
+| `sortable` | boolean | If true, column headers are clickable to sort. Default: false. |
+| `filterable` | boolean | If true, filter inputs appear below headers. Default: false. |
+
+**YAML example:**
+
+```yaml
+- table:
+    caption: 'Scores'
+    headers: ['Name', 'Score']
+    rows:
+      - ['Alice', '95']
+      - ['Bob', '87']
+```
+
+---
+
+### `sql`
+
+SQL interpreter block: students run queries against a lesson-defined schema (single table or multiple tables). Supports validation against a solution query.
+
+| Option        | Type   | Description |
+|---------------|--------|-------------|
+| `tableName`   | string | Name of the single table (when not using `tables`). Default: `'table'`. |
+| `columns`     | array  | Column names for the single table. |
+| `rows`        | array  | Row data (array of arrays) for the single table. |
+| `tables`      | array  | Optional. Multiple tables: each `{ tableName, columns, rows }`. Overrides single table. |
+| `solution`   | string | Solution query; result is compared to the user’s result for validation. |
+| `instructions` | string | Optional. Instructions shown in the block. |
+
+**YAML example (single table):**
+
+```yaml
+- sql:
+    tableName: 'products'
+    columns: ['id', 'name', 'price']
+    rows:
+      - ['1', 'Widget', '9.99']
+      - ['2', 'Gadget', '14.50']
+    solution: 'SELECT * FROM products'
+    instructions: 'Run a query that matches the solution.'
+```
+
+**YAML example (multiple tables):** use `tables: [ { tableName, columns, rows }, ... ]`.
+
+---
+
+### `divider`
+
+A horizontal divider with an optional caption (section label).
+
+| Option   | Type   | Description |
+|----------|--------|-------------|
+| `caption` | string | Optional. Text shown above the line. |
+
+**YAML example:**
+
+```yaml
+- divider:
+    caption: 'Next section'
+```
+
+---
+
+### `tabs`
+
+A set of tabs; each tab has a name and a list of blocks. Blocks can be any type (including nested `tabs` or `sql`).
+
+| Option | Type  | Description |
+|--------|-------|-------------|
+| `tabs` | array | List of tab objects. Each has `name` and `blocks` (array of block objects). |
+
+**YAML example:**
+
+```yaml
+- tabs:
+    tabs:
+      - tab:
+          name: 'Example 1'
+          blocks:
+            - paragraph:
+                text: 'Content for first tab.'
+      - tab:
+          name: 'Example 2'
+          blocks:
+            - sql:
+                tableName: 't1'
+                columns: ['id', 'x']
+                rows: [['1', 'a']]
+                solution: 'SELECT * FROM t1'
+```
+
+---
+
+### `list`
+
+A bullet list.
+
+| Option  | Type  | Description |
+|---------|-------|-------------|
+| `items` | array | List of strings (one per item). Supports inline math (KaTeX). |
+
+**YAML example:**
+
+```yaml
+- list:
+    items:
+      - 'First item'
+      - 'Second item'
+```
+
+---
+
+### `text_section`
+
+A bordered container that groups **header**, **paragraph**, and **list** blocks.
+
+| Option  | Type  | Description |
+|---------|-------|-------------|
+| `blocks` | array | Block objects; only `header`, `paragraph`, and `list` are allowed. |
+
+**YAML example:**
+
+```yaml
+- text_section:
+    blocks:
+      - header:
+          text: 'Section title'
+      - paragraph:
+          text: 'Body text.'
+      - list:
+          items: ['A', 'B']
+```
+
+---
+
+### `callout`
+
+A callout (aside) with an optional title and inner blocks. Allowed inner types: header, paragraph, list, table, chart, image, divider, tabs, text_section (no video or sql).
+
+| Option   | Type   | Description |
+|----------|--------|-------------|
+| `title`  | string | Optional. Callout title. |
+| `blocks` | array  | Block objects (header, paragraph, list, table, chart, image, divider, tabs, text_section). |
+
+**YAML example:**
+
+```yaml
+- callout:
+    title: 'Tip'
+    blocks:
+      - paragraph:
+          text: 'Remember to run the solution query first.'
+      - list:
+          items: ['Step one', 'Step two']
+```
+
+---
+
+## Block showcase (demo class)
+
+The **demo** class (`demo.yaml`) has one lesson, **All blocks**, that demonstrates every block type in order and ends with **3 tab examples**. The second tab contains **3 sub-tabs, each with its own SQL editor**. Use the **Block showcase** class in the app to see all blocks in one place.
+
+---
+
 ## Summary
 
 | File / concept      | Purpose |
 |---------------------|--------|
-| `public/content/classes.yaml` | Lists courses; each course has `name`, `title`, and `lessonsYaml` (the lesson file). |
-| Lesson YAML (e.g. `sql-intro.yaml`) | Defines `lessons`: mix of `lesson` (button + blocks) and `lesson_category` (section label). |
-| Blocks               | Each block type (`header`, `paragraph`, `video`, `image`, `chart`) has specific options; order in `blocks` is the order on the page. |
+| `public/content/classes.yaml` | Lists courses; each has `name`, `title`, and `lessonsYaml`. |
+| Lesson YAML (e.g. `sql-intro.yaml`, `demo.yaml`) | Defines `lessons`: mix of `lesson` (button + blocks) and `lesson_category` (section label). |
+| Blocks               | Types: `header`, `paragraph`, `video`, `image`, `chart`, `table`, `sql`, `divider`, `tabs`, `list`, `text_section`, `callout`. Order in `blocks` is the order on the page. |
 
 All content lives under **`public`**: put lesson YAML files in `public/content/` and images in `public/images/`.

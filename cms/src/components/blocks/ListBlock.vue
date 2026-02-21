@@ -36,15 +36,17 @@ const listItems = computed(() => Array.isArray(props.items) ? props.items : [])
   text-align: left;
 }
 
-/* One tab-width indent (2em) in front of the list; list is left-aligned */
+/* Match paragraph font exactly: same size, line-height, letter-spacing, color */
 .block-list__ul {
-  margin: 0 0 0 2em;
-  padding-left: 1.5em;
+  margin: 0 0 0 1.5em;
+  padding: 0 0 0 0.75em;
+  border-left: 2px solid rgba(148, 163, 184, 0.4);
   list-style-type: disc;
   list-style-position: outside;
   font-size: clamp(0.8125rem, 2vw, 1rem);
-  line-height: 1.5;
-  color: #333;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  color: #475569;
   text-align: left;
   max-width: 100%;
   overflow-wrap: break-word;
@@ -52,13 +54,22 @@ const listItems = computed(() => Array.isArray(props.items) ? props.items : [])
 }
 
 .block-list__li {
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.5rem;
+  padding-left: 0.25em;
   overflow-wrap: break-word;
   word-break: break-word;
+  font-size: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: inherit;
 }
 
 .block-list__li:last-child {
   margin-bottom: 0;
+}
+
+.block-list__li::marker {
+  color: #94a3b8;
 }
 
 .block-list__li :deep(.katex) {

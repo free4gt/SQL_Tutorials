@@ -1,0 +1,182 @@
+# Demo class: one lesson that showcases every block type (no Image), with narration and dividers.
+# Ending: 3 tab examples, one of which has 3 sub-tabs each with a SQL editor.
+lessons:
+  - lesson:
+      button:
+        text: 'All blocks'
+      blocks:
+        - header:
+            text: 'Block showcase'
+        - paragraph:
+            text: 'This lesson walks through every block type. Each section is separated by a divider and narrated so you know where one demo starts and ends.'
+
+        - divider:
+            caption: 'Header'
+        - paragraph:
+            text: 'The block above this paragraph is a header — the main title for the lesson or section.'
+        - header:
+            text: 'Example header'
+
+        - divider:
+            caption: 'Paragraph'
+        - paragraph:
+            text: 'This block type is paragraph: body text. You can use multiple paragraphs in a row.'
+
+        - divider:
+            caption: 'List'
+        - paragraph:
+            text: 'A list block shows bullet points. Useful for steps or key points.'
+        - list:
+            items:
+              - 'First list item'
+              - 'Second list item'
+              - 'Third list item'
+
+        - divider:
+            caption: 'Text section'
+        - paragraph:
+            text: 'A text section groups header, paragraph, and list blocks inside a bordered box. Only those three block types are allowed inside.'
+        - text_section:
+            blocks:
+              - header:
+                  text: 'Inside the box'
+              - paragraph:
+                  text: 'This content is inside the text section.'
+              - list:
+                  items:
+                    - 'Item A'
+                    - 'Item B'
+
+        - divider:
+            caption: 'Table'
+        - paragraph:
+            text: 'The table block renders a data table. You can add a caption, and optionally make columns sortable or filterable.'
+        - table:
+            caption: 'Sample table'
+            headers: ['Name', 'Score']
+            rows:
+              - ['Alice', '95']
+              - ['Bob', '87']
+              - ['Carol', '92']
+            sortable: true
+            filterable: true
+
+        - divider:
+            caption: 'Chart'
+        - paragraph:
+            text: 'The chart block shows a Chart.js chart. Supported types: line, bar, pie. Below is a simple line chart.'
+        - chart:
+            chartType: 'line'
+            data:
+              labels: ['Jan', 'Feb', 'Mar']
+              datasets:
+                - label: 'Series 1'
+                  data: [10, 20, 15]
+
+        - divider:
+            caption: 'Callout'
+        - paragraph:
+            text: 'A callout is an aside with an optional title. It can contain paragraphs, lists, tables, charts, and even nested tabs (no video or SQL inside).'
+        - callout:
+            title: 'Callout example'
+            blocks:
+              - paragraph:
+                  text: 'This is inside the callout. Use it for tips, notes, or side content.'
+              - list:
+                  items:
+                    - 'Point one'
+                    - 'Point two'
+
+        - divider:
+            caption: 'Video'
+        - paragraph:
+            text: 'The video block embeds a video in a 16∶9 container. Typically you use a YouTube or other embed URL.'
+        - video:
+            src: 'https://www.youtube.com/embed/M0HYcnwMIjQ'
+
+        - divider:
+            caption: 'SQL interpreter'
+        - paragraph:
+            text: 'The SQL interpreter block gives learners a schema (one or more tables) and a solution query. They click Start, then write and run SQL. Validation checks columns, row count, and result values against the solution. Below: a single table "products" with columns id, name, price. Try: SELECT * FROM products.'
+        - sql:
+            tableName: 'products'
+            columns: ['id', 'name', 'price']
+            rows:
+              - ['1', 'Widget', '9.99']
+              - ['2', 'Gadget', '14.50']
+              - ['3', 'Gizmo', '4.25']
+            solution: 'SELECT * FROM products'
+            instructions: 'Run a query that matches the solution (e.g. SELECT * FROM products).'
+
+        - divider:
+            caption: 'Tabs (3 examples)'
+        - paragraph:
+            text: 'The tabs block shows multiple panels; each tab has a name and a list of blocks. Below are 3 tab examples. The first is plain content; the second has 3 sub-tabs, each with its own SQL editor; the third is a summary table.'
+        - tabs:
+            tabs:
+              - tab:
+                  name: 'Example 1'
+                  blocks:
+                    - header:
+                        text: 'First example'
+                    - paragraph:
+                        text: 'Plain content in the first tab: text and a list.'
+                    - list:
+                        items:
+                          - 'Item A'
+                          - 'Item B'
+              - tab:
+                  name: 'Example 2'
+                  blocks:
+                    - header:
+                        text: 'Three SQL editors'
+                    - paragraph:
+                        text: 'This tab has 3 sub-tabs; each sub-tab has a SQL editor with its own table. Click Start in each, then run the solution query.'
+                    - tabs:
+                        tabs:
+                          - tab:
+                              name: 'Editor 1'
+                              blocks:
+                                - sql:
+                                    tableName: 't1'
+                                    columns: ['id', 'x']
+                                    rows:
+                                      - ['1', 'a']
+                                      - ['2', 'b']
+                                    solution: 'SELECT * FROM t1'
+                                    instructions: 'Query table t1.'
+                          - tab:
+                              name: 'Editor 2'
+                              blocks:
+                                - sql:
+                                    tableName: 't2'
+                                    columns: ['id', 'y']
+                                    rows:
+                                      - ['1', 'p']
+                                      - ['2', 'q']
+                                    solution: 'SELECT * FROM t2'
+                                    instructions: 'Query table t2.'
+                          - tab:
+                              name: 'Editor 3'
+                              blocks:
+                                - sql:
+                                    tableName: 't3'
+                                    columns: ['id', 'z']
+                                    rows:
+                                      - ['1', 'm']
+                                      - ['2', 'n']
+                                    solution: 'SELECT * FROM t3'
+                                    instructions: 'Query table t3.'
+              - tab:
+                  name: 'Example 3'
+                  blocks:
+                    - header:
+                        text: 'Third example'
+                    - table:
+                        caption: 'Summary'
+                        headers: ['Type', 'Count']
+                        rows:
+                          - ['Examples', '3']
+                          - ['SQL editors in Example 2', '3']
+                        sortable: true
+                        filterable: true

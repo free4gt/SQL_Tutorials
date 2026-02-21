@@ -4,14 +4,10 @@ classes:
       title: 'Introduction to SQL'
       lessonsYaml: 'sql-intro.yaml'
   - class:
-      name: 'sql-select'
-      title: 'SQL SELECT Statement'
-      lessonsYaml: 'sql-select.yaml'
-  - class:
-      name: 'tabs-test'
-      title: 'Tabs test'
-      lessonsYaml: 'tabs-test.yaml'
-  - class:
       name: 'practice'
       title: 'Practice Projects'
       lessonsYaml: 'practice.yaml'
+  - class:
+      name: 'demo'
+      title: 'Block showcase'
+      lessonsYaml: 'demo.yaml'
