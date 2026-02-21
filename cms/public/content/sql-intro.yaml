@@ -10,6 +10,18 @@ lessons:
             src: 'https://www.youtube.com/embed/M0HYcnwMIjQ'
         - paragraph:
             text: 'Tiny Realms creates stunning Generative AI videos of miniature historical worlds. This medieval scene captures the essence of feudal Europe around 1100-1400 AD. Watch knights in full plate armor patrol castle walls while peasant villages bustle around watermills and Gothic cathedrals rise in the distance. Ox-plows till muddy fields as monks copy manuscripts by candlelight.'
+        - table:
+            caption: 'Sample data — Knights and realms'
+            headers: ['Name', 'Realm', 'Year']
+            rows:
+              - ['Sir Aldric', 'Northmarch', '1124']
+              - ['Dame Elara', 'Rivershire', '1156']
+              - ['Sir Cedric', 'Northmarch', '1131']
+              - ['Lady Maren', 'Eastfold', '1142']
+              - ['Sir Torvald', 'Rivershire', '1160']
+            footer: ['—', '5 knights', '—']
+            sortable: true
+            filterable: true
         - paragraph:
             text: 'Example with math: the integral \( \int_0^1 x^2 \, dx = \frac{1}{3} \) gives the area under the curve.'
         - chart:
