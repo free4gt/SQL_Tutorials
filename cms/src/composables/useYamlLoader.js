@@ -2,9 +2,20 @@ import { ref } from 'vue'
 import yaml from 'js-yaml'
 import { useClassroomStore } from '../stores/classroom.js'
 
+// Normalize a single block object to { type, ...props }. e.g. { paragraph: { text: 'Hi' } } → { type: 'paragraph', text: 'Hi' }.
+function normalizeSingleBlock(blockRaw) {
+  if (!blockRaw || typeof blockRaw !== 'object' || Array.isArray(blockRaw)) return null
+  const entries = Object.entries(blockRaw)
+  if (entries.length === 0) return null
+  const [type, value] = entries[0]
+  const props = typeof value === 'object' && value !== null ? value : { text: value }
+  return { type, ...props }
+}
+
 // Normalize blocks for rendering. Supports:
 // - Array format (primary): [ { header: { text: '...' } }, { video: { src: '...' } }, ... ] — type is the key, order preserved.
 // - Object format (legacy): { header: {...}, video: {...} } — one block per key.
+// - tabs: { tabs: [ { tab: { name, block: { paragraph: {...} } } } ] } → tabs array with each block normalized.
 // Output: [ { type: 'header', text: '...' }, { type: 'video', src: '...' }, ... ] for rendering in order.
 function normalizeBlocks(raw) {
   let normalized = []
@@ -15,7 +26,34 @@ function normalizeBlocks(raw) {
         if (entries.length) {
           const [type, value] = entries[0]
           const props = typeof value === 'object' && value !== null ? value : { text: value }
-          return { type, ...props }
+          const out = { type, ...props }
+          // Tabs: normalize each tab to { name, blocks: [...] }. Supports single `block` or multiple `blocks`.
+          if (type === 'tabs' && Array.isArray(out.tabs)) {
+            out.tabs = out.tabs.map(item => {
+              const tabData = item.tab ?? item
+              const name = tabData.name ?? 'Tab'
+              let blocks = []
+              if (Array.isArray(tabData.blocks)) {
+                blocks = normalizeBlocks(tabData.blocks)
+              } else if (tabData.block != null) {
+                const single = normalizeSingleBlock(tabData.block)
+                if (single) blocks = [single]
+              }
+              return { name, blocks }
+            }).filter(t => t.blocks.length > 0)
+          }
+          // Text section: normalize inner blocks; only header, paragraph, list are allowed.
+          if (type === 'text_section' && (out.blocks != null || value?.blocks != null)) {
+            const raw = Array.isArray(out.blocks) ? out.blocks : (Array.isArray(value?.blocks) ? value.blocks : [])
+            out.blocks = normalizeBlocks(raw).filter(b => b && ['header', 'paragraph', 'list'].includes(b.type))
+          }
+          // Callout: normalize inner blocks; no video or sql (header, paragraph, list, table, chart, image, divider, tabs, text_section).
+          if (type === 'callout' && (out.blocks != null || value?.blocks != null)) {
+            const calloutAllowed = ['header', 'paragraph', 'list', 'table', 'chart', 'image', 'divider', 'tabs', 'text_section']
+            const raw = Array.isArray(out.blocks) ? out.blocks : (Array.isArray(value?.blocks) ? value.blocks : [])
+            out.blocks = normalizeBlocks(raw).filter(b => b && calloutAllowed.includes(b.type))
+          }
+          return out
         }
       }
       return null

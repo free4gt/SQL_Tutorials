@@ -80,6 +80,13 @@ function getBlockProps(block) {
   box-sizing: border-box;
 }
 
+/* List and paragraph: left-align content, not centered */
+.lesson-content :deep(.block-container.block-list),
+.lesson-content :deep(.block-container.block-paragraph) {
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }

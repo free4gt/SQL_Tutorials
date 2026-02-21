@@ -7,6 +7,10 @@ import ChartBlock from './ChartBlock.vue'
 import TableBlock from './TableBlock.vue'
 import SQLInterpreterBlock from './SQLInterpreterBlock.vue'
 import DividerBlock from './DividerBlock.vue'
+import TabsBlock from './TabsBlock.vue'
+import ListBlock from './ListBlock.vue'
+import TextSectionBlock from './TextSectionBlock.vue'
+import CalloutBlock from './CalloutBlock.vue'
 
 export { BaseBlock }
 export const blockComponents = {
@@ -17,5 +21,9 @@ export const blockComponents = {
   chart: ChartBlock,
   table: TableBlock,
   sql: SQLInterpreterBlock,
-  divider: DividerBlock
+  divider: DividerBlock,
+  tabs: TabsBlock,
+  list: ListBlock,
+  text_section: TextSectionBlock,
+  callout: CalloutBlock
 }

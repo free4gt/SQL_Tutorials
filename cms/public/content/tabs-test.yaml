@@ -1,0 +1,370 @@
+# Tabs test — many tab cases with mixed content
+lessons:
+  - lesson:
+      button:
+        text: 'Tabs stress test'
+      blocks:
+        - header:
+            text: 'Tabs test — mixed content'
+        - paragraph:
+            text: 'This lesson exercises the tabs block with many combinations: single blocks, multiple blocks, tables, SQL, charts, video, and dividers.'
+        - divider:
+            caption: 'Case 1 — single block per tab'
+        - tabs:
+            tabs:
+              - tab:
+                  name: Text
+                  block:
+                    paragraph:
+                      text: 'Single paragraph in a tab. Short content.'
+              - tab:
+                  name: Header only
+                  block:
+                    header:
+                      text: 'Just a header'
+              - tab:
+                  name: Divider
+                  block:
+                    divider:
+                      caption: 'Divider inside tab'
+        - divider:
+            caption: 'Case 2 — table + chart + sql'
+        - tabs:
+            tabs:
+              - tab:
+                  name: Table
+                  block:
+                    table:
+                      caption: 'Small table'
+                      headers: ['A', 'B']
+                      rows:
+                        - ['1', '2']
+                        - ['3', '4']
+                      footer: ['—', '2 rows', '—']
+              - tab:
+                  name: Chart
+                  block:
+                    chart:
+                      chartType: bar
+                      data:
+                        labels: ['X', 'Y', 'Z']
+                        datasets:
+                          - label: 'Values'
+                            data: [10, 20, 15]
+                            backgroundColor: ['rgba(54, 162, 235, 0.6)', 'rgba(255, 99, 132, 0.6)', 'rgba(75, 192, 192, 0.6)']
+                      options:
+                        plugins:
+                          title:
+                            display: true
+                            text: 'Bar chart in tab'
+              - tab:
+                  name: SQL
+                  block:
+                    sql:
+                      tableName: demo
+                      columns:
+                        - name: id
+                          type: integer
+                        - name: name
+                          type: text
+                      rows:
+                        - [1, 'Alpha']
+                        - [2, 'Beta']
+                      instructions: 'Click Start. Try SELECT * FROM demo;'
+                      solution: 'SELECT * FROM demo;'
+        - divider:
+            caption: 'Case 3 — multiple blocks per tab'
+        - tabs:
+            tabs:
+              - tab:
+                  name: Header + para
+                  blocks:
+                    - header:
+                        text: 'Section title'
+                    - paragraph:
+                        text: 'Body text under the header. Multiple blocks in one tab.'
+              - tab:
+                  name: Para + divider
+                  blocks:
+                    - paragraph:
+                        text: 'Paragraph first.'
+                    - divider:
+                        caption: 'Then a divider'
+              - tab:
+                  name: Three blocks
+                  blocks:
+                    - header:
+                        text: 'Step 1'
+                    - paragraph:
+                        text: 'First paragraph.'
+                    - paragraph:
+                        text: 'Second paragraph.'
+        - divider:
+            caption: 'Case 4 — video + text'
+        - tabs:
+            tabs:
+              - tab:
+                  name: Video
+                  block:
+                    video:
+                      src: 'https://www.youtube.com/embed/M0HYcnwMIjQ'
+              - tab:
+                  name: Text
+                  block:
+                    paragraph:
+                      text: 'No video here — just text in this tab.'
+        - divider:
+            caption: 'Case 5 — SQL with intro'
+        - tabs:
+            tabs:
+              - tab:
+                  name: Instructions + SQL
+                  blocks:
+                    - header:
+                        text: 'Try this query'
+                    - paragraph:
+                        text: 'Start the interpreter and run the solution.'
+                    - sql:
+                        tableName: products
+                        columns:
+                          - name: id
+                            type: integer
+                          - name: name
+                            type: text
+                          - name: price
+                            type: text
+                        rows:
+                          - [1, 'Widget', '9.99']
+                          - [2, 'Gadget', '14.50']
+                        instructions: 'SELECT name, price FROM products;'
+                        solution: 'SELECT name, price FROM products;'
+              - tab:
+                  name: Table only
+                  block:
+                    table:
+                      caption: 'Products'
+                      headers: ['id', 'name', 'price']
+                      rows:
+                        - ['1', 'Widget', '9.99']
+                        - ['2', 'Gadget', '14.50']
+        - divider:
+            caption: 'Case 5a — 4 tabs, each with one SQL editor'
+        - tabs:
+            tabs:
+              - tab:
+                  name: Table A
+                  block:
+                    sql:
+                      tableName: a
+                      columns:
+                        - name: id
+                          type: integer
+                        - name: val
+                          type: text
+                      rows:
+                        - [1, 'one']
+                        - [2, 'two']
+                      instructions: 'Click Start. Try SELECT * FROM a;'
+                      solution: 'SELECT * FROM a;'
+              - tab:
+                  name: Table B
+                  block:
+                    sql:
+                      tableName: b
+                      columns:
+                        - name: id
+                          type: integer
+                        - name: label
+                          type: text
+                      rows:
+                        - [1, 'Alpha']
+                        - [2, 'Beta']
+                      instructions: 'Click Start. Try SELECT * FROM b;'
+                      solution: 'SELECT * FROM b;'
+              - tab:
+                  name: Table C
+                  block:
+                    sql:
+                      tableName: c
+                      columns:
+                        - name: x
+                          type: integer
+                        - name: y
+                          type: integer
+                      rows:
+                        - [10, 20]
+                        - [30, 40]
+                      instructions: 'Click Start. Try SELECT x, y FROM c;'
+                      solution: 'SELECT x, y FROM c;'
+              - tab:
+                  name: Table D
+                  block:
+                    sql:
+                      tableName: d
+                      columns:
+                        - name: name
+                          type: text
+                        - name: score
+                          type: integer
+                      rows:
+                        - ['Alice', 95]
+                        - ['Bob', 87]
+                      instructions: 'Click Start. Try SELECT name, score FROM d;'
+                      solution: 'SELECT name, score FROM d ORDER BY score DESC;'
+        - divider:
+            caption: 'Case 5b — one tab with 4 SQL editors'
+        - tabs:
+            tabs:
+              - tab:
+                  name: '4 SQL editors'
+                  blocks:
+                    - header:
+                        text: 'Multiple SQL interpreters in one tab'
+                    - paragraph:
+                        text: 'Only one SQL client is active at a time. Click Start on any block; the others will show Start again. Scroll to see all four.'
+                    - sql:
+                        tableName: a
+                        columns:
+                          - name: id
+                            type: integer
+                          - name: val
+                            type: text
+                        rows:
+                          - [1, 'one']
+                          - [2, 'two']
+                        instructions: 'SELECT * FROM a;'
+                        solution: 'SELECT * FROM a;'
+                    - sql:
+                        tableName: b
+                        columns:
+                          - name: id
+                            type: integer
+                          - name: label
+                            type: text
+                        rows:
+                          - [1, 'Alpha']
+                          - [2, 'Beta']
+                        instructions: 'SELECT * FROM b;'
+                        solution: 'SELECT * FROM b;'
+                    - sql:
+                        tableName: c
+                        columns:
+                          - name: x
+                            type: integer
+                          - name: y
+                            type: integer
+                        rows:
+                          - [10, 20]
+                          - [30, 40]
+                        instructions: 'SELECT x, y FROM c;'
+                        solution: 'SELECT x, y FROM c;'
+                    - sql:
+                        tableName: d
+                        columns:
+                          - name: name
+                            type: text
+                          - name: score
+                            type: integer
+                        rows:
+                          - ['Alice', 95]
+                          - ['Bob', 87]
+                        instructions: 'SELECT name, score FROM d ORDER BY score DESC;'
+                        solution: 'SELECT name, score FROM d ORDER BY score DESC;'
+              - tab:
+                  name: Other
+                  block:
+                    paragraph:
+                      text: 'This tab has no SQL — use the "4 SQL editors" tab to test multiple interpreters in one tab.'
+        - divider:
+            caption: 'Case 6 — four tabs mixed'
+        - tabs:
+            tabs:
+              - tab:
+                  name: Line chart
+                  block:
+                    chart:
+                      chartType: line
+                      data:
+                        labels: ['Q1', 'Q2', 'Q3', 'Q4']
+                        datasets:
+                          - label: 'Sales'
+                            data: [30, 45, 35, 50]
+                            borderColor: 'rgb(75, 192, 192)'
+                            tension: 0.3
+                      options:
+                        plugins:
+                          title:
+                            display: true
+                            text: 'Quarterly sales'
+              - tab:
+                  name: Pie
+                  block:
+                    chart:
+                      chartType: pie
+                      data:
+                        labels: ['A', 'B', 'C']
+                        datasets:
+                          - data: [40, 35, 25]
+                            backgroundColor: ['#4ade80', '#fbbf24', '#94a3b8']
+                      options:
+                        plugins:
+                          title:
+                            display: true
+                            text: 'Pie in tab'
+              - tab:
+                  name: Table
+                  block:
+                    table:
+                      caption: 'Data'
+                      headers: ['Col1', 'Col2', 'Col3']
+                      rows:
+                        - ['a', 'b', 'c']
+                        - ['d', 'e', 'f']
+                        - ['g', 'h', 'i']
+                      sortable: true
+              - tab:
+                  name: Text
+                  block:
+                    paragraph:
+                      text: 'Fourth tab is plain text. All four tabs should switch correctly.'
+        - divider:
+            caption: 'Case 7 — single block variants'
+        - tabs:
+            tabs:
+              - tab:
+                  name: Header
+                  block:
+                    header:
+                      text: 'Header tab'
+              - tab:
+                  name: Paragraph
+                  block:
+                    paragraph:
+                      text: 'A single paragraph. **Bold** and normal.'
+              - tab:
+                  name: Divider
+                  block:
+                    divider:
+                      caption: 'Caption here'
+        - divider:
+            caption: 'Case 8 — two tabs, multi-block each'
+        - tabs:
+            tabs:
+              - tab:
+                  name: Left
+                  blocks:
+                    - header:
+                        text: 'Left tab'
+                    - paragraph:
+                        text: 'First block.'
+                    - paragraph:
+                        text: 'Second block.'
+              - tab:
+                  name: Right
+                  blocks:
+                    - paragraph:
+                        text: 'Right tab has one paragraph.'
+                    - divider:
+                        caption: 'End'
+        - paragraph:
+            text: 'End of tabs test. If all tab cases above render and switch correctly, the tabs block is working as intended.'

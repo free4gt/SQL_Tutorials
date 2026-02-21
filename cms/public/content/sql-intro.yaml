@@ -43,6 +43,18 @@ lessons:
               2. Filter by realm: add WHERE realm = 'Northmarch'
               Check the Solution tab for the expected query.
             solution: "SELECT name, realm FROM knights WHERE realm = 'Northmarch';"
+        - text_section:
+            blocks:
+              - header:
+                  text: 'Quick recap'
+              - paragraph:
+                  text: 'You used SELECT to read columns from the knights table and WHERE to filter by realm. These are the building blocks of most SQL queries.'
+              - list:
+                  items:
+                    - 'SELECT lists the columns you want (or * for all)'
+                    - 'FROM names the table'
+                    - 'WHERE filters rows by a condition'
+                    - 'This is a very long list item to show how overflow works: the text wraps within the list block and does not overflow sideways. Long words will break if needed so the list stays within the content area. The list has no max-height so it grows with its items and the page scrolls.'
         - paragraph:
             text: '**Two interpreters:** Only one SQL client is active at a time. Click Start on the block below — the one above will show Start again.'
         - sql:
@@ -59,6 +71,35 @@ lessons:
             solution: "SELECT realm_name, population FROM realms WHERE population > 9000;"
         - paragraph:
             text: '**Multiple tables:** This block has two tables. Use the Table dropdown to switch; columns update for the selected table. You can write queries that use both (e.g. JOIN).'
+        - callout:
+            title: 'Technical note'
+            blocks:
+              - header:
+                  text: 'Why JOIN matters'
+              - paragraph:
+                  text: 'JOIN combines rows from two tables when a condition matches. Here knights have a realm name; the realms table has realm_name and population. Linking them gives you knight names with their realm population.'
+              - list:
+                  items:
+                    - 'Match on knights.realm = realms.realm_name'
+                    - 'Use table aliases: FROM knights k JOIN realms r'
+                    - 'Filter with WHERE after the JOIN'
+              - tabs:
+                  tabs:
+                    - tab:
+                        name: Syntax
+                        block:
+                          paragraph:
+                            text: 'SELECT k.name, r.population FROM knights k JOIN realms r ON k.realm = r.realm_name;'
+                    - tab:
+                        name: Table ref
+                        block:
+                          table:
+                            caption: 'Concept: link columns'
+                            headers: ['knights.realm', 'realms.realm_name']
+                            rows:
+                              - ['Northmarch', 'Northmarch']
+                              - ['Rivershire', 'Rivershire']
+                            footer: ['—', 'match', '—']
         - sql:
             tables:
               - tableName: knights
@@ -131,6 +172,61 @@ lessons:
                 title:
                   display: true
                   text: 'Lesson Progress'
+        - divider:
+            caption: 'Tabs demo'
+        - tabs:
+            tabs:
+              - tab:
+                  name: Table
+                  block:
+                    table:
+                      caption: 'Knights sample (in tab)'
+                      headers: ['Name', 'Realm', 'Year']
+                      rows:
+                        - ['Sir Aldric', 'Northmarch', '1124']
+                        - ['Dame Elara', 'Rivershire', '1156']
+                        - ['Sir Cedric', 'Northmarch', '1131']
+                      footer: ['—', '3 rows', '—']
+                      sortable: true
+                      filterable: true
+              - tab:
+                  name: SQL
+                  blocks:
+                    - header:
+                        text: 'Query the realms table'
+                    - paragraph:
+                        text: 'Click Start below, then run SELECT * FROM realms or add WHERE population > 9000.'
+                    - sql:
+                        tableName: realms
+                        columns:
+                          - name: realm_name
+                            type: text
+                          - name: population
+                            type: integer
+                        rows:
+                          - ['Northmarch', 12000]
+                          - ['Rivershire', 8000]
+                          - ['Eastfold', 9500]
+                        instructions: |
+                          Click Start and try: SELECT * FROM realms;
+                          Or filter: WHERE population > 9000
+                        solution: "SELECT realm_name, population FROM realms WHERE population > 9000;"
+              - tab:
+                  name: Chart
+                  block:
+                    chart:
+                      chartType: bar
+                      data:
+                        labels: ['SQL', 'Python', 'JS', 'Rust']
+                        datasets:
+                          - label: 'Students'
+                            data: [65, 49, 72, 28]
+                            backgroundColor: ['rgba(54, 162, 235, 0.6)', 'rgba(255, 99, 132, 0.6)', 'rgba(255, 206, 86, 0.6)', 'rgba(75, 192, 192, 0.6)']
+                      options:
+                        plugins:
+                          title:
+                            display: true
+                            text: 'Students by Language (in tab)'
   - lesson_category:
       text: 'Industrial Era'
   - lesson:
