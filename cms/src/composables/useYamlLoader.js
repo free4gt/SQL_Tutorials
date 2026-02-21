@@ -55,6 +55,13 @@ export function useYamlLoader(store) {
   async function loadClass(className) {
     try {
       store.setCurrentClass(className)
+      // Clear immediately so the new class never receives the previous class's blocks.
+      // Otherwise the LessonContent key changes and Vue mounts a new instance while
+      // currentBlocks is still stale (async fetch not done), so header/content show wrong class.
+      currentBlocks.value = []
+      currentLessons.value = []
+      store.setCurrentLessons([], [])
+
       const classData = store.classes?.find(c => c.class.name === className)
       if (!classData) return
       
@@ -106,8 +113,9 @@ export function useYamlLoader(store) {
 
   function loadLesson(lessonIndex) {
     store.setCurrentLesson(lessonIndex)
-    const lesson = store.currentClass?.lessons?.[lessonIndex]
-    currentBlocks.value = Array.isArray(lesson?.blocks) ? lesson.blocks : []
+    // Use same lessons array as the list so we never show stale/wrong lesson content
+    const lesson = currentLessons.value[lessonIndex]
+    currentBlocks.value = Array.isArray(lesson?.blocks) ? [...lesson.blocks] : []
   }
 
   return {

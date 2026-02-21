@@ -17,7 +17,7 @@ lessons:
         - header:
             text: 'The \( \texttt{SELECT} \) formula'
         - paragraph:
-            text: 'The minimal form is \( \texttt{SELECT}\;\textit{columns}\;\texttt{FROM}\;\textit{table} \). Use \( \texttt{*} \) to mean “all columns.” So \( \texttt{SELECT * FROM T} \) returns every column of table \( T \); if \( T \) has \( n \) rows and \( k \) columns, the result has size \( n \times k \).'
+            text: 'The minimal form is \( \texttt{SELECT}\;\textit{columns}\;\texttt{FROM}\;\textit{table} \). Use \( \texttt{*} \) to mean "all columns." So \( \texttt{SELECT * FROM T} \) returns every column of table \( T \); if \( T \) has \( n \) rows and \( k \) columns, the result has size \( n \times k \).'
         - table:
             caption: 'Example table \( \texttt{products} \) (id, name, price)'
             headers: ['id', 'name', 'price']
