@@ -12,6 +12,121 @@
           <span class="sql-block__status-text">{{ store.ready ? 'Ready' : 'Loading…' }}</span>
         </div>
       </header>
+      <!-- Mobile portrait: 4 tabs (Instructions, Table, Query, Solution) share one central pane -->
+      <div class="sql-block__mobile">
+        <div class="sql-block__mobile-tabs">
+          <button
+            type="button"
+            class="sql-block__mobile-tab"
+            :class="{ 'sql-block__mobile-tab--active': mobileCentralTab === 'instructions' }"
+            @click="mobileCentralTab = 'instructions'"
+          >
+            Instructions
+          </button>
+          <button
+            type="button"
+            class="sql-block__mobile-tab"
+            :class="{ 'sql-block__mobile-tab--active': mobileCentralTab === 'table' }"
+            @click="mobileCentralTab = 'table'"
+          >
+            Table
+          </button>
+          <button
+            type="button"
+            class="sql-block__mobile-tab"
+            :class="{ 'sql-block__mobile-tab--active': mobileCentralTab === 'query' }"
+            @click="mobileCentralTab = 'query'"
+          >
+            Query
+          </button>
+          <button
+            type="button"
+            class="sql-block__mobile-tab"
+            :class="{ 'sql-block__mobile-tab--active': mobileCentralTab === 'solution' }"
+            @click="mobileCentralTab = 'solution'"
+          >
+            Solution
+          </button>
+        </div>
+        <div class="sql-block__mobile-central">
+          <div v-show="mobileCentralTab === 'instructions'" class="sql-block__mobile-pane">
+            <h4 class="sql-block__instructions-title">Instructions</h4>
+            <div class="sql-block__instructions-body">{{ instructions || ' ' }}</div>
+          </div>
+          <div v-show="mobileCentralTab === 'table'" class="sql-block__mobile-pane sql-block__mobile-pane--schema">
+            <template v-if="tablesList.length > 1">
+              <label class="sql-block__schema-label" for="sql-table-select-mobile">Table:</label>
+              <select
+                id="sql-table-select-mobile"
+                v-model.number="selectedTableIndex"
+                class="sql-block__table-select"
+                aria-label="Select table"
+              >
+                <option
+                  v-for="(t, idx) in tablesList"
+                  :key="idx"
+                  :value="idx"
+                >
+                  {{ t.tableName }}
+                </option>
+              </select>
+            </template>
+            <template v-else>
+              <h4 class="sql-block__schema-title">Table: {{ tablesList[0]?.tableName ?? tableName }}</h4>
+            </template>
+            <p class="sql-block__schema-column-head">Columns</p>
+            <div class="sql-block__schema-divider" aria-hidden="true" />
+            <ul class="sql-block__columns">
+              <li
+                v-for="(col, i) in displayColumns"
+                :key="i"
+                class="sql-block__column"
+              >
+                <span class="sql-block__column-name">{{ col.name }}</span>
+                <span class="sql-block__column-type">{{ col.type }}</span>
+              </li>
+            </ul>
+          </div>
+          <div v-show="mobileCentralTab === 'query'" class="sql-block__mobile-pane">
+            <template v-if="!isActive">
+              <div class="sql-block__start-wrap">
+                <button
+                  type="button"
+                  class="sql-block__start-btn"
+                  :disabled="!store.ready"
+                  @click="onStart"
+                >
+                  {{ store.ready ? 'Start' : 'Loading…' }}
+                </button>
+              </div>
+            </template>
+            <template v-else>
+              <div class="sql-block__mobile-query-actions">
+                <button
+                  type="button"
+                  class="sql-block__run-btn sql-block__run-btn--mobile"
+                  :disabled="store.isQueryRunning"
+                  @click="onRun"
+                >
+                  {{ store.isQueryRunning ? 'Running…' : 'Run' }}
+                </button>
+              </div>
+              <div class="sql-block__editor-wrap">
+                <textarea
+                  v-model="queryText"
+                  class="sql-block__editor"
+                  placeholder="SELECT *&#10;FROM table_name&#10;WHERE ..."
+                  spellcheck="false"
+                  rows="10"
+                />
+              </div>
+            </template>
+          </div>
+          <div v-show="mobileCentralTab === 'solution'" class="sql-block__mobile-pane">
+            <pre class="sql-block__solution">{{ formattedSolution }}</pre>
+          </div>
+        </div>
+      </div>
       <div class="sql-block__grid">
         <!-- Top row: schema (table) | query -->
         <aside class="sql-block__schema">
@@ -198,6 +313,7 @@ const props = defineProps({
 const store = useSqlInterpreterStore()
 const queryText = ref('')
 const activeTab = ref('query')
+const mobileCentralTab = ref('instructions')
 const selectedTableIndex = ref(0)
 const resultRows = ref([])
 const resultColumns = ref([])
@@ -291,6 +407,134 @@ onMounted(() => {
 @media (max-width: 768px) {
   .sql-block__container {
     max-height: 58vh;
+  }
+}
+
+/* Mobile portrait only: 4 tabs + single central pane; results stay at bottom */
+.sql-block__mobile {
+  display: none;
+  flex-direction: column;
+  flex: 5 1 0;
+  min-height: 0;
+  border-bottom: 1px solid #c5d0de;
+}
+
+@media (max-width: 768px) {
+  .sql-block__mobile {
+    display: flex;
+  }
+  .sql-block__grid {
+    display: none !important;
+  }
+}
+
+.sql-block__mobile-tabs {
+  flex-shrink: 0;
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid #c5d0de;
+  background: #e8eef4;
+}
+
+.sql-block__mobile-tab {
+  flex: 1;
+  padding: 0.5rem 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: #555;
+  cursor: pointer;
+  margin-bottom: -1px;
+}
+.sql-block__mobile-tab--active {
+  background: #fff;
+  border-bottom-color: #2196f3;
+  color: #1a1a1a;
+}
+
+.sql-block__mobile-central {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.sql-block__mobile-pane {
+  min-height: 100%;
+  flex: 1;
+  min-height: 0;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.sql-block__mobile-pane--schema {
+  background: #f0f4f8;
+}
+.sql-block__mobile-pane--schema .sql-block__schema-title,
+.sql-block__mobile-pane--schema .sql-block__schema-label {
+  margin-top: 0;
+}
+.sql-block__mobile-pane .sql-block__instructions-title {
+  flex-shrink: 0;
+  margin: 0 0 0.35rem 0;
+}
+.sql-block__mobile-pane .sql-block__instructions-body {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+.sql-block__mobile-pane--schema {
+  overflow: auto;
+}
+.sql-block__mobile-pane .sql-block__solution {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
+/* Query tab: Run button fixed at top, SQL editor fills below (mobile) */
+.sql-block__mobile-query-actions {
+  flex-shrink: 0;
+  margin-bottom: 0.5rem;
+}
+.sql-block__mobile-pane .sql-block__editor-wrap {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+.sql-block__mobile-pane .sql-block__editor-wrap .sql-block__editor {
+  flex: 1;
+  min-height: 6rem;
+  resize: none;
+}
+.sql-block__run-btn--mobile {
+  margin-left: 0;
+  margin-right: 0;
+  width: 100%;
+}
+
+/* Mobile only: hide scrollbars on SQL interpreter */
+@media (max-width: 768px) {
+  .sql-block__mobile,
+  .sql-block__mobile-central,
+  .sql-block__mobile-pane .sql-block__editor-wrap,
+  .sql-block__mobile-pane .sql-block__instructions-body,
+  .sql-block__mobile-pane--schema,
+  .sql-block__results {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .sql-block__mobile ::-webkit-scrollbar,
+  .sql-block__mobile-central ::-webkit-scrollbar,
+  .sql-block__results ::-webkit-scrollbar {
+    display: none;
   }
 }
 
