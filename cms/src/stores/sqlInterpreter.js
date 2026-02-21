@@ -12,38 +12,50 @@ export const useSqlInterpreterStore = defineStore('sqlInterpreter', {
     ready: false,
     activeBlockId: null,
     queryRunning: false,
-    // Solution run after Start: 'pending' | 'ok' | 'failed' | 'duplicate_columns'
-    solutionStatus: null,
-    solutionValidationMessage: null,
-    // SQL results validation: expected shape from running the solution (after Start)
-    expectedColumnNames: null,
-    expectedRowCount: null,
-    // Content fingerprint (sequential chain of sorted row hashes) for solution and last user result
-    expectedResultFingerprint: null,
-    userResultFingerprint: null,
-    // For hash-count comparison when fingerprint fails: solution hash→count, user row hashes per row
-    expectedHashCounts: null,
-    userRowHashes: null
+    /** Per-block validation state so each SQL interpreter shows only its own warnings. Key: blockId. */
+    blockValidation: {}
   }),
 
   getters: {
     isActive: (state) => (blockId) => state.activeBlockId === blockId,
     isQueryRunning: (state) => state.queryRunning,
-    /** Booleans per user result row: true if that row's hash has a count/content issue vs solution. Only used when fingerprint fails; row count already matched, so issues are wrong content or off duplicate (no missing-row case). */
+    /** Get validation state for a block. Returns a safe object with nulls if block has no data. */
+    getBlockValidation(state) {
+      return (blockId) => {
+        const d = state.blockValidation[blockId]
+        if (!d || typeof d !== 'object') {
+          return {
+            solutionStatus: null,
+            solutionValidationMessage: null,
+            expectedColumnNames: null,
+            expectedRowCount: null,
+            expectedResultFingerprint: null,
+            userResultFingerprint: null,
+            expectedHashCounts: null,
+            userRowHashes: null
+          }
+        }
+        return d
+      }
+    },
+    /** Booleans per user result row for a block. Only used when fingerprint fails. */
     userRowIssueFlags(state) {
-      const expected = state.expectedHashCounts
-      const rowHashes = state.userRowHashes
-      if (!expected || !Array.isArray(rowHashes) || rowHashes.length === 0) return []
-      const userCounts = {}
-      for (const h of rowHashes) {
-        userCounts[h] = (userCounts[h] || 0) + 1
+      return (blockId) => {
+        const d = state.blockValidation[blockId]
+        const expected = d?.expectedHashCounts
+        const rowHashes = d?.userRowHashes
+        if (!expected || !Array.isArray(rowHashes) || rowHashes.length === 0) return []
+        const userCounts = {}
+        for (const h of rowHashes) {
+          userCounts[h] = (userCounts[h] || 0) + 1
+        }
+        const problematic = new Set()
+        const allHashes = new Set([...Object.keys(expected), ...rowHashes])
+        for (const h of allHashes) {
+          if ((expected[h] || 0) !== (userCounts[h] || 0)) problematic.add(h)
+        }
+        return rowHashes.map((h) => problematic.has(h))
       }
-      const problematic = new Set()
-      const allHashes = new Set([...Object.keys(expected), ...rowHashes])
-      for (const h of allHashes) {
-        if ((expected[h] || 0) !== (userCounts[h] || 0)) problematic.add(h)
-      }
-      return rowHashes.map((h) => problematic.has(h))
     }
   },
 
@@ -65,14 +77,16 @@ export const useSqlInterpreterStore = defineStore('sqlInterpreter', {
     async startLesson(blockId, payload) {
       if (!this.db || !this.ready) return
       this.activeBlockId = blockId
-      this.expectedColumnNames = null
-      this.expectedRowCount = null
-      this.expectedResultFingerprint = null
-      this.userResultFingerprint = null
-      this.expectedHashCounts = null
-      this.userRowHashes = null
-      this.solutionStatus = null
-      this.solutionValidationMessage = null
+      if (!this.blockValidation[blockId]) this.blockValidation[blockId] = {}
+      const b = this.blockValidation[blockId]
+      b.solutionStatus = null
+      b.solutionValidationMessage = null
+      b.expectedColumnNames = null
+      b.expectedRowCount = null
+      b.expectedResultFingerprint = null
+      b.userResultFingerprint = null
+      b.expectedHashCounts = null
+      b.userRowHashes = null
 
       const plain = toPlainPayload(payload)
       const tables = Array.isArray(plain.tables) && plain.tables.length > 0
@@ -84,14 +98,16 @@ export const useSqlInterpreterStore = defineStore('sqlInterpreter', {
         await this.db.exec(`CREATE SCHEMA ${SCHEMA_NAME};`)
 
         for (const { tableName, columns, rows } of tables) {
-          const colDefs = (columns || [])
+          const normCols = (columns || []).map(normalizeColumn).filter(Boolean)
+          if (normCols.length === 0) continue
+          const colDefs = normCols
             .map((c) => `${escapeIdent(c.name)} ${mapType(c.type)}`)
             .join(', ')
           const tableRef = `${SCHEMA_NAME}.${escapeIdent(tableName)}`
           await this.db.exec(`CREATE TABLE ${tableRef} (${colDefs});`)
 
           if (Array.isArray(rows) && rows.length > 0) {
-            const numCols = columns?.length ?? 0
+            const numCols = normCols.length
             for (const row of rows) {
               const vals = row.slice(0, numCols).map((v) => formatValue(v))
               await this.db.exec(
@@ -154,27 +170,33 @@ export const useSqlInterpreterStore = defineStore('sqlInterpreter', {
       }
     },
 
-    /** SQL results validation: set expected column names and row count from running the solution. No column count — we only compare names (case-insensitive) and row count. */
-    setExpectedFromResult(columnNames, rowCount) {
-      this.expectedColumnNames =
+    /** SQL results validation: set expected column names and row count from running the solution (for the given block). */
+    setExpectedFromResult(blockId, columnNames, rowCount) {
+      if (!this.blockValidation[blockId]) this.blockValidation[blockId] = {}
+      const b = this.blockValidation[blockId]
+      b.expectedColumnNames =
         Array.isArray(columnNames) && columnNames.length > 0
           ? columnNames.map((n) => (n != null ? String(n) : ''))
           : null
       const num = rowCount != null ? Number(rowCount) : NaN
-      this.expectedRowCount = Number.isInteger(num) && num >= 0 ? num : null
+      b.expectedRowCount = Number.isInteger(num) && num >= 0 ? num : null
     },
 
-    setExpectedFingerprint(fingerprint, hashCounts) {
-      this.expectedResultFingerprint = fingerprint != null ? String(fingerprint) : null
-      this.expectedHashCounts =
+    setExpectedFingerprint(blockId, fingerprint, hashCounts) {
+      if (!this.blockValidation[blockId]) this.blockValidation[blockId] = {}
+      const b = this.blockValidation[blockId]
+      b.expectedResultFingerprint = fingerprint != null ? String(fingerprint) : null
+      b.expectedHashCounts =
         hashCounts != null && typeof hashCounts === 'object' && !Array.isArray(hashCounts)
           ? { ...hashCounts }
           : null
     },
 
-    setUserResultFingerprint(fingerprint, rowHashes) {
-      this.userResultFingerprint = fingerprint != null ? String(fingerprint) : null
-      this.userRowHashes = Array.isArray(rowHashes) ? [...rowHashes] : null
+    setUserResultFingerprint(blockId, fingerprint, rowHashes) {
+      if (!this.blockValidation[blockId]) this.blockValidation[blockId] = {}
+      const b = this.blockValidation[blockId]
+      b.userResultFingerprint = fingerprint != null ? String(fingerprint) : null
+      b.userRowHashes = Array.isArray(rowHashes) ? [...rowHashes] : null
     },
 
     /**
@@ -223,21 +245,24 @@ export const useSqlInterpreterStore = defineStore('sqlInterpreter', {
       return { fingerprint, hashCounts, rowHashes }
     },
 
-    setSolutionOk() {
-      this.solutionStatus = 'ok'
-      this.solutionValidationMessage = null
+    setSolutionOk(blockId) {
+      if (!this.blockValidation[blockId]) this.blockValidation[blockId] = {}
+      this.blockValidation[blockId].solutionStatus = 'ok'
+      this.blockValidation[blockId].solutionValidationMessage = null
     },
 
-    setSolutionFailed(reason) {
-      this.solutionStatus = 'failed'
+    setSolutionFailed(blockId, reason) {
+      if (!this.blockValidation[blockId]) this.blockValidation[blockId] = {}
+      this.blockValidation[blockId].solutionStatus = 'failed'
       const base = 'Solution failed.'
-      this.solutionValidationMessage =
+      this.blockValidation[blockId].solutionValidationMessage =
         reason && String(reason).trim() ? `${base} ${String(reason).trim()}` : base
     },
 
-    setSolutionDuplicateColumns() {
-      this.solutionStatus = 'duplicate_columns'
-      this.solutionValidationMessage = 'Solution failed (duplicate column name).'
+    setSolutionDuplicateColumns(blockId) {
+      if (!this.blockValidation[blockId]) this.blockValidation[blockId] = {}
+      this.blockValidation[blockId].solutionStatus = 'duplicate_columns'
+      this.blockValidation[blockId].solutionValidationMessage = 'Solution failed (duplicate column name).'
     },
 
     /** Returns true if the column names array has duplicates. */
@@ -267,19 +292,21 @@ export const useSqlInterpreterStore = defineStore('sqlInterpreter', {
     },
 
     /**
-     * SQL results validation: message for the status bar.
-     * Precedence: 1) solution bad, 2) user duplicate columns, 3) column names (case-insensitive, order-invariant), 4) row count, 5) match.
+     * SQL results validation: message for the status bar (for the given block).
+     * Precedence: 1) solution bad, 2) user duplicate columns, 3) column names, 4) row count, 5) match.
      */
-    getValidationMessage(resultColumns, resultRowCount) {
+    getValidationMessage(blockId, resultColumns, resultRowCount) {
+      const d = this.blockValidation[blockId]
+      if (!d) return null
       const cols = Array.isArray(resultColumns) ? resultColumns : []
       const gotRow = resultRowCount == null ? 0 : Number(resultRowCount)
-      const expNames = this.expectedColumnNames
-      const expRow = this.expectedRowCount
-      const expFp = this.expectedResultFingerprint
-      const userFp = this.userResultFingerprint
+      const expNames = d.expectedColumnNames
+      const expRow = d.expectedRowCount
+      const expFp = d.expectedResultFingerprint
+      const userFp = d.userResultFingerprint
 
-      if (this.solutionStatus === 'failed' || this.solutionStatus === 'duplicate_columns') {
-        return this.solutionValidationMessage
+      if (d.solutionStatus === 'failed' || d.solutionStatus === 'duplicate_columns') {
+        return d.solutionValidationMessage
       }
       if (this.hasDuplicateColumnNames(cols)) {
         return 'Duplicate column names in result.'
@@ -333,6 +360,17 @@ function toPlainPayload(payload) {
       tables: []
     }
   }
+}
+
+/** Normalize column to { name, type }. Accepts string (column name, type 'text') or object { name, type }. */
+function normalizeColumn(c) {
+  if (c != null && typeof c === 'object' && typeof c.name === 'string') {
+    return { name: c.name, type: c.type }
+  }
+  if (typeof c === 'string' && c.trim() !== '') {
+    return { name: c.trim(), type: 'text' }
+  }
+  return null
 }
 
 function escapeIdent(name) {

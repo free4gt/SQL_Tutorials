@@ -371,6 +371,21 @@ import { ref, computed, onMounted } from 'vue'
 import { format } from 'sql-formatter'
 import { useSqlInterpreterStore } from '../../stores/sqlInterpreter.js'
 
+/** Normalize column for display: string → { name, type: 'text' }, object → { name, type }. */
+function normalizeColumnForDisplay(c) {
+  if (c != null && typeof c === 'object' && typeof c.name === 'string') {
+    return { name: c.name, type: c.type ?? 'text' }
+  }
+  if (typeof c === 'string' && c.trim() !== '') {
+    return { name: c.trim(), type: 'text' }
+  }
+  return null
+}
+
+function normalizeColumnsList(cols) {
+  return (Array.isArray(cols) ? cols : []).map(normalizeColumnForDisplay).filter(Boolean)
+}
+
 function toPlainLessonPayload(props) {
   try {
     if (Array.isArray(props.tables) && props.tables.length > 0) {
@@ -421,14 +436,14 @@ const tablesList = computed(() => {
   if (Array.isArray(props.tables) && props.tables.length > 0) {
     return props.tables.map((t) => ({
       tableName: t?.tableName ?? '',
-      columns: Array.isArray(t?.columns) ? t.columns : [],
+      columns: normalizeColumnsList(t?.columns),
       rows: Array.isArray(t?.rows) ? t.rows : []
     }))
   }
   return [
     {
       tableName: props.tableName ?? 'table',
-      columns: Array.isArray(props.columns) ? props.columns : [],
+      columns: normalizeColumnsList(props.columns),
       rows: Array.isArray(props.rows) ? props.rows : []
     }
   ]
@@ -481,25 +496,25 @@ async function onStart() {
       ])
       const { rows, columns, error } = result
       if (error) {
-        store.setSolutionFailed(error)
+        store.setSolutionFailed(blockId, error)
         return
       }
       if (store.hasDuplicateColumnNames(columns)) {
-        store.setSolutionDuplicateColumns()
+        store.setSolutionDuplicateColumns(blockId)
         return
       }
-      store.setSolutionOk()
-      store.setExpectedFromResult(columns, rows?.length ?? 0)
+      store.setSolutionOk(blockId)
+      store.setExpectedFromResult(blockId, columns, rows?.length ?? 0)
       const solutionResult = await store.computeResultFingerprint(rows ?? [], columns ?? [])
       if (solutionResult) {
-        store.setExpectedFingerprint(solutionResult.fingerprint, solutionResult.hashCounts)
+        store.setExpectedFingerprint(blockId, solutionResult.fingerprint, solutionResult.hashCounts)
       }
       solutionOutputColumns.value = Array.isArray(columns) ? [...columns] : []
     } catch (e) {
-      store.setSolutionFailed(e?.message ?? 'Query timed out')
+      store.setSolutionFailed(blockId, e?.message ?? 'Query timed out')
     }
   } else {
-    store.setSolutionOk()
+    store.setSolutionOk(blockId)
   }
 }
 
@@ -525,26 +540,27 @@ async function onRun() {
     resultColumns.value = Array.isArray(columns) && columns.length > 0 ? columns : (rows.length > 0 ? Object.keys(rows[0]) : [])
     const userResult = await store.computeResultFingerprint(rows, resultColumns.value)
     if (userResult) {
-      store.setUserResultFingerprint(userResult.fingerprint, userResult.rowHashes)
+      store.setUserResultFingerprint(blockId, userResult.fingerprint, userResult.rowHashes)
     }
   }
 }
 
+const blockValidation = computed(() => store.getBlockValidation(blockId))
 const solutionStatusClass = computed(() => {
-  const s = store.solutionStatus
+  const s = blockValidation.value.solutionStatus
   if (s === 'ok') return 'sql-block__status--ready'
   if (s === 'failed' || s === 'duplicate_columns') return 'sql-block__status--error'
   return 'sql-block__status--pending'
 })
 const solutionStatusTitle = computed(() => {
-  const s = store.solutionStatus
+  const s = blockValidation.value.solutionStatus
   if (s === 'ok') return 'Solution ran successfully; no duplicate columns.'
   if (s === 'failed') return 'Solution query did not complete.'
   if (s === 'duplicate_columns') return 'Solution result has duplicate column names.'
   return 'Solution not run yet.'
 })
 const solutionStatusText = computed(() => {
-  const s = store.solutionStatus
+  const s = blockValidation.value.solutionStatus
   if (s === 'ok') return 'Solution'
   if (s === 'failed') return 'Solution'
   if (s === 'duplicate_columns') return 'Solution'
@@ -553,13 +569,14 @@ const solutionStatusText = computed(() => {
 
 const validationMessage = computed(() => {
   if (!hasRunOnce.value || resultError.value) return null
-  return store.getValidationMessage(resultColumns.value, resultRows.value?.length ?? 0)
+  return store.getValidationMessage(blockId, resultColumns.value, resultRows.value?.length ?? 0)
 })
 
 function rowHasIssue(rowIndex) {
   if (validationMessage.value !== "Result values don't match solution.") return false
-  if (!store.userRowHashes || store.userRowHashes.length === 0) return false
-  const flags = store.userRowIssueFlags
+  const b = store.getBlockValidation(blockId)
+  if (!b.userRowHashes || b.userRowHashes.length === 0) return false
+  const flags = store.userRowIssueFlags(blockId)
   return Array.isArray(flags) && flags[rowIndex] === true
 }
 
@@ -567,7 +584,8 @@ const validationStatusClass = computed(() => {
   const msg = validationMessage.value
   if (!msg) return ''
   if (msg.startsWith('success:')) return 'sql-block__validation--match'
-  if (store.solutionStatus === 'failed' || store.solutionStatus === 'duplicate_columns') return 'sql-block__validation--error'
+  const s = blockValidation.value.solutionStatus
+  if (s === 'failed' || s === 'duplicate_columns') return 'sql-block__validation--error'
   return 'sql-block__validation--mismatch'
 })
 
