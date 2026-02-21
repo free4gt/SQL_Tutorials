@@ -1,0 +1,72 @@
+# SQL SELECT Statement — dedicated class
+lessons:
+  - lesson:
+      button:
+        text: 'The SELECT Statement'
+      blocks:
+        - header:
+            text: 'Understanding the SQL \( \texttt{SELECT} \) Statement'
+        - paragraph:
+            text: 'The \( \texttt{SELECT} \) statement is the primary way you read data from a relational database. Conceptually, it applies a **projection** (choose columns) and optionally a **selection** (filter rows). In relational algebra we write projection as \( \pi_{\text{columns}}(R) \) and selection as \( \sigma_{\text{condition}}(R) \).'
+        - video:
+            src: 'https://www.youtube.com/embed/5tEApCGgpEQ'
+        - paragraph:
+            text: 'After watching the video, you should be able to write basic \( \texttt{SELECT} \) queries: list columns after SELECT, name the table in FROM, and use WHERE for conditions. The number of rows returned can be thought of as the cardinality \( |R| \) of the result set.'
+        - divider:
+            caption: 'Core syntax'
+        - header:
+            text: 'The \( \texttt{SELECT} \) formula'
+        - paragraph:
+            text: 'The minimal form is \( \texttt{SELECT}\;\textit{columns}\;\texttt{FROM}\;\textit{table} \). Use \( \texttt{*} \) to mean “all columns.” So \( \texttt{SELECT * FROM T} \) returns every column of table \( T \); if \( T \) has \( n \) rows and \( k \) columns, the result has size \( n \times k \).'
+        - table:
+            caption: 'Example table \( \texttt{products} \) (id, name, price)'
+            headers: ['id', 'name', 'price']
+            rows:
+              - ['1', 'Widget A', '9.99']
+              - ['2', 'Widget B', '14.50']
+              - ['3', 'Gadget X', '29.00']
+            footer: ['—', '3 rows', '—']
+            sortable: true
+            filterable: true
+        - paragraph:
+            text: 'To project only some columns, list them: \( \texttt{SELECT name, price FROM products} \). That returns a result with 2 columns and the same number of rows \( n \). Order of columns in the list determines order in the result.'
+        - sql:
+            tableName: products
+            columns:
+              - name: id
+                type: integer
+              - name: name
+                type: text
+              - name: price
+                type: text
+            rows:
+              - [1, 'Widget A', '9.99']
+              - [2, 'Widget B', '14.50']
+              - [3, 'Gadget X', '29.00']
+            instructions: |
+              Click Start. Try:
+              1. SELECT * FROM products;
+              2. SELECT name, price FROM products;
+              Compare row count: both return 3 rows; the second returns 2 columns.
+            solution: "SELECT name, price FROM products;"
+        - divider:
+            caption: 'Practice'
+        - header:
+            text: 'Why \( \texttt{SELECT} \) matters'
+        - paragraph:
+            text: 'In set terms, a table is a relation — a set of tuples. \( \texttt{SELECT} \) without WHERE returns a subset of columns (projection); with WHERE it also restricts rows (selection). So the full form \( \texttt{SELECT}\;\textit{cols}\;\texttt{FROM}\;\textit{T}\;\texttt{WHERE}\;\textit{cond} \) corresponds to \( \pi_{\textit{cols}}\big(\sigma_{\textit{cond}}(T)\big) \).'
+        - chart:
+            chartType: bar
+            data:
+              labels: ['SELECT *', 'SELECT cols', 'SELECT + WHERE']
+              datasets:
+                - label: 'Result size (rows)'
+                  data: [10, 10, 4]
+                  backgroundColor: ['rgba(59, 130, 246, 0.6)', 'rgba(59, 130, 246, 0.6)', 'rgba(34, 197, 94, 0.6)']
+            options:
+              plugins:
+                title:
+                  display: true
+                  text: 'Typical result sizes (example)'
+        - paragraph:
+            text: 'Mastering \( \texttt{SELECT} \) is the first step toward querying real data. Next lessons will add \( \texttt{WHERE} \), \( \texttt{ORDER BY} \), and joins — each can be expressed in relational algebra, e.g. join as \( R \bowtie S \).'

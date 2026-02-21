@@ -275,6 +275,14 @@ const lessonListCollapsed = ref(false)
   .lesson-content-area {
     padding: 0 10% 2rem 10%; 
   }
+  /* Divider spans full width of content area (breaks out of 10% padding) */
+  .lesson-content-area :deep(.block-divider) {
+    width: 125%;
+    margin-left: -12.5%;
+  }
+  .lesson-content-area :deep(.block-divider .block-divider__line) {
+    width: 100%;
+  }
 }
 
 </style>
