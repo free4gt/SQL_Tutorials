@@ -160,12 +160,12 @@ function listKey(i, item) {
   }
 }
 
-/* Tablet/desktop */
+/* Tablet/desktop — smallest margin on right only */
 @media (min-width: 769px) {
   .lesson-list {
     border-radius: 8px;
     padding: 1.5rem;
-    margin: 0;
+    margin: 0 0.25rem 0 0;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     box-sizing: border-box;
   }

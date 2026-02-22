@@ -87,6 +87,7 @@ const classTitle = computed(() => store.currentClass?.class?.title || 'Lessons')
   overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  padding-top: 0.5rem;
 }
 
 .lesson-content-area > * {
@@ -210,20 +211,20 @@ const classTitle = computed(() => store.currentClass?.class?.title || 'Lessons')
   display: none; /* Chrome, Safari, Edge */
 }
 
-/* Mobile Phones (portrait) — content on top, lesson list full width at bottom, no side grey */
+/* Mobile Phones (portrait) — content on top, lesson list full width at bottom, no gap above bar */
 @media (max-width: 768px) {
   .main-content {
     grid-template-columns: 1fr;
     grid-template-rows: minmax(0, 1fr) auto;
     padding: 4.25rem 0 .5rem 0;
-    gap: 1rem;
+    gap: 0;
     overflow: hidden;
   }
   .main-content--list-collapsed {
     grid-template-rows: 1fr;
   }
   .lesson-content-area {
-    padding: 0 0.5rem 1rem 0.5rem;
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
     min-height: 0;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
@@ -232,10 +233,10 @@ const classTitle = computed(() => store.currentClass?.class?.title || 'Lessons')
     flex-shrink: 0;
     background: #f5f7fa;
     border-top: 2px solid #c5d0de;
-    padding: 0.25rem 0 0 0;
+    padding: 0;
   }
   .lesson-list-sticky-header {
-    padding: 0.35rem 0.75rem;
+    padding: 0.4rem 0.75rem;
     background: #fff;
     border-bottom-color: #e2e8f0;
   }
@@ -313,8 +314,11 @@ const classTitle = computed(() => store.currentClass?.class?.title || 'Lessons')
 @media (min-width: 769px) and (max-width: 1023px) {
   .main-content {
     grid-template-columns: 2fr 1fr;
-    padding: 4.75rem 1rem 2rem 1rem;
+    padding: 4.75rem 0 2rem 1rem;
     gap: 1.5rem;
+  }
+  .lesson-list-sticky-header {
+    margin-right: 0.25rem; /* match lesson list card right margin (0.25rem) so title doesn’t scroll to edge */
   }
   .main-content--list-collapsed {
     grid-template-columns: 1fr 3rem;
@@ -329,8 +333,11 @@ const classTitle = computed(() => store.currentClass?.class?.title || 'Lessons')
   .main-content {
     padding-top: 7rem;
     grid-template-columns: 3fr 1fr;
-    padding: 5rem 1rem 2rem 1rem;
+    padding: 5rem 0 2rem 1rem;
     gap: 2rem;
+  }
+  .lesson-list-sticky-header {
+    margin-right: 0.25rem; /* match lesson list card right margin (0.25rem) so title doesn’t scroll to edge */
   }
   .main-content--list-collapsed {
     grid-template-columns: 1fr 3rem;
@@ -345,7 +352,7 @@ const classTitle = computed(() => store.currentClass?.class?.title || 'Lessons')
   .main-content {
     padding-top: 7rem;
     grid-template-columns: 3fr 1fr;
-    padding: 5rem 1rem 1rem 1rem;
+    padding: 5rem 0 1rem 1rem;
     gap: 2rem;
   }
   .main-content--list-collapsed {
@@ -356,12 +363,12 @@ const classTitle = computed(() => store.currentClass?.class?.title || 'Lessons')
     min-width: 3rem;
   }
   .lesson-content-area {
-    padding: 0 10% 2rem 10%;
+    padding: 0.5rem 5% 2rem 5%;
   }
-  /* Divider spans full width of content area (breaks out of 10% padding) */
+  /* Divider spans full width of content area (breaks out of 5% padding) */
   .lesson-content-area :deep(.block-divider) {
-    width: 125%;
-    margin-left: -12.5%;
+    width: 110%;
+    margin-left: -5%;
   }
   .lesson-content-area :deep(.block-divider .block-divider__line) {
     width: 100%;
