@@ -1,0 +1,13 @@
+# Class 2: Basic SQL
+# Video slide = blocks: header, video, paragraph
+lessons:
+  - lesson:
+      button:
+        text: 'Select statements'
+      blocks:
+        - header:
+            text: 'Select statements'
+        - video:
+            src: ''
+        - paragraph:
+            text: ''
