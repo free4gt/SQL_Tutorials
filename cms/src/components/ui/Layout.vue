@@ -223,7 +223,7 @@ const classTitle = computed(() => store.currentClass?.class?.title || 'Lessons')
     grid-template-rows: 1fr;
   }
   .lesson-content-area {
-    padding: 0 0.5rem 1rem 0;
+    padding: 0 0.5rem 1rem 0.5rem;
     min-height: 0;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
