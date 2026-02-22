@@ -1,6 +1,6 @@
 <template>
   <div ref="rootRef" class="lesson-list">
-    <h3 class="lesson-list__title" v-katex>
+    <h3 v-if="!hideTitle" class="lesson-list__title" v-katex>
       <BookOpen class="lesson-list__icon" aria-hidden />
       {{ store.currentClass?.class?.title || 'Lessons' }}
     </h3>
@@ -31,7 +31,11 @@ import { useClassroomStore } from '../../stores/classroom.js'
 
 const store = useClassroomStore()
 defineEmits(['select-lesson'])
-const props = defineProps(['lessons', 'displayList'])
+const props = defineProps({
+  lessons: { type: Array, default: () => [] },
+  displayList: { type: Array, default: () => [] },
+  hideTitle: { type: Boolean, default: false }
+})
 
 const rootRef = ref(null)
 const lessonsContainerRef = ref(null)
@@ -147,10 +151,24 @@ function listKey(i, item) {
   font-size: clamp(0.8125rem, 0.4rem + 2cqw, 1rem);
 }
 
-/* Hide header on small viewports (single-column / mobile layout) */
+/* Mobile: lesson list full width, no side gaps */
 @media (max-width: 768px) {
-  .lesson-list .lesson-list__title {
-    display: none;
+  .lesson-list {
+    border-radius: 0;
+    padding: 1rem 0.5rem 1.5rem 0.5rem;
+    box-shadow: none;
   }
 }
+
+/* Tablet/desktop — smallest margin on right only */
+@media (min-width: 769px) {
+  .lesson-list {
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 0 0.25rem 0 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+  }
+}
+
 </style>

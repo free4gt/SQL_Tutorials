@@ -7,6 +7,7 @@
       <LessonList
         :lessons="currentLessons"
         :display-list="store.currentClass?.displayList ?? []"
+        :hide-title="true"
         @select-lesson="loadLesson"
       />
     </template>
