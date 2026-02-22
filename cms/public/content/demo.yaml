@@ -9,88 +9,93 @@ lessons:
         - header:
             text: 'Intro'
         - paragraph:
-            text: 'This program is a learning content management system. It hosts courses and lessons: you pick a class (e.g. SQL intro, practice), then a lesson. Each lesson is built from content blocks—headings, paragraphs, lists, tables, charts, video embeds, and SQL interpreters that run in the browser. Content is defined in YAML files; no backend database is required for the lessons themselves.'
+            text: 'We provide a basic overview of content types in this system.  There are 4 basic content types.  Each piece of content is represented by a block.'
+        - list:
+            items:
+              - 'text blocks - this includes headers, paragraphs, lists and dividers.'
+              - 'tables and charts blocks - basic data analysis elements: charts and tables.'
+              - 'interactive blocks - blocks you can interact with: videos and programming interfaces.'
+              - 'container blocks - blocks that can hold other blocks: tabs and callouts.'
         - paragraph:
-            text: 'The app is fully responsive. It works on phones, tablets, and desktops. Layout and controls adapt to the screen size so you can read and use the SQL editor on any device.'
-        - paragraph:
-            text: 'What is a content block? Lessons are made of content blocks. Each block is one type of content: a heading, a paragraph, a list, a table, a chart, an SQL editor, and so on. You arrange blocks in order in the lesson YAML; they appear in that order on the page.'
-        - paragraph:
-            text: 'The next lessons go through each block type with examples and options, from simple to more advanced.'
-
+            text: 'Each block is part of a lesson and is defined sequentially.  It gets rendered sequuentially.  Feel free to check the lesson list on the right to see each content type.'
   - lesson_category:
       text: 'Text type'
-  # --- Header ---
-  - lesson:
-      button:
-        text: 'Header'
-      blocks:
-        - header:
-            text: 'Header block'
-        - paragraph:
-            text: 'A header is a section or lesson title. Keep it short.'
-        - header:
-            text: 'Example title'
-        - paragraph:
-            text: 'You can use KaTeX for math in headers. Example below.'
-        - header:
-            text: 'Formula: \( E = mc^2 \)'
-
-  # --- Paragraph ---
   - lesson:
       button:
         text: 'Paragraph'
       blocks:
         - header:
-            text: 'Paragraph block'
+            text: 'Paragraph'
         - paragraph:
-            text: 'Paragraphs are body text. Use one block per paragraph.'
+            text: 'Here we cover all the possible text blocks. All of these blocks support KaTeX, a subset of LaTeX notation.'
         - paragraph:
-            text: 'You can render math with KaTeX. Inline: \( a^2 + b^2 = c^2 \). Display: \[ \int_0^1 x^2 \, dx = \frac{1}{3}. \] Use single-quoted strings in YAML when you include backslashes or quotes.'
-
-  # --- List ---
+            text: 'A basic paragraph block that contains text to be read.'
+        - paragraph:
+            text: 'You can use KaTeX in paragraphs. Inline: \( a^2 + b^2 = c^2 \). Display: \[ \int_0^1 x^2 \, dx = \frac{1}{3}. \]'
+  - lesson:
+      button:
+        text: 'Header'
+      blocks:
+        - header:
+            text: 'Header'
+        - paragraph:
+            text: 'A basic heading for a section. A block that contains text summarizing content in a text section. You can set the header size with level: 1 (h1) through 6 (h6). Default is 1.'
+        - paragraph:
+            text: 'h1 (level: 1 or default):'
+        - header:
+            level: 1
+            text: 'Main title (h1)'
+        - paragraph:
+            text: 'h3 (level: 3):'
+        - header:
+            level: 3
+            text: 'Subsection (h3)'
   - lesson:
       button:
         text: 'List'
       blocks:
         - header:
-            text: 'List block'
+            text: 'List'
         - paragraph:
-            text: 'A list shows bullet points. Good for steps or key points.'
+            text: 'A basic bulleted list. You can have any number of items in the list. Use the optional ordered: true for a numbered list.'
         - list:
             items:
               - 'First item'
               - 'Second item'
-              - 'Third item'
-        - paragraph:
-            text: 'List items support KaTeX as well.'
-        - list:
-            items:
               - 'Point \( n \)'
-              - 'Next point'
-
-  # --- Divider ---
+        - paragraph:
+            text: 'Numbered list (ordered: true):'
+        - list:
+            ordered: true
+            items:
+              - 'Step one'
+              - 'Step two'
+              - 'Step three'
   - lesson:
       button:
         text: 'Divider'
       blocks:
         - header:
-            text: 'Divider block'
+            text: 'Divider'
         - paragraph:
-            text: 'A divider is a horizontal line. Use it to separate sections. You can add an optional caption above the line.'
+            text: 'You can use a divider to separate content out. For example, maybe you want to indicate a high-level difference between two sections of a lesson. The divider can have an optional header (caption) or no header.'
+        - paragraph:
+            text: 'Divider with no header:'
+        - divider: {}
+        - paragraph:
+            text: 'Divider with header (caption):'
         - divider:
             caption: 'Section break'
         - paragraph:
             text: 'Content after the divider.'
-
-  # --- Text section ---
   - lesson:
       button:
         text: 'Text section'
       blocks:
         - header:
-            text: 'Text section block'
+            text: 'Text section'
         - paragraph:
-            text: 'A text section groups header, paragraph, and list blocks inside a bordered box. Only those three types are allowed inside.'
+            text: 'This is a container that can hold multiple text blocks. It gives them an outline. It applies default margins to children.'
         - text_section:
             blocks:
               - header:
@@ -112,49 +117,26 @@ lessons:
         - header:
             text: 'Table block'
         - paragraph:
-            text: 'Tables have options: caption, headers, rows, footer, sortable, filterable. Below: one example per option (max 5).'
+            text: 'Tables support caption, headers, rows, footer, sortable, and filterable. Below: two examples — no options, then all options.'
         - paragraph:
-            text: '1. Basic table (headers + rows).'
+            text: '1. Table with no options (headers + rows only).'
         - table:
             headers: ['A', 'B']
             rows:
               - ['1', '2']
               - ['3', '4']
         - paragraph:
-            text: '2. With caption.'
+            text: '2. Table with all options (caption, sortable, filterable, footer).'
         - table:
             caption: 'Scores'
             headers: ['Name', 'Score']
             rows:
               - ['Alice', '95']
               - ['Bob', '87']
-        - paragraph:
-            text: '3. Sortable (click column headers).'
-        - table:
-            caption: 'Sortable'
-            headers: ['Name', 'Score']
-            rows:
-              - ['Alice', '95']
-              - ['Bob', '87']
+              - ['Carol', '92']
+            footer: ['Total', '280']
             sortable: true
-        - paragraph:
-            text: '4. Filterable (type in filter row).'
-        - table:
-            caption: 'Filterable'
-            headers: ['Name', 'Score']
-            rows:
-              - ['Alice', '95']
-              - ['Bob', '87']
             filterable: true
-        - paragraph:
-            text: '5. With footer row.'
-        - table:
-            caption: 'With footer'
-            headers: ['Item', 'Qty']
-            rows:
-              - ['Apples', '10']
-              - ['Oranges', '5']
-            footer: ['Total', '15']
 
   # --- Chart ---
   - lesson:
@@ -165,8 +147,9 @@ lessons:
             text: 'Chart block'
         - paragraph:
             text: 'Charts use Chart.js. Types: line, bar, pie. Options: chartType, data (labels + datasets), options.'
-        - paragraph:
-            text: 'Line chart.'
+        - header:
+            level: 3
+            text: 'Line chart'
         - chart:
             chartType: 'line'
             data:
@@ -174,8 +157,9 @@ lessons:
               datasets:
                 - label: 'Series 1'
                   data: [10, 20, 15]
-        - paragraph:
-            text: 'Bar chart.'
+        - header:
+            level: 3
+            text: 'Bar chart'
         - chart:
             chartType: 'bar'
             data:
@@ -183,8 +167,9 @@ lessons:
               datasets:
                 - label: 'Count'
                   data: [12, 19, 8]
-        - paragraph:
-            text: 'Pie chart.'
+        - header:
+            level: 3
+            text: 'Pie chart'
         - chart:
             chartType: 'pie'
             data:
@@ -203,7 +188,7 @@ lessons:
         - header:
             text: 'Video block'
         - paragraph:
-            text: 'The video block embeds a video in a 16∶9 container. Use an embed URL (e.g. YouTube embed).'
+            text: 'The video block embeds a video in a 16∶9 container. I have a YouTube account and will link to videos there; you use the video embed URL in the block.'
         - video:
             src: 'https://www.youtube.com/embed/M0HYcnwMIjQ'
 
@@ -215,11 +200,17 @@ lessons:
         - header:
             text: 'SQL interpreter block'
         - paragraph:
-            text: 'The SQL interpreter runs Postgres in the browser (PGlite). There is no server: the database lives in the page. When you click Start, the lesson schema (tables and rows from YAML) is loaded and the solution query is run to set the expected result. The database is reset every time you click Start, so each run starts from a clean state.'
+            text: 'The SQL Editor has Table, Query, and Instructions tabs.'
         - paragraph:
-            text: 'Properties you can set in YAML: tableName, columns, rows (single table), or tables (multiple tables). Also solution (the query that defines the correct result) and instructions (text shown in the block).'
+            text: 'The Table part shows the table(s) in the SQL instance that you can query. A dropdown appears when there are multiple tables.'
         - paragraph:
-            text: 'Example: one table, three rows. Click Start, then run SELECT * FROM products to match the solution.'
+            text: 'The Query section has your query and the expected solution. When you press Start, it runs the solution query and records statistics about it. When you run your query, it validates against the solution. If you get stuck, use the Copy solution button to copy the solution into your query section.'
+        - paragraph:
+            text: 'Instructions describe the expectation of the exercise. The output lists the columns needed in your solution. If your columns do not match (in any order, case insensitive), it will not validate further.'
+        - paragraph:
+            text: 'Validation works in order: (1) Check your columns, (2) Check row count, (3) Check content—if content is wrong, errors are flagged with a red dot and red highlighting.'
+        - paragraph:
+            text: 'The top-right corner shows whether the database is running and whether the solution query ran successfully. The database runs in-memory in the browser—there is no server. Both indicators must succeed for validation to work. If validation is not on, you can still query the database.'
         - sql:
             tableName: 'products'
             columns: ['id', 'name', 'price']
@@ -240,7 +231,7 @@ lessons:
         - header:
             text: 'Callout block'
         - paragraph:
-            text: 'A callout is an aside with an optional title. It can contain header, paragraph, list, table, chart, image, divider, tabs, text_section (no video or SQL inside).'
+            text: 'A callout holds supplementary content: deeper technical detail, extra exercises, or optional material that goes beyond the main lesson. Use it for tips, further reading, or practice that learners can do if they want more. It can contain header, paragraph, list, table, chart, image, divider, tabs, text_section (no video or SQL inside).'
         - callout:
             title: 'Tip'
             blocks:
@@ -333,3 +324,58 @@ lessons:
                         rows:
                           - ['A', '1']
                           - ['B', '2']
+        - paragraph:
+            text: 'Example 4: nested tabs. Left and Right each have two leaf tabs.'
+        - tabs:
+            tabs:
+              - tab:
+                  name: 'Left'
+                  blocks:
+                    - paragraph:
+                        text: 'Left branch. Two leaves below.'
+                    - tabs:
+                        tabs:
+                          - tab:
+                              name: 'Left A'
+                              blocks:
+                                - paragraph:
+                                    text: 'Left A: summary of the first topic. Key points go here.'
+                                - list:
+                                    items:
+                                      - 'Point one'
+                                      - 'Point two'
+                          - tab:
+                              name: 'Left B'
+                              blocks:
+                                - paragraph:
+                                    text: 'Left B: deeper dive. Extra detail or a short exercise.'
+                                - header:
+                                    level: 3
+                                    text: 'Details'
+              - tab:
+                  name: 'Right'
+                  blocks:
+                    - paragraph:
+                        text: 'Right branch. Two leaves below.'
+                    - tabs:
+                        tabs:
+                          - tab:
+                              name: 'Right A'
+                              blocks:
+                                - paragraph:
+                                    text: 'Right A: alternative approach or reference.'
+                                - table:
+                                    headers: ['Option', 'Use']
+                                    rows:
+                                      - ['A', 'First']
+                                      - ['B', 'Second']
+                          - tab:
+                              name: 'Right B'
+                              blocks:
+                                - paragraph:
+                                    text: 'Right B: wrap-up or next steps.'
+                                - list:
+                                    ordered: true
+                                    items:
+                                      - 'Step 1'
+                                      - 'Step 2'

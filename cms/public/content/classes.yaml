@@ -9,5 +9,5 @@ classes:
       lessonsYaml: 'practice.yaml'
   - class:
       name: 'demo'
-      title: 'Content type explanation'
+      title: 'CMS - Demonstration'
       lessonsYaml: 'demo.yaml'

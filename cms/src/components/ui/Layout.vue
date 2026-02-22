@@ -10,33 +10,44 @@
       <main class="lesson-content-area">
         <slot name="lesson-content"></slot>
       </main>
-      <aside
-        class="lesson-list-area"
-        :class="{ 'lesson-list-area--collapsed': lessonListCollapsed }"
-      >
-        <button
-          type="button"
-          class="lesson-list-toggle"
-          :class="{ 'lesson-list-toggle--bottom': lessonListCollapsed }"
-          :aria-label="lessonListCollapsed ? 'Show lesson list' : 'Hide lesson list'"
-          @click="lessonListCollapsed = !lessonListCollapsed"
+      <div class="mobile-sticky-bar">
+        <aside
+          class="lesson-list-area"
+          :class="{ 'lesson-list-area--collapsed': lessonListCollapsed }"
         >
-          <PanelRightOpen v-if="lessonListCollapsed" aria-hidden />
-          <PanelRightClose v-else aria-hidden />
-        </button>
-        <div v-show="!lessonListCollapsed" class="lesson-list-slot">
-          <slot name="lesson-list"></slot>
-        </div>
-      </aside>
+          <div class="lesson-list-sticky-header">
+            <h3 class="lesson-list-sticky-header__title" v-katex>
+              <BookOpen class="lesson-list-sticky-header__icon" aria-hidden />
+              {{ classTitle }}
+            </h3>
+            <button
+              type="button"
+              class="lesson-list-toggle"
+              :class="{ 'lesson-list-toggle--bottom': lessonListCollapsed }"
+              :aria-label="lessonListCollapsed ? 'Show lesson list' : 'Hide lesson list'"
+              @click="lessonListCollapsed = !lessonListCollapsed"
+            >
+              <PanelRightOpen v-if="lessonListCollapsed" aria-hidden />
+              <PanelRightClose v-else aria-hidden />
+            </button>
+          </div>
+          <div v-show="!lessonListCollapsed" class="lesson-list-slot">
+            <slot name="lesson-list"></slot>
+          </div>
+        </aside>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { PanelRightOpen, PanelRightClose } from 'lucide-vue-next'
+import { ref, computed } from 'vue'
+import { BookOpen, PanelRightOpen, PanelRightClose } from 'lucide-vue-next'
+import { useClassroomStore } from '../../stores/classroom.js'
 
 const lessonListCollapsed = ref(false)
+const store = useClassroomStore()
+const classTitle = computed(() => store.currentClass?.class?.title || 'Lessons')
 </script>
 
 <style scoped>
@@ -83,19 +94,64 @@ const lessonListCollapsed = ref(false)
   min-height: 100%;
 }
 
+/* Wrapper for title + lesson list: on mobile it's a sticky bar below navbar */
+.mobile-sticky-bar {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+}
+
 .lesson-list-area {
   position: relative;
   min-height: 0;
   overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  display: flex;
+  flex-direction: column;
 }
 
-.lesson-list-toggle {
-  position: absolute;
-  top: 0.25rem;
-  right: 0.5rem;
+/* Sticky title + collapse button: same row, stay fixed when scrolling lesson list (all breakpoints) */
+.lesson-list-sticky-header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: #fff;
+  border-bottom: 1px solid #e2e8f0;
+  position: sticky;
+  top: 0;
   z-index: 20;
+  box-shadow: 0 1px 0 0 rgba(0,0,0,0.04);
+}
+.lesson-list-sticky-header__title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  font-size: clamp(0.8125rem, 2.5vw, 1.1rem);
+  font-weight: 600;
+  color: #333;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.lesson-list-sticky-header__icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #666;
+  flex-shrink: 0;
+}
+
+.lesson-list-sticky-header .lesson-list-toggle {
+  position: static;
+  flex-shrink: 0;
+}
+.lesson-list-toggle {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -120,14 +176,26 @@ const lessonListCollapsed = ref(false)
 }
 
 .lesson-list-slot {
-  padding-top: 3rem;
-  min-height: 100%;
+  min-height: 0;
+  flex: 1 1 auto;
 }
 
-/* Collapsed: content expands, list area shrinks to toggle only (same for all breakpoints) */
+/* Collapsed: only the toggle button is visible — no title bar, no white box (all breakpoints) */
 .main-content--list-collapsed .lesson-list-area {
   overflow: visible;
-  min-width: 3rem;
+  min-width: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.main-content--list-collapsed .lesson-list-sticky-header {
+  background: transparent;
+  border: none;
+  padding: 0;
+  box-shadow: none;
+  justify-content: flex-end;
+}
+.main-content--list-collapsed .lesson-list-sticky-header__title {
+  display: none;
 }
 .main-content--list-collapsed .lesson-list-slot {
   display: none;
@@ -142,37 +210,38 @@ const lessonListCollapsed = ref(false)
   display: none; /* Chrome, Safari, Edge */
 }
 
-/* Mobile Phones (portrait) — collapse: full-width content, button fixed bottom-right */
+/* Mobile Phones (portrait) — content on top, lesson list full width at bottom, no side grey */
 @media (max-width: 768px) {
   .main-content {
     grid-template-columns: 1fr;
     grid-template-rows: minmax(0, 1fr) auto;
-    padding: 4.25rem .5rem .5rem .5rem;
+    padding: 4.25rem 0 .5rem 0;
     gap: 1rem;
     overflow: hidden;
   }
   .main-content--list-collapsed {
-    grid-template-columns: 1fr;
     grid-template-rows: 1fr;
   }
   .lesson-content-area {
-    padding-bottom: 1rem;
+    padding: 0 0.5rem 1rem 0.5rem;
     min-height: 0;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
-  .lesson-list-area {
-    order: 2;
+  .mobile-sticky-bar {
     flex-shrink: 0;
-    max-height: 11.5rem; /* ~collapse area + 2 lesson buttons, extra so bottom isn't obscured */
+    background: #f5f7fa;
+    border-top: 2px solid #c5d0de;
+    padding: 0.25rem 0 0 0;
+  }
+  .lesson-list-sticky-header {
+    padding: 0.5rem 0.75rem;
+  }
+  .lesson-list-area {
+    flex-shrink: 0;
+    max-height: 11.5rem;
     overflow-y: auto;
     min-height: 0;
-  }
-  .lesson-list-toggle {
-    top: 0.125rem;
-  }
-  .lesson-list-slot {
-    padding-top: 2.5rem;
   }
   .main-content--list-collapsed .lesson-list-area {
     position: fixed;
@@ -180,10 +249,8 @@ const lessonListCollapsed = ref(false)
     right: 1rem;
     left: auto;
     width: auto;
-    height: auto;
-    max-height: none;
     min-width: 0;
-    order: unset;
+    max-height: none;
     overflow: visible;
     z-index: 50;
   }
@@ -198,7 +265,7 @@ const lessonListCollapsed = ref(false)
 @media (max-height: 768px) and (orientation: landscape) {
   .main-content {
     grid-template-columns: 3fr 1fr;
-    padding: 4.25rem .5rem .5rem .5rem; 
+    padding: 4.25rem .5rem .5rem 0;
     gap: 1.5rem;
   }
   .lesson-content-area {
@@ -230,12 +297,15 @@ const lessonListCollapsed = ref(false)
 }
 
 
-/* Small tablets (portrait) */
+/* Small tablets (portrait) — lesson list flush right and top */
 @media (min-width: 769px) and (max-width: 1023px) {
   .main-content {
     grid-template-columns: 2fr 1fr;
-    padding: 4.75rem 1rem 2rem 1rem; 
+    padding: 4.75rem 1rem 2rem 0; 
     gap: 1.5rem;
+  }
+  .lesson-list-sticky-header {
+    padding: 0 0 0.5rem 0.75rem;
   }
   .main-content--list-collapsed {
     grid-template-columns: 1fr 3rem;
@@ -245,13 +315,16 @@ const lessonListCollapsed = ref(false)
     min-width: 3rem;
   }
 }
-/* Large tablets / laptops / monitors */
+/* Large tablets / laptops / monitors — lesson list flush right and top */
 @media (min-width: 1024px) { 
   .main-content {
     padding-top: 7rem;
     grid-template-columns: 3fr 1fr;
-    padding: 5rem 1rem 2rem 1rem; 
+    padding: 5rem 1rem 2rem 0; 
     gap: 2rem;
+  }
+  .lesson-list-sticky-header {
+    padding: 0.5rem 0 0.5rem 0.75rem;
   }
   .main-content--list-collapsed {
     grid-template-columns: 1fr 3rem;
@@ -266,8 +339,11 @@ const lessonListCollapsed = ref(false)
   .main-content {
     padding-top: 7rem;
     grid-template-columns: 3fr 1fr;
-    padding: 5rem 1rem 1rem 1rem; 
+    padding: 5rem 1rem 1rem 0; 
     gap: 2rem;
+  }
+  .lesson-list-sticky-header {
+    padding: 0 0 0.5rem 0.75rem;
   }
   .main-content--list-collapsed {
     grid-template-columns: 1fr 3rem;

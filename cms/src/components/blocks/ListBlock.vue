@@ -1,6 +1,9 @@
 <template>
   <div class="block-container block-list">
-    <ul class="block-list__ul">
+    <component
+      :is="ordered ? 'ol' : 'ul'"
+      class="block-list__list"
+    >
       <li
         v-for="(item, index) in listItems"
         :key="index"
@@ -9,7 +12,7 @@
       >
         {{ item }}
       </li>
-    </ul>
+    </component>
   </div>
 </template>
 
@@ -20,6 +23,10 @@ const props = defineProps({
   items: {
     type: Array,
     default: () => []
+  },
+  ordered: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -37,10 +44,9 @@ const listItems = computed(() => Array.isArray(props.items) ? props.items : [])
 }
 
 /* Match paragraph font exactly: same size, line-height, letter-spacing, color */
-.block-list__ul {
-  margin: 0 0 0 1.5em;
-  padding: 0 0 0 0.75em;
-  border-left: 2px solid rgba(148, 163, 184, 0.4);
+.block-list__list {
+  margin: 0;
+  padding-left: 1.25em;
   list-style-type: disc;
   list-style-position: outside;
   font-size: clamp(0.8125rem, 2vw, 1rem);
@@ -53,9 +59,13 @@ const listItems = computed(() => Array.isArray(props.items) ? props.items : [])
   word-break: break-word;
 }
 
+ol.block-list__list {
+  list-style-type: decimal;
+}
+
 .block-list__li {
-  margin-bottom: 0.5rem;
-  padding-left: 0.25em;
+  margin-bottom: 0.05rem;
+  padding-left: 0.1em;
   overflow-wrap: break-word;
   word-break: break-word;
   font-size: inherit;

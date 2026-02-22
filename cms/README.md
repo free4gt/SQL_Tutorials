@@ -90,17 +90,21 @@ Every lesson’s content is built from **blocks**. Each block is written in YAML
 
 ### `header`
 
-Renders a main heading (e.g. lesson title).
+Renders a heading (h1–h6). Use `level` to choose size.
 
-| Option | Type   | Description |
-|--------|--------|-------------|
-| `text` | string | Heading text. Supports inline math (KaTeX). |
+| Option  | Type   | Description |
+|---------|--------|-------------|
+| `text`  | string | Heading text. Supports inline math (KaTeX). |
+| `level` | number | Heading level 1–6 (h1–h6). Default: 1. |
 
 **YAML example:**
 
 ```yaml
 - header:
     text: 'Introduction to SQL \( E = mc^2 \)'
+- header:
+    level: 3
+    text: 'Subsection title'
 ```
 
 ---
@@ -332,19 +336,30 @@ A set of tabs; each tab has a name and a list of blocks. Blocks can be any type 
 
 ### `list`
 
-A bullet list.
+A bullet list or numbered list.
 
-| Option  | Type  | Description |
-|---------|-------|-------------|
-| `items` | array | List of strings (one per item). Supports inline math (KaTeX). |
+| Option   | Type    | Description |
+|----------|---------|-------------|
+| `items`  | array   | List of strings (one per item). Supports inline math (KaTeX). |
+| `ordered` | boolean | If true, render as a numbered list (ol). Default: false (bullets). |
 
-**YAML example:**
+**YAML example (bullets):**
 
 ```yaml
 - list:
     items:
       - 'First item'
       - 'Second item'
+```
+
+**YAML example (numbered):**
+
+```yaml
+- list:
+    ordered: true
+    items:
+      - 'Step one'
+      - 'Step two'
 ```
 
 ---

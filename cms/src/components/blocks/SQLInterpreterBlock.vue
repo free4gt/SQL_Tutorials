@@ -23,7 +23,7 @@
           </div>
         </div>
       </header>
-      <!-- Mobile portrait: 4 tabs (Instructions, Table, Query, Solution) share one central pane -->
+      <!-- Mobile / tablet portrait: 5 tabs (Instructions, Table, Query, Solution, Output) share one central pane -->
       <div class="sql-block__mobile">
         <div class="sql-block__mobile-tabs">
           <button
@@ -45,6 +45,14 @@
           <button
             type="button"
             class="sql-block__mobile-tab"
+            :class="{ 'sql-block__mobile-tab--active': mobileCentralTab === 'output' }"
+            @click="mobileCentralTab = 'output'"
+          >
+            Output
+          </button>
+          <button
+            type="button"
+            class="sql-block__mobile-tab"
             :class="{ 'sql-block__mobile-tab--active': mobileCentralTab === 'query' }"
             @click="mobileCentralTab = 'query'"
           >
@@ -61,33 +69,8 @@
         </div>
         <div class="sql-block__mobile-central">
           <div v-show="mobileCentralTab === 'instructions'" class="sql-block__mobile-pane">
-            <div class="sql-block__instructions-tabs">
-              <button
-                type="button"
-                class="sql-block__instructions-tab"
-                :class="{ 'sql-block__instructions-tab--active': instructionsSectionTab === 'instructions' }"
-                @click="instructionsSectionTab = 'instructions'"
-              >
-                Instructions
-              </button>
-              <button
-                type="button"
-                class="sql-block__instructions-tab"
-                :class="{ 'sql-block__instructions-tab--active': instructionsSectionTab === 'output' }"
-                @click="instructionsSectionTab = 'output'"
-              >
-                Output
-              </button>
-            </div>
-            <div v-show="instructionsSectionTab === 'instructions'" class="sql-block__instructions-content">
+            <div class="sql-block__instructions-content">
               <div class="sql-block__instructions-body">{{ instructions || ' ' }}</div>
-            </div>
-            <div v-show="instructionsSectionTab === 'output'" class="sql-block__instructions-content sql-block__instructions-output">
-              <p class="sql-block__output-intro"><strong>Expected columns</strong> (case-insensitive).</p>
-              <p v-if="solutionOutputColumns.length === 0" class="sql-block__output-empty">Run Start to see expected column names here.</p>
-              <ul v-else class="sql-block__output-columns">
-                <li v-for="(col, i) in solutionOutputColumns" :key="i" class="sql-block__output-column">{{ col }}</li>
-              </ul>
             </div>
           </div>
           <div v-show="mobileCentralTab === 'table'" class="sql-block__mobile-pane sql-block__mobile-pane--schema">
@@ -123,6 +106,15 @@
                 <span class="sql-block__column-type">{{ col.type }}</span>
               </li>
             </ul>
+          </div>
+          <div v-show="mobileCentralTab === 'output'" class="sql-block__mobile-pane">
+            <div class="sql-block__instructions-content sql-block__instructions-output">
+              <p class="sql-block__output-intro"><strong>Expected columns</strong> (case-insensitive).</p>
+              <p v-if="solutionOutputColumns.length === 0" class="sql-block__output-empty">Run Start to see expected column names here.</p>
+              <ul v-else class="sql-block__output-columns">
+                <li v-for="(col, i) in solutionOutputColumns" :key="i" class="sql-block__output-column">{{ col }}</li>
+              </ul>
+            </div>
           </div>
           <div v-show="mobileCentralTab === 'query'" class="sql-block__mobile-pane">
             <template v-if="!isActive">
@@ -613,13 +605,13 @@ onMounted(() => {
   border: 1px solid #c5d0de;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1023px) {
   .sql-block__container {
     max-height: 58vh;
   }
 }
 
-/* Mobile portrait only: 4 tabs + single central pane; results stay at bottom */
+/* Mobile + tablet portrait: 5 tabs + single central pane; results stay at bottom */
 .sql-block__mobile {
   display: none;
   flex-direction: column;
@@ -628,7 +620,7 @@ onMounted(() => {
   border-bottom: 1px solid #c5d0de;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1023px) {
   .sql-block__mobile {
     display: flex;
   }
@@ -688,10 +680,6 @@ onMounted(() => {
 .sql-block__mobile-pane--schema .sql-block__schema-label {
   margin-top: 0;
 }
-.sql-block__mobile-pane .sql-block__instructions-tabs {
-  margin: 0 -0.75rem 0.35rem -0.75rem;
-  padding: 0 0.75rem;
-}
 .sql-block__mobile-pane .sql-block__instructions-content {
   flex: 1;
   min-height: 0;
@@ -735,8 +723,8 @@ onMounted(() => {
   flex: 1;
 }
 
-/* Mobile only: hide scrollbars on SQL interpreter */
-@media (max-width: 768px) {
+/* Mobile + tablet portrait: hide scrollbars on SQL interpreter */
+@media (max-width: 1023px) {
   .sql-block__mobile,
   .sql-block__mobile-central,
   .sql-block__mobile-pane .sql-block__editor-wrap,
@@ -754,7 +742,7 @@ onMounted(() => {
   }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1024px) {
   .sql-block__container {
     max-height: 62vh;
   }

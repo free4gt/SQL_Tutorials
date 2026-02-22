@@ -1,12 +1,33 @@
 <template>
   <div class="block-container block-header">
-    <h1 class="lesson-header" v-katex>{{ text }}</h1>
+    <component
+      :is="headingTag"
+      class="lesson-header"
+      :class="`lesson-header--h${levelClamped}`"
+      v-katex
+    >
+      {{ text }}
+    </component>
     <span class="block-header__line" aria-hidden="true"></span>
   </div>
 </template>
 
 <script setup>
-defineProps(['text'])
+import { computed } from 'vue'
+
+const props = defineProps({
+  text: { type: String, default: '' },
+  level: { type: Number, default: 1 }
+})
+
+const levelClamped = computed(() => {
+  const n = Number(props.level)
+  if (!Number.isInteger(n) || n < 1) return 1
+  if (n > 6) return 6
+  return n
+})
+
+const headingTag = computed(() => `h${levelClamped.value}`)
 </script>
 
 <style scoped>
@@ -23,12 +44,35 @@ defineProps(['text'])
 .lesson-header {
   width: 100%;
   margin: 0 0 0.75rem 0;
-  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
   font-weight: 600;
   letter-spacing: 0.04em;
   color: #334155;
   line-height: 1.3;
   text-align: center;
+}
+
+.lesson-header--h1 {
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+}
+
+.lesson-header--h2 {
+  font-size: clamp(1rem, 2.2vw, 1.25rem);
+}
+
+.lesson-header--h3 {
+  font-size: clamp(0.9375rem, 2vw, 1.125rem);
+}
+
+.lesson-header--h4 {
+  font-size: clamp(0.875rem, 1.8vw, 1rem);
+}
+
+.lesson-header--h5 {
+  font-size: clamp(0.8125rem, 1.6vw, 0.9375rem);
+}
+
+.lesson-header--h6 {
+  font-size: clamp(0.75rem, 1.4vw, 0.875rem);
 }
 
 .block-header__line {

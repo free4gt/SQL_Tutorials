@@ -88,13 +88,13 @@ function getBlockProps(block) {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-/* Tabs: aligned 100% left in the tabs form */
+/* Tabs: center-aligned for both top-level and nested tabs */
 .block-tabs__tab-list {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 0;
-  justify-content: flex-start;
+  justify-content: center;
   background: #e8eef4;
   border-bottom: 1px solid #c5d0de;
   flex-shrink: 0;
