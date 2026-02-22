@@ -1,42 +1,72 @@
-# Converted from origin/main web_courses/course_content/practice.json (Tiny Realm lessons)
+# Class 1: Introduction to SQL
+# Video slide = blocks: header, video, paragraph
 lessons:
   - lesson:
       button:
-        text: 'Medieval Tiny Realm'
+        text: 'Introduction to SQL'
       blocks:
         - header:
-            text: 'Medieval Tiny Realm'
+            text: 'Introduction to SQL'
         - video:
-            src: 'https://www.youtube.com/embed/M0HYcnwMIjQ'
+            src: ''
         - paragraph:
-            text: 'Tiny Realms creates stunning Generative AI videos of miniature historical worlds. This medieval scene captures the essence of feudal Europe around 1100-1400 AD. Watch knights in full plate armor patrol castle walls while peasant villages bustle around watermills and Gothic cathedrals rise in the distance. Ox-plows till muddy fields as monks copy manuscripts by candlelight.'
+            text: 'We provide a basic overview of our course.'  # What the course covers
   - lesson:
       button:
-        text: 'Industrials Tiny Realm'
+        text: 'Setting up course software'
       blocks:
         - header:
-            text: 'Industrials Tiny Realm'
-        - video:
-            src: 'https://www.youtube.com/embed/VuSy4-69bAY'
-        - paragraph:
-            text: 'Tiny Realms produces mesmerizing Generative AI content showing miniature historical eras. This industrial scene recreates 19th-century factory towns during the peak of the Industrial Revolution (1830-1900). Steam engines drive massive ironworks while child laborers tend spinning jennies. Smokestacks darken the sky as railroads connect grimy factory districts to distant coalfields.'
+            text: 'Setting up course software'
+        - tabs:
+            tabs:
+              - tab:
+                  name: 'Windows'
+                  blocks:
+                    - video:
+                        src: ''
+                    - paragraph:
+                        text: 'We provide Windows specific instructions for setting up PostgreSQL and PgAdmin4.'
+              - tab:
+                  name: 'MacOSX'
+                  blocks:
+                    - video:
+                        src: ''
+                    - paragraph:
+                        text: 'We provide MacOSX specific instructions for setting up PostgreSQL and PgAdmin4.'
+              - tab:
+                  name: 'Linux'
+                  blocks:
+                    - video:
+                        src: ''
+                    - paragraph:
+                        text: 'We provide Linux specific instructions for setting up PostgreSQL and PgAdmin4.'
   - lesson:
       button:
-        text: 'Feudal Japan Tiny Realm'
+        text: 'PgAdmin4 Demo'
       blocks:
         - header:
-            text: 'Feudal Japan Tiny Realm'
+            text: 'PgAdmin4 Demo'
         - video:
-            src: 'https://www.youtube.com/embed/KI6UHGiK2vE'
+            src: ''
         - paragraph:
-            text: 'Tiny Realms crafts beautiful Generative AI reconstructions of historical micro-worlds. This video depicts Sengoku-era Japan (1467-1603) during the Warring States period. Samurai in lacquered armor clash with naginata spears while ninja scale castle walls. Rice paddies surround fortified yamashiros as Buddhist temples ring with war drums.'
+            text: 'We provide a quick tour of pgAdmin4 and explains how it interacts with PostgreSQL.'
   - lesson:
       button:
-        text: 'Chernobyl Tiny Realm'
+        text: 'What is PostgreSQL?'
       blocks:
         - header:
-            text: 'Chernobyl Tiny Realm'
+            text: 'What is PostgreSQL?'
         - video:
-            src: 'https://www.youtube.com/embed/dXRRF8I3SZs'
+            src: ''
         - paragraph:
-            text: "Tiny Realms generates haunting Generative AI depictions of significant historical moments. This scene recreates Pripyat, Ukraine in April 1986 immediately after the Chernobyl nuclear disaster. Ferris wheels stand frozen mid-turn in abandoned amusement parks. Reactor 4's graphite fire glows while firefighters in inadequate gear battle invisible radiation in khaki Soviet uniforms."
+            text: 'We provide a basic overview of PostgreSQL, what it looks like under the covers and how it interacts with pgAdmin4.'
+  - lesson:
+      button:
+        text: 'Course next steps'
+      blocks:
+        - header:
+            text: 'Course next steps'
+        - video:
+            src: ''
+        - paragraph:
+            text: 'We provide a basic overview of what the next lessons will cover.'

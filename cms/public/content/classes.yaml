@@ -1,8 +1,12 @@
 classes:
   - class:
       name: 'sql-intro'
-      title: 'Introduction to SQL'
+      title: 'Intro to SQL'
       lessonsYaml: 'sql-intro.yaml'
+  - class:
+      name: 'sql-basic'
+      title: 'Basic SQL'
+      lessonsYaml: 'sql-basic.yaml'
   - class:
       name: 'practice'
       title: 'Practice Projects'

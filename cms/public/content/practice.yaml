@@ -1,42 +1,52 @@
-# Converted from origin/main web_courses/course_content/practice.json (Tiny Realm lessons)
+# Placeholder: 5 video slides (header, video, paragraph)
 lessons:
   - lesson:
       button:
-        text: 'Medieval Tiny Realm'
+        text: 'Practice 1'
       blocks:
         - header:
-            text: 'Medieval Tiny Realm'
+            text: 'Practice 1'
         - video:
-            src: 'https://www.youtube.com/embed/M0HYcnwMIjQ'
+            src: ''
         - paragraph:
-            text: 'Tiny Realms creates stunning Generative AI videos of miniature historical worlds. This medieval scene captures the essence of feudal Europe around 1100-1400 AD. Watch knights in full plate armor patrol castle walls while peasant villages bustle around watermills and Gothic cathedrals rise in the distance. Ox-plows till muddy fields as monks copy manuscripts by candlelight.'
+            text: ''
   - lesson:
       button:
-        text: 'Industrials Tiny Realm'
+        text: 'Practice 2'
       blocks:
         - header:
-            text: 'Industrials Tiny Realm'
+            text: 'Practice 2'
         - video:
-            src: 'https://www.youtube.com/embed/VuSy4-69bAY'
+            src: ''
         - paragraph:
-            text: 'Tiny Realms produces mesmerizing Generative AI content showing miniature historical eras. This industrial scene recreates 19th-century factory towns during the peak of the Industrial Revolution (1830-1900). Steam engines drive massive ironworks while child laborers tend spinning jennies. Smokestacks darken the sky as railroads connect grimy factory districts to distant coalfields.'
+            text: ''
   - lesson:
       button:
-        text: 'Feudal Japan Tiny Realm'
+        text: 'Practice 3'
       blocks:
         - header:
-            text: 'Feudal Japan Tiny Realm'
+            text: 'Practice 3'
         - video:
-            src: 'https://www.youtube.com/embed/KI6UHGiK2vE'
+            src: ''
         - paragraph:
-            text: 'Tiny Realms crafts beautiful Generative AI reconstructions of historical micro-worlds. This video depicts Sengoku-era Japan (1467-1603) during the Warring States period. Samurai in lacquered armor clash with naginata spears while ninja scale castle walls. Rice paddies surround fortified yamashiros as Buddhist temples ring with war drums.'
+            text: ''
   - lesson:
       button:
-        text: 'Chernobyl Tiny Realm'
+        text: 'Practice 4'
       blocks:
         - header:
-            text: 'Chernobyl Tiny Realm'
+            text: 'Practice 4'
         - video:
-            src: 'https://www.youtube.com/embed/dXRRF8I3SZs'
+            src: ''
         - paragraph:
-            text: "Tiny Realms generates haunting Generative AI depictions of significant historical moments. This scene recreates Pripyat, Ukraine in April 1986 immediately after the Chernobyl nuclear disaster. Ferris wheels stand frozen mid-turn in abandoned amusement parks. Reactor 4's graphite fire glows while firefighters in inadequate gear battle invisible radiation in khaki Soviet uniforms."
+            text: ''
+  - lesson:
+      button:
+        text: 'Practice 5'
+      blocks:
+        - header:
+            text: 'Practice 5'
+        - video:
+            src: ''
+        - paragraph:
+            text: ''
