@@ -223,7 +223,7 @@ const classTitle = computed(() => store.currentClass?.class?.title || 'Lessons')
     grid-template-rows: 1fr;
   }
   .lesson-content-area {
-    padding: 0 0.5rem 1rem 0.5rem;
+    padding: 0 0.5rem 1rem 0;
     min-height: 0;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
@@ -235,7 +235,19 @@ const classTitle = computed(() => store.currentClass?.class?.title || 'Lessons')
     padding: 0.25rem 0 0 0;
   }
   .lesson-list-sticky-header {
-    padding: 0.5rem 0.75rem;
+    padding: 0.35rem 0.75rem;
+    background: #fff;
+    border-bottom-color: #e2e8f0;
+  }
+  .lesson-list-sticky-header__title {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: #64748b;
+  }
+  .lesson-list-sticky-header__icon {
+    width: 1.125rem;
+    height: 1.125rem;
+    color: #94a3b8;
   }
   .lesson-list-area {
     flex-shrink: 0;
@@ -265,7 +277,7 @@ const classTitle = computed(() => store.currentClass?.class?.title || 'Lessons')
 @media (max-height: 768px) and (orientation: landscape) {
   .main-content {
     grid-template-columns: 3fr 1fr;
-    padding: 4.25rem .5rem .5rem 0;
+    padding: 4.25rem 0.5rem 0.5rem 0.5rem;
     gap: 1.5rem;
   }
   .lesson-content-area {
@@ -297,15 +309,12 @@ const classTitle = computed(() => store.currentClass?.class?.title || 'Lessons')
 }
 
 
-/* Small tablets (portrait) — lesson list flush right and top */
+/* Small tablets (portrait) */
 @media (min-width: 769px) and (max-width: 1023px) {
   .main-content {
     grid-template-columns: 2fr 1fr;
-    padding: 4.75rem 1rem 2rem 0; 
+    padding: 4.75rem 1rem 2rem 1rem;
     gap: 1.5rem;
-  }
-  .lesson-list-sticky-header {
-    padding: 0 0 0.5rem 0.75rem;
   }
   .main-content--list-collapsed {
     grid-template-columns: 1fr 3rem;
@@ -315,16 +324,13 @@ const classTitle = computed(() => store.currentClass?.class?.title || 'Lessons')
     min-width: 3rem;
   }
 }
-/* Large tablets / laptops / monitors — lesson list flush right and top */
+/* Large tablets / laptops / monitors */
 @media (min-width: 1024px) { 
   .main-content {
     padding-top: 7rem;
     grid-template-columns: 3fr 1fr;
-    padding: 5rem 1rem 2rem 0; 
+    padding: 5rem 1rem 2rem 1rem;
     gap: 2rem;
-  }
-  .lesson-list-sticky-header {
-    padding: 0.5rem 0 0.5rem 0.75rem;
   }
   .main-content--list-collapsed {
     grid-template-columns: 1fr 3rem;
@@ -339,11 +345,8 @@ const classTitle = computed(() => store.currentClass?.class?.title || 'Lessons')
   .main-content {
     padding-top: 7rem;
     grid-template-columns: 3fr 1fr;
-    padding: 5rem 1rem 1rem 0; 
+    padding: 5rem 1rem 1rem 1rem;
     gap: 2rem;
-  }
-  .lesson-list-sticky-header {
-    padding: 0 0 0.5rem 0.75rem;
   }
   .main-content--list-collapsed {
     grid-template-columns: 1fr 3rem;
@@ -353,7 +356,7 @@ const classTitle = computed(() => store.currentClass?.class?.title || 'Lessons')
     min-width: 3rem;
   }
   .lesson-content-area {
-    padding: 0 10% 2rem 10%; 
+    padding: 0 10% 2rem 10%;
   }
   /* Divider spans full width of content area (breaks out of 10% padding) */
   .lesson-content-area :deep(.block-divider) {

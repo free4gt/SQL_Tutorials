@@ -160,12 +160,14 @@ function listKey(i, item) {
   }
 }
 
-/* Tablet/desktop: lesson list flush right and top (no right/top padding) */
+/* Tablet/desktop */
 @media (min-width: 769px) {
   .lesson-list {
-    border-radius: 8px 0 0 8px;
-    padding: 0 0 1.5rem 1.5rem;
+    border-radius: 8px;
+    padding: 1.5rem;
     margin: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-sizing: border-box;
   }
 }
 
