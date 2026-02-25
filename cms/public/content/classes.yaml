@@ -4,9 +4,9 @@ classes:
       title: 'Intro to SQL'
       lessonsYaml: 'sql-intro.yaml'
   - class:
-      name: 'sql-basic'
-      title: 'Basic SQL'
-      lessonsYaml: 'sql-basic.yaml'
+      name: 'car-factory'
+      title: 'Case study: Toyota Manufacturing'
+      lessonsYaml: 'car-factory.yaml'
   - class:
       name: 'practice'
       title: 'Practice Projects'

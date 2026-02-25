@@ -1,72 +1,2251 @@
-# Class 1: Introduction to SQL
-# Video slide = blocks: header, video, paragraph
+# PostgreSQL SQL Syntax – each lesson: h3 Video, video, paragraph, h3 Example data, paragraph, table, h3 SQL interpreter, 5 tabs with SQL editor
 lessons:
+  - lesson_category:
+      text: 'Intro'
   - lesson:
       button:
-        text: 'Introduction to SQL'
+        text: 'Introduction'
       blocks:
         - header:
-            text: 'Introduction to SQL'
+            text: 'Introduction'
         - video:
             src: ''
         - paragraph:
-            text: 'We provide a basic overview of our course.'  # What the course covers
+            text: ''
+  - lesson_category:
+      text: 'Databases'
   - lesson:
       button:
-        text: 'Setting up course software'
+        text: 'What is a Database?'
       blocks:
         - header:
-            text: 'Setting up course software'
+            text: 'What is a Database?'
+        - video:
+            src: ''
+        - paragraph:
+            text: ''
+  - lesson:
+      button:
+        text: 'What is a table?'
+      blocks:
+        - header:
+            text: 'What is a table?'
+        - video:
+            src: ''
+        - paragraph:
+            text: ''
+  - lesson:
+      button:
+        text: 'What is SQL?'
+      blocks:
+        - header:
+            text: 'What is SQL?'
+        - video:
+            src: ''
+        - paragraph:
+            text: ''
+  - lesson:
+      button:
+        text: 'Basic interface?'
+      blocks:
+        - header:
+            text: 'Basic interface?'
+        - video:
+            src: ''
+        - paragraph:
+            text: ''
+  - lesson_category:
+      text: 'SQL basics'
+  - lesson:
+      button:
+        text: 'SQL basics'
+      blocks:
+        - header:
+            level: 3
+            text: 'Video'
+        - video:
+            src: ''
+        - paragraph:
+            text: ''
+        - header:
+            level: 3
+            text: 'Example data'
+        - paragraph:
+            text: ''
+        - table:
+            headers: ['col1', 'col2']
+            rows:
+              - ['a', 'b']
+        - header:
+            level: 3
+            text: 'SQL interpreter'
         - tabs:
             tabs:
               - tab:
-                  name: 'Windows'
+                  name: 'Exercise 1'
                   blocks:
-                    - video:
-                        src: ''
-                    - paragraph:
-                        text: 'We provide Windows specific instructions for setting up PostgreSQL and PgAdmin4.'
+                    - sql:
+                        tableName: 't1'
+                        columns: ['id', 'x']
+                        rows:
+                          - ['1', 'a']
+                        solution: 'SELECT * FROM t1'
+                        instructions: ''
               - tab:
-                  name: 'MacOSX'
+                  name: 'Exercise 2'
                   blocks:
-                    - video:
-                        src: ''
-                    - paragraph:
-                        text: 'We provide MacOSX specific instructions for setting up PostgreSQL and PgAdmin4.'
+                    - sql:
+                        tableName: 't2'
+                        columns: ['id', 'y']
+                        rows:
+                          - ['1', 'b']
+                        solution: 'SELECT * FROM t2'
+                        instructions: ''
               - tab:
-                  name: 'Linux'
+                  name: 'Exercise 3'
                   blocks:
-                    - video:
-                        src: ''
-                    - paragraph:
-                        text: 'We provide Linux specific instructions for setting up PostgreSQL and PgAdmin4.'
+                    - sql:
+                        tableName: 't3'
+                        columns: ['id', 'z']
+                        rows:
+                          - ['1', 'c']
+                        solution: 'SELECT * FROM t3'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 4'
+                  blocks:
+                    - sql:
+                        tableName: 't4'
+                        columns: ['id', 'w']
+                        rows:
+                          - ['1', 'd']
+                        solution: 'SELECT * FROM t4'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 5'
+                  blocks:
+                    - sql:
+                        tableName: 't5'
+                        columns: ['id', 'v']
+                        rows:
+                          - ['1', 'e']
+                        solution: 'SELECT * FROM t5'
+                        instructions: ''
   - lesson:
       button:
-        text: 'PgAdmin4 Demo'
+        text: 'Select'
       blocks:
         - header:
-            text: 'PgAdmin4 Demo'
+            level: 3
+            text: 'Video'
         - video:
             src: ''
         - paragraph:
-            text: 'We provide a quick tour of pgAdmin4 and explains how it interacts with PostgreSQL.'
+            text: ''
+        - header:
+            level: 3
+            text: 'Example data'
+        - paragraph:
+            text: ''
+        - table:
+            headers: ['col1', 'col2']
+            rows:
+              - ['a', 'b']
+        - header:
+            level: 3
+            text: 'SQL interpreter'
+        - tabs:
+            tabs:
+              - tab:
+                  name: 'Exercise 1'
+                  blocks:
+                    - sql:
+                        tableName: 't1'
+                        columns: ['id', 'x']
+                        rows:
+                          - ['1', 'a']
+                        solution: 'SELECT * FROM t1'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 2'
+                  blocks:
+                    - sql:
+                        tableName: 't2'
+                        columns: ['id', 'y']
+                        rows:
+                          - ['1', 'b']
+                        solution: 'SELECT * FROM t2'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 3'
+                  blocks:
+                    - sql:
+                        tableName: 't3'
+                        columns: ['id', 'z']
+                        rows:
+                          - ['1', 'c']
+                        solution: 'SELECT * FROM t3'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 4'
+                  blocks:
+                    - sql:
+                        tableName: 't4'
+                        columns: ['id', 'w']
+                        rows:
+                          - ['1', 'd']
+                        solution: 'SELECT * FROM t4'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 5'
+                  blocks:
+                    - sql:
+                        tableName: 't5'
+                        columns: ['id', 'v']
+                        rows:
+                          - ['1', 'e']
+                        solution: 'SELECT * FROM t5'
+                        instructions: ''
   - lesson:
       button:
-        text: 'What is PostgreSQL?'
+        text: 'DISTINCT'
       blocks:
         - header:
-            text: 'What is PostgreSQL?'
+            level: 3
+            text: 'Video'
         - video:
             src: ''
         - paragraph:
-            text: 'We provide a basic overview of PostgreSQL, what it looks like under the covers and how it interacts with pgAdmin4.'
+            text: ''
+        - header:
+            level: 3
+            text: 'Example data'
+        - paragraph:
+            text: ''
+        - table:
+            headers: ['col1', 'col2']
+            rows:
+              - ['a', 'b']
+        - header:
+            level: 3
+            text: 'SQL interpreter'
+        - tabs:
+            tabs:
+              - tab:
+                  name: 'Exercise 1'
+                  blocks:
+                    - sql:
+                        tableName: 't1'
+                        columns: ['id', 'x']
+                        rows:
+                          - ['1', 'a']
+                        solution: 'SELECT * FROM t1'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 2'
+                  blocks:
+                    - sql:
+                        tableName: 't2'
+                        columns: ['id', 'y']
+                        rows:
+                          - ['1', 'b']
+                        solution: 'SELECT * FROM t2'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 3'
+                  blocks:
+                    - sql:
+                        tableName: 't3'
+                        columns: ['id', 'z']
+                        rows:
+                          - ['1', 'c']
+                        solution: 'SELECT * FROM t3'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 4'
+                  blocks:
+                    - sql:
+                        tableName: 't4'
+                        columns: ['id', 'w']
+                        rows:
+                          - ['1', 'd']
+                        solution: 'SELECT * FROM t4'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 5'
+                  blocks:
+                    - sql:
+                        tableName: 't5'
+                        columns: ['id', 'v']
+                        rows:
+                          - ['1', 'e']
+                        solution: 'SELECT * FROM t5'
+                        instructions: ''
   - lesson:
       button:
-        text: 'Course next steps'
+        text: 'LIMIT'
       blocks:
         - header:
-            text: 'Course next steps'
+            level: 3
+            text: 'Video'
         - video:
             src: ''
         - paragraph:
-            text: 'We provide a basic overview of what the next lessons will cover.  This should be a fun course!'
+            text: ''
+        - header:
+            level: 3
+            text: 'Example data'
+        - paragraph:
+            text: ''
+        - table:
+            headers: ['col1', 'col2']
+            rows:
+              - ['a', 'b']
+        - header:
+            level: 3
+            text: 'SQL interpreter'
+        - tabs:
+            tabs:
+              - tab:
+                  name: 'Exercise 1'
+                  blocks:
+                    - sql:
+                        tableName: 't1'
+                        columns: ['id', 'x']
+                        rows:
+                          - ['1', 'a']
+                        solution: 'SELECT * FROM t1'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 2'
+                  blocks:
+                    - sql:
+                        tableName: 't2'
+                        columns: ['id', 'y']
+                        rows:
+                          - ['1', 'b']
+                        solution: 'SELECT * FROM t2'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 3'
+                  blocks:
+                    - sql:
+                        tableName: 't3'
+                        columns: ['id', 'z']
+                        rows:
+                          - ['1', 'c']
+                        solution: 'SELECT * FROM t3'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 4'
+                  blocks:
+                    - sql:
+                        tableName: 't4'
+                        columns: ['id', 'w']
+                        rows:
+                          - ['1', 'd']
+                        solution: 'SELECT * FROM t4'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 5'
+                  blocks:
+                    - sql:
+                        tableName: 't5'
+                        columns: ['id', 'v']
+                        rows:
+                          - ['1', 'e']
+                        solution: 'SELECT * FROM t5'
+                        instructions: ''
+  - lesson:
+      button:
+        text: 'ORDER BY'
+      blocks:
+        - header:
+            level: 3
+            text: 'Video'
+        - video:
+            src: ''
+        - paragraph:
+            text: ''
+        - header:
+            level: 3
+            text: 'Example data'
+        - paragraph:
+            text: ''
+        - table:
+            headers: ['col1', 'col2']
+            rows:
+              - ['a', 'b']
+        - header:
+            level: 3
+            text: 'SQL interpreter'
+        - tabs:
+            tabs:
+              - tab:
+                  name: 'Exercise 1'
+                  blocks:
+                    - sql:
+                        tableName: 't1'
+                        columns: ['id', 'x']
+                        rows:
+                          - ['1', 'a']
+                        solution: 'SELECT * FROM t1'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 2'
+                  blocks:
+                    - sql:
+                        tableName: 't2'
+                        columns: ['id', 'y']
+                        rows:
+                          - ['1', 'b']
+                        solution: 'SELECT * FROM t2'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 3'
+                  blocks:
+                    - sql:
+                        tableName: 't3'
+                        columns: ['id', 'z']
+                        rows:
+                          - ['1', 'c']
+                        solution: 'SELECT * FROM t3'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 4'
+                  blocks:
+                    - sql:
+                        tableName: 't4'
+                        columns: ['id', 'w']
+                        rows:
+                          - ['1', 'd']
+                        solution: 'SELECT * FROM t4'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 5'
+                  blocks:
+                    - sql:
+                        tableName: 't5'
+                        columns: ['id', 'v']
+                        rows:
+                          - ['1', 'e']
+                        solution: 'SELECT * FROM t5'
+                        instructions: ''
+  - lesson:
+      button:
+        text: 'CASE'
+      blocks:
+        - header:
+            level: 3
+            text: 'Video'
+        - video:
+            src: ''
+        - paragraph:
+            text: ''
+        - header:
+            level: 3
+            text: 'Example data'
+        - paragraph:
+            text: ''
+        - table:
+            headers: ['col1', 'col2']
+            rows:
+              - ['a', 'b']
+        - header:
+            level: 3
+            text: 'SQL interpreter'
+        - tabs:
+            tabs:
+              - tab:
+                  name: 'Exercise 1'
+                  blocks:
+                    - sql:
+                        tableName: 't1'
+                        columns: ['id', 'x']
+                        rows:
+                          - ['1', 'a']
+                        solution: 'SELECT * FROM t1'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 2'
+                  blocks:
+                    - sql:
+                        tableName: 't2'
+                        columns: ['id', 'y']
+                        rows:
+                          - ['1', 'b']
+                        solution: 'SELECT * FROM t2'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 3'
+                  blocks:
+                    - sql:
+                        tableName: 't3'
+                        columns: ['id', 'z']
+                        rows:
+                          - ['1', 'c']
+                        solution: 'SELECT * FROM t3'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 4'
+                  blocks:
+                    - sql:
+                        tableName: 't4'
+                        columns: ['id', 'w']
+                        rows:
+                          - ['1', 'd']
+                        solution: 'SELECT * FROM t4'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 5'
+                  blocks:
+                    - sql:
+                        tableName: 't5'
+                        columns: ['id', 'v']
+                        rows:
+                          - ['1', 'e']
+                        solution: 'SELECT * FROM t5'
+                        instructions: ''
+  - lesson:
+      button:
+        text: 'WHERE'
+      blocks:
+        - header:
+            level: 3
+            text: 'Video'
+        - video:
+            src: ''
+        - paragraph:
+            text: ''
+        - header:
+            level: 3
+            text: 'Example data'
+        - paragraph:
+            text: ''
+        - table:
+            headers: ['col1', 'col2']
+            rows:
+              - ['a', 'b']
+        - header:
+            level: 3
+            text: 'SQL interpreter'
+        - tabs:
+            tabs:
+              - tab:
+                  name: 'Exercise 1'
+                  blocks:
+                    - sql:
+                        tableName: 't1'
+                        columns: ['id', 'x']
+                        rows:
+                          - ['1', 'a']
+                        solution: 'SELECT * FROM t1'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 2'
+                  blocks:
+                    - sql:
+                        tableName: 't2'
+                        columns: ['id', 'y']
+                        rows:
+                          - ['1', 'b']
+                        solution: 'SELECT * FROM t2'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 3'
+                  blocks:
+                    - sql:
+                        tableName: 't3'
+                        columns: ['id', 'z']
+                        rows:
+                          - ['1', 'c']
+                        solution: 'SELECT * FROM t3'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 4'
+                  blocks:
+                    - sql:
+                        tableName: 't4'
+                        columns: ['id', 'w']
+                        rows:
+                          - ['1', 'd']
+                        solution: 'SELECT * FROM t4'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 5'
+                  blocks:
+                    - sql:
+                        tableName: 't5'
+                        columns: ['id', 'v']
+                        rows:
+                          - ['1', 'e']
+                        solution: 'SELECT * FROM t5'
+                        instructions: ''
+  - lesson:
+      button:
+        text: 'What is a function?'
+      blocks:
+        - header:
+            level: 3
+            text: 'Video'
+        - video:
+            src: ''
+        - paragraph:
+            text: ''
+        - header:
+            level: 3
+            text: 'Example data'
+        - paragraph:
+            text: ''
+        - table:
+            headers: ['col1', 'col2']
+            rows:
+              - ['a', 'b']
+        - header:
+            level: 3
+            text: 'SQL interpreter'
+        - tabs:
+            tabs:
+              - tab:
+                  name: 'Exercise 1'
+                  blocks:
+                    - sql:
+                        tableName: 't1'
+                        columns: ['id', 'x']
+                        rows:
+                          - ['1', 'a']
+                        solution: 'SELECT * FROM t1'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 2'
+                  blocks:
+                    - sql:
+                        tableName: 't2'
+                        columns: ['id', 'y']
+                        rows:
+                          - ['1', 'b']
+                        solution: 'SELECT * FROM t2'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 3'
+                  blocks:
+                    - sql:
+                        tableName: 't3'
+                        columns: ['id', 'z']
+                        rows:
+                          - ['1', 'c']
+                        solution: 'SELECT * FROM t3'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 4'
+                  blocks:
+                    - sql:
+                        tableName: 't4'
+                        columns: ['id', 'w']
+                        rows:
+                          - ['1', 'd']
+                        solution: 'SELECT * FROM t4'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 5'
+                  blocks:
+                    - sql:
+                        tableName: 't5'
+                        columns: ['id', 'v']
+                        rows:
+                          - ['1', 'e']
+                        solution: 'SELECT * FROM t5'
+                        instructions: ''
+  - lesson_category:
+      text: 'Data types'
+  - lesson:
+      button:
+        text: 'Numeric types (integer, numeric, decimal)'
+      blocks:
+        - header:
+            level: 3
+            text: 'Video'
+        - video:
+            src: ''
+        - paragraph:
+            text: ''
+        - header:
+            level: 3
+            text: 'Example data'
+        - paragraph:
+            text: ''
+        - table:
+            headers: ['type', 'category', 'typical use', 'examples', 'literal']
+            rows:
+              - ['integer', 'Numeric', 'IDs, counts', 'user_id, quantity', '42']
+              - ['numeric(10,2)', 'Numeric', 'Money, precise decimals', 'price, total', '123.45']
+        - header:
+            level: 3
+            text: 'SQL interpreter'
+        - tabs:
+            tabs:
+              - tab:
+                  name: 'Exercise 1'
+                  blocks:
+                    - sql:
+                        tableName: 't1'
+                        columns: ['id', 'x']
+                        rows:
+                          - ['1', 'a']
+                        solution: 'SELECT * FROM t1'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 2'
+                  blocks:
+                    - sql:
+                        tableName: 't2'
+                        columns: ['id', 'y']
+                        rows:
+                          - ['1', 'b']
+                        solution: 'SELECT * FROM t2'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 3'
+                  blocks:
+                    - sql:
+                        tableName: 't3'
+                        columns: ['id', 'z']
+                        rows:
+                          - ['1', 'c']
+                        solution: 'SELECT * FROM t3'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 4'
+                  blocks:
+                    - sql:
+                        tableName: 't4'
+                        columns: ['id', 'w']
+                        rows:
+                          - ['1', 'd']
+                        solution: 'SELECT * FROM t4'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 5'
+                  blocks:
+                    - sql:
+                        tableName: 't5'
+                        columns: ['id', 'v']
+                        rows:
+                          - ['1', 'e']
+                        solution: 'SELECT * FROM t5'
+                        instructions: ''
+  - lesson:
+      button:
+        text: 'Text types (text, varchar)'
+      blocks:
+        - header:
+            level: 3
+            text: 'Video'
+        - video:
+            src: ''
+        - paragraph:
+            text: ''
+        - header:
+            level: 3
+            text: 'Example data'
+        - paragraph:
+            text: ''
+        - table:
+            headers: ['type', 'category', 'typical use', 'examples', 'literal']
+            rows:
+              - ['text', 'Text', 'Names, content', 'name, description', "'hello'"]
+              - ['varchar(255)', 'Text', 'Emails, limited text', 'email, username', "'user@example.com'"]
+        - header:
+            level: 3
+            text: 'SQL interpreter'
+        - tabs:
+            tabs:
+              - tab:
+                  name: 'Exercise 1'
+                  blocks:
+                    - sql:
+                        tableName: 't1'
+                        columns: ['id', 'x']
+                        rows:
+                          - ['1', 'a']
+                        solution: 'SELECT * FROM t1'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 2'
+                  blocks:
+                    - sql:
+                        tableName: 't2'
+                        columns: ['id', 'y']
+                        rows:
+                          - ['1', 'b']
+                        solution: 'SELECT * FROM t2'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 3'
+                  blocks:
+                    - sql:
+                        tableName: 't3'
+                        columns: ['id', 'z']
+                        rows:
+                          - ['1', 'c']
+                        solution: 'SELECT * FROM t3'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 4'
+                  blocks:
+                    - sql:
+                        tableName: 't4'
+                        columns: ['id', 'w']
+                        rows:
+                          - ['1', 'd']
+                        solution: 'SELECT * FROM t4'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 5'
+                  blocks:
+                    - sql:
+                        tableName: 't5'
+                        columns: ['id', 'v']
+                        rows:
+                          - ['1', 'e']
+                        solution: 'SELECT * FROM t5'
+                        instructions: ''
+  - lesson:
+      button:
+        text: 'Boolean'
+      blocks:
+        - header:
+            level: 3
+            text: 'Video'
+        - video:
+            src: ''
+        - paragraph:
+            text: ''
+        - header:
+            level: 3
+            text: 'Example data'
+        - paragraph:
+            text: ''
+        - table:
+            headers: ['type', 'category', 'typical use', 'examples', 'literal']
+            rows:
+              - ['boolean', 'Boolean', 'Flags', 'is_active, deleted', 'true, false']
+        - header:
+            level: 3
+            text: 'SQL interpreter'
+        - tabs:
+            tabs:
+              - tab:
+                  name: 'Exercise 1'
+                  blocks:
+                    - sql:
+                        tableName: 't1'
+                        columns: ['id', 'x']
+                        rows:
+                          - ['1', 'a']
+                        solution: 'SELECT * FROM t1'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 2'
+                  blocks:
+                    - sql:
+                        tableName: 't2'
+                        columns: ['id', 'y']
+                        rows:
+                          - ['1', 'b']
+                        solution: 'SELECT * FROM t2'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 3'
+                  blocks:
+                    - sql:
+                        tableName: 't3'
+                        columns: ['id', 'z']
+                        rows:
+                          - ['1', 'c']
+                        solution: 'SELECT * FROM t3'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 4'
+                  blocks:
+                    - sql:
+                        tableName: 't4'
+                        columns: ['id', 'w']
+                        rows:
+                          - ['1', 'd']
+                        solution: 'SELECT * FROM t4'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 5'
+                  blocks:
+                    - sql:
+                        tableName: 't5'
+                        columns: ['id', 'v']
+                        rows:
+                          - ['1', 'e']
+                        solution: 'SELECT * FROM t5'
+                        instructions: ''
+  - lesson:
+      button:
+        text: 'Date and timestamp types'
+      blocks:
+        - header:
+            level: 3
+            text: 'Video'
+        - video:
+            src: ''
+        - paragraph:
+            text: ''
+        - header:
+            level: 3
+            text: 'Example data'
+        - paragraph:
+            text: ''
+        - table:
+            headers: ['type', 'category', 'typical use', 'examples', 'literal']
+            rows:
+              - ['timestamptz', 'Date/Time', 'Timestamps (recommended)', 'created_at, updated_at', "'2026-02-24'::timestamptz"]
+              - ['date', 'Date/Time', 'Birthdays, due dates', 'birth_date', "'2026-02-24'::date"]
+        - header:
+            level: 3
+            text: 'SQL interpreter'
+        - tabs:
+            tabs:
+              - tab:
+                  name: 'Exercise 1'
+                  blocks:
+                    - sql:
+                        tableName: 't1'
+                        columns: ['id', 'x']
+                        rows:
+                          - ['1', 'a']
+                        solution: 'SELECT * FROM t1'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 2'
+                  blocks:
+                    - sql:
+                        tableName: 't2'
+                        columns: ['id', 'y']
+                        rows:
+                          - ['1', 'b']
+                        solution: 'SELECT * FROM t2'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 3'
+                  blocks:
+                    - sql:
+                        tableName: 't3'
+                        columns: ['id', 'z']
+                        rows:
+                          - ['1', 'c']
+                        solution: 'SELECT * FROM t3'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 4'
+                  blocks:
+                    - sql:
+                        tableName: 't4'
+                        columns: ['id', 'w']
+                        rows:
+                          - ['1', 'd']
+                        solution: 'SELECT * FROM t4'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 5'
+                  blocks:
+                    - sql:
+                        tableName: 't5'
+                        columns: ['id', 'v']
+                        rows:
+                          - ['1', 'e']
+                        solution: 'SELECT * FROM t5'
+                        instructions: ''
+  - lesson:
+      button:
+        text: 'NULL'
+      blocks:
+        - header:
+            level: 3
+            text: 'Video'
+        - video:
+            src: ''
+        - paragraph:
+            text: ''
+        - header:
+            level: 3
+            text: 'Example data'
+        - paragraph:
+            text: ''
+        - table:
+            headers: ['col1', 'col2']
+            rows:
+              - ['a', 'b']
+        - header:
+            level: 3
+            text: 'SQL interpreter'
+        - tabs:
+            tabs:
+              - tab:
+                  name: 'Exercise 1'
+                  blocks:
+                    - sql:
+                        tableName: 't1'
+                        columns: ['id', 'x']
+                        rows:
+                          - ['1', 'a']
+                        solution: 'SELECT * FROM t1'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 2'
+                  blocks:
+                    - sql:
+                        tableName: 't2'
+                        columns: ['id', 'y']
+                        rows:
+                          - ['1', 'b']
+                        solution: 'SELECT * FROM t2'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 3'
+                  blocks:
+                    - sql:
+                        tableName: 't3'
+                        columns: ['id', 'z']
+                        rows:
+                          - ['1', 'c']
+                        solution: 'SELECT * FROM t3'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 4'
+                  blocks:
+                    - sql:
+                        tableName: 't4'
+                        columns: ['id', 'w']
+                        rows:
+                          - ['1', 'd']
+                        solution: 'SELECT * FROM t4'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 5'
+                  blocks:
+                    - sql:
+                        tableName: 't5'
+                        columns: ['id', 'v']
+                        rows:
+                          - ['1', 'e']
+                        solution: 'SELECT * FROM t5'
+                        instructions: ''
+  - lesson:
+      button:
+        text: 'Other data types'
+      blocks:
+        - header:
+            level: 3
+            text: 'Video'
+        - video:
+            src: ''
+        - paragraph:
+            text: ''
+        - header:
+            level: 3
+            text: 'Example data'
+        - paragraph:
+            text: ''
+        - table:
+            headers: ['type', 'typical use', 'example literal']
+            rows:
+              - ['uuid', 'Unique IDs, distributed systems', "'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11'::uuid"]
+        - header:
+            level: 3
+            text: 'SQL interpreter'
+        - tabs:
+            tabs:
+              - tab:
+                  name: 'Exercise 1'
+                  blocks:
+                    - sql:
+                        tableName: 't1'
+                        columns: ['id', 'x']
+                        rows:
+                          - ['1', 'a']
+                        solution: 'SELECT * FROM t1'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 2'
+                  blocks:
+                    - sql:
+                        tableName: 't2'
+                        columns: ['id', 'y']
+                        rows:
+                          - ['1', 'b']
+                        solution: 'SELECT * FROM t2'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 3'
+                  blocks:
+                    - sql:
+                        tableName: 't3'
+                        columns: ['id', 'z']
+                        rows:
+                          - ['1', 'c']
+                        solution: 'SELECT * FROM t3'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 4'
+                  blocks:
+                    - sql:
+                        tableName: 't4'
+                        columns: ['id', 'w']
+                        rows:
+                          - ['1', 'd']
+                        solution: 'SELECT * FROM t4'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 5'
+                  blocks:
+                    - sql:
+                        tableName: 't5'
+                        columns: ['id', 'v']
+                        rows:
+                          - ['1', 'e']
+                        solution: 'SELECT * FROM t5'
+                        instructions: ''
+  - lesson_category:
+      text: 'GROUP BY and HAVING'
+  - lesson:
+      button:
+        text: 'Aggregation and GROUP BY'
+      blocks:
+        - header:
+            level: 3
+            text: 'Video'
+        - video:
+            src: ''
+        - paragraph:
+            text: ''
+        - header:
+            level: 3
+            text: 'Example data'
+        - paragraph:
+            text: ''
+        - table:
+            headers: ['col1', 'col2']
+            rows:
+              - ['a', 'b']
+        - header:
+            level: 3
+            text: 'SQL interpreter'
+        - tabs:
+            tabs:
+              - tab:
+                  name: 'Exercise 1'
+                  blocks:
+                    - sql:
+                        tableName: 't1'
+                        columns: ['id', 'x']
+                        rows:
+                          - ['1', 'a']
+                        solution: 'SELECT * FROM t1'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 2'
+                  blocks:
+                    - sql:
+                        tableName: 't2'
+                        columns: ['id', 'y']
+                        rows:
+                          - ['1', 'b']
+                        solution: 'SELECT * FROM t2'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 3'
+                  blocks:
+                    - sql:
+                        tableName: 't3'
+                        columns: ['id', 'z']
+                        rows:
+                          - ['1', 'c']
+                        solution: 'SELECT * FROM t3'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 4'
+                  blocks:
+                    - sql:
+                        tableName: 't4'
+                        columns: ['id', 'w']
+                        rows:
+                          - ['1', 'd']
+                        solution: 'SELECT * FROM t4'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 5'
+                  blocks:
+                    - sql:
+                        tableName: 't5'
+                        columns: ['id', 'v']
+                        rows:
+                          - ['1', 'e']
+                        solution: 'SELECT * FROM t5'
+                        instructions: ''
+  - lesson:
+      button:
+        text: 'HAVING and Group Filtering'
+      blocks:
+        - header:
+            level: 3
+            text: 'Video'
+        - video:
+            src: ''
+        - paragraph:
+            text: ''
+        - header:
+            level: 3
+            text: 'Example data'
+        - paragraph:
+            text: ''
+        - table:
+            headers: ['col1', 'col2']
+            rows:
+              - ['a', 'b']
+        - header:
+            level: 3
+            text: 'SQL interpreter'
+        - tabs:
+            tabs:
+              - tab:
+                  name: 'Exercise 1'
+                  blocks:
+                    - sql:
+                        tableName: 't1'
+                        columns: ['id', 'x']
+                        rows:
+                          - ['1', 'a']
+                        solution: 'SELECT * FROM t1'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 2'
+                  blocks:
+                    - sql:
+                        tableName: 't2'
+                        columns: ['id', 'y']
+                        rows:
+                          - ['1', 'b']
+                        solution: 'SELECT * FROM t2'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 3'
+                  blocks:
+                    - sql:
+                        tableName: 't3'
+                        columns: ['id', 'z']
+                        rows:
+                          - ['1', 'c']
+                        solution: 'SELECT * FROM t3'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 4'
+                  blocks:
+                    - sql:
+                        tableName: 't4'
+                        columns: ['id', 'w']
+                        rows:
+                          - ['1', 'd']
+                        solution: 'SELECT * FROM t4'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 5'
+                  blocks:
+                    - sql:
+                        tableName: 't5'
+                        columns: ['id', 'v']
+                        rows:
+                          - ['1', 'e']
+                        solution: 'SELECT * FROM t5'
+                        instructions: ''
+  - lesson:
+      button:
+        text: 'Order of clauses'
+      blocks:
+        - header:
+            level: 3
+            text: 'Video'
+        - video:
+            src: ''
+        - paragraph:
+            text: ''
+        - header:
+            level: 3
+            text: 'Example data'
+        - paragraph:
+            text: ''
+        - table:
+            headers: ['col1', 'col2']
+            rows:
+              - ['a', 'b']
+        - header:
+            level: 3
+            text: 'SQL interpreter'
+        - tabs:
+            tabs:
+              - tab:
+                  name: 'Exercise 1'
+                  blocks:
+                    - sql:
+                        tableName: 't1'
+                        columns: ['id', 'x']
+                        rows:
+                          - ['1', 'a']
+                        solution: 'SELECT * FROM t1'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 2'
+                  blocks:
+                    - sql:
+                        tableName: 't2'
+                        columns: ['id', 'y']
+                        rows:
+                          - ['1', 'b']
+                        solution: 'SELECT * FROM t2'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 3'
+                  blocks:
+                    - sql:
+                        tableName: 't3'
+                        columns: ['id', 'z']
+                        rows:
+                          - ['1', 'c']
+                        solution: 'SELECT * FROM t3'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 4'
+                  blocks:
+                    - sql:
+                        tableName: 't4'
+                        columns: ['id', 'w']
+                        rows:
+                          - ['1', 'd']
+                        solution: 'SELECT * FROM t4'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 5'
+                  blocks:
+                    - sql:
+                        tableName: 't5'
+                        columns: ['id', 'v']
+                        rows:
+                          - ['1', 'e']
+                        solution: 'SELECT * FROM t5'
+                        instructions: ''
+  - lesson_category:
+      text: 'Joins'
+  - lesson:
+      button:
+        text: 'INNER JOIN'
+      blocks:
+        - header:
+            level: 3
+            text: 'Video'
+        - video:
+            src: ''
+        - paragraph:
+            text: ''
+        - header:
+            level: 3
+            text: 'Example data'
+        - paragraph:
+            text: ''
+        - table:
+            headers: ['col1', 'col2']
+            rows:
+              - ['a', 'b']
+        - header:
+            level: 3
+            text: 'SQL interpreter'
+        - tabs:
+            tabs:
+              - tab:
+                  name: 'Exercise 1'
+                  blocks:
+                    - sql:
+                        tableName: 't1'
+                        columns: ['id', 'x']
+                        rows:
+                          - ['1', 'a']
+                        solution: 'SELECT * FROM t1'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 2'
+                  blocks:
+                    - sql:
+                        tableName: 't2'
+                        columns: ['id', 'y']
+                        rows:
+                          - ['1', 'b']
+                        solution: 'SELECT * FROM t2'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 3'
+                  blocks:
+                    - sql:
+                        tableName: 't3'
+                        columns: ['id', 'z']
+                        rows:
+                          - ['1', 'c']
+                        solution: 'SELECT * FROM t3'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 4'
+                  blocks:
+                    - sql:
+                        tableName: 't4'
+                        columns: ['id', 'w']
+                        rows:
+                          - ['1', 'd']
+                        solution: 'SELECT * FROM t4'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 5'
+                  blocks:
+                    - sql:
+                        tableName: 't5'
+                        columns: ['id', 'v']
+                        rows:
+                          - ['1', 'e']
+                        solution: 'SELECT * FROM t5'
+                        instructions: ''
+  - lesson:
+      button:
+        text: 'LEFT JOIN'
+      blocks:
+        - header:
+            level: 3
+            text: 'Video'
+        - video:
+            src: ''
+        - paragraph:
+            text: ''
+        - header:
+            level: 3
+            text: 'Example data'
+        - paragraph:
+            text: ''
+        - table:
+            headers: ['col1', 'col2']
+            rows:
+              - ['a', 'b']
+        - header:
+            level: 3
+            text: 'SQL interpreter'
+        - tabs:
+            tabs:
+              - tab:
+                  name: 'Exercise 1'
+                  blocks:
+                    - sql:
+                        tableName: 't1'
+                        columns: ['id', 'x']
+                        rows:
+                          - ['1', 'a']
+                        solution: 'SELECT * FROM t1'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 2'
+                  blocks:
+                    - sql:
+                        tableName: 't2'
+                        columns: ['id', 'y']
+                        rows:
+                          - ['1', 'b']
+                        solution: 'SELECT * FROM t2'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 3'
+                  blocks:
+                    - sql:
+                        tableName: 't3'
+                        columns: ['id', 'z']
+                        rows:
+                          - ['1', 'c']
+                        solution: 'SELECT * FROM t3'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 4'
+                  blocks:
+                    - sql:
+                        tableName: 't4'
+                        columns: ['id', 'w']
+                        rows:
+                          - ['1', 'd']
+                        solution: 'SELECT * FROM t4'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 5'
+                  blocks:
+                    - sql:
+                        tableName: 't5'
+                        columns: ['id', 'v']
+                        rows:
+                          - ['1', 'e']
+                        solution: 'SELECT * FROM t5'
+                        instructions: ''
+  - lesson:
+      button:
+        text: 'RIGHT JOIN'
+      blocks:
+        - header:
+            level: 3
+            text: 'Video'
+        - video:
+            src: ''
+        - paragraph:
+            text: ''
+        - header:
+            level: 3
+            text: 'Example data'
+        - paragraph:
+            text: ''
+        - table:
+            headers: ['col1', 'col2']
+            rows:
+              - ['a', 'b']
+        - header:
+            level: 3
+            text: 'SQL interpreter'
+        - tabs:
+            tabs:
+              - tab:
+                  name: 'Exercise 1'
+                  blocks:
+                    - sql:
+                        tableName: 't1'
+                        columns: ['id', 'x']
+                        rows:
+                          - ['1', 'a']
+                        solution: 'SELECT * FROM t1'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 2'
+                  blocks:
+                    - sql:
+                        tableName: 't2'
+                        columns: ['id', 'y']
+                        rows:
+                          - ['1', 'b']
+                        solution: 'SELECT * FROM t2'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 3'
+                  blocks:
+                    - sql:
+                        tableName: 't3'
+                        columns: ['id', 'z']
+                        rows:
+                          - ['1', 'c']
+                        solution: 'SELECT * FROM t3'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 4'
+                  blocks:
+                    - sql:
+                        tableName: 't4'
+                        columns: ['id', 'w']
+                        rows:
+                          - ['1', 'd']
+                        solution: 'SELECT * FROM t4'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 5'
+                  blocks:
+                    - sql:
+                        tableName: 't5'
+                        columns: ['id', 'v']
+                        rows:
+                          - ['1', 'e']
+                        solution: 'SELECT * FROM t5'
+                        instructions: ''
+  - lesson:
+      button:
+        text: 'FULL JOIN'
+      blocks:
+        - header:
+            level: 3
+            text: 'Video'
+        - video:
+            src: ''
+        - paragraph:
+            text: ''
+        - header:
+            level: 3
+            text: 'Example data'
+        - paragraph:
+            text: ''
+        - table:
+            headers: ['col1', 'col2']
+            rows:
+              - ['a', 'b']
+        - header:
+            level: 3
+            text: 'SQL interpreter'
+        - tabs:
+            tabs:
+              - tab:
+                  name: 'Exercise 1'
+                  blocks:
+                    - sql:
+                        tableName: 't1'
+                        columns: ['id', 'x']
+                        rows:
+                          - ['1', 'a']
+                        solution: 'SELECT * FROM t1'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 2'
+                  blocks:
+                    - sql:
+                        tableName: 't2'
+                        columns: ['id', 'y']
+                        rows:
+                          - ['1', 'b']
+                        solution: 'SELECT * FROM t2'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 3'
+                  blocks:
+                    - sql:
+                        tableName: 't3'
+                        columns: ['id', 'z']
+                        rows:
+                          - ['1', 'c']
+                        solution: 'SELECT * FROM t3'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 4'
+                  blocks:
+                    - sql:
+                        tableName: 't4'
+                        columns: ['id', 'w']
+                        rows:
+                          - ['1', 'd']
+                        solution: 'SELECT * FROM t4'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 5'
+                  blocks:
+                    - sql:
+                        tableName: 't5'
+                        columns: ['id', 'v']
+                        rows:
+                          - ['1', 'e']
+                        solution: 'SELECT * FROM t5'
+                        instructions: ''
+  - lesson:
+      button:
+        text: 'Joins with GROUP BY and HAVING'
+      blocks:
+        - header:
+            level: 3
+            text: 'Video'
+        - video:
+            src: ''
+        - paragraph:
+            text: ''
+        - header:
+            level: 3
+            text: 'Example data'
+        - paragraph:
+            text: ''
+        - table:
+            headers: ['col1', 'col2']
+            rows:
+              - ['a', 'b']
+        - header:
+            level: 3
+            text: 'SQL interpreter'
+        - tabs:
+            tabs:
+              - tab:
+                  name: 'Exercise 1'
+                  blocks:
+                    - sql:
+                        tableName: 't1'
+                        columns: ['id', 'x']
+                        rows:
+                          - ['1', 'a']
+                        solution: 'SELECT * FROM t1'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 2'
+                  blocks:
+                    - sql:
+                        tableName: 't2'
+                        columns: ['id', 'y']
+                        rows:
+                          - ['1', 'b']
+                        solution: 'SELECT * FROM t2'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 3'
+                  blocks:
+                    - sql:
+                        tableName: 't3'
+                        columns: ['id', 'z']
+                        rows:
+                          - ['1', 'c']
+                        solution: 'SELECT * FROM t3'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 4'
+                  blocks:
+                    - sql:
+                        tableName: 't4'
+                        columns: ['id', 'w']
+                        rows:
+                          - ['1', 'd']
+                        solution: 'SELECT * FROM t4'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 5'
+                  blocks:
+                    - sql:
+                        tableName: 't5'
+                        columns: ['id', 'v']
+                        rows:
+                          - ['1', 'e']
+                        solution: 'SELECT * FROM t5'
+                        instructions: ''
+  - lesson_category:
+      text: 'Advanced data types'
+  - lesson:
+      button:
+        text: 'Advanced data types (overview)'
+      blocks:
+        - header:
+            level: 3
+            text: 'Video'
+        - video:
+            src: ''
+        - paragraph:
+            text: ''
+        - header:
+            level: 3
+            text: 'Example data'
+        - paragraph:
+            text: ''
+        - table:
+            headers: ['type', 'typical use', 'example literal']
+            rows:
+              - ['array (e.g. text[])', 'Lists, tags, multi-values', "'{a,b,c}'::text[]"]
+              - ['json / jsonb', 'Structured data, API payloads', "'{\"key\": \"value\"}'::jsonb"]
+              - ['range (int4range, tstzrange, etc.)', 'Intervals, periods, spans', "'[1,10]'::int4range"]
+        - header:
+            level: 3
+            text: 'SQL interpreter'
+        - tabs:
+            tabs:
+              - tab:
+                  name: 'Exercise 1'
+                  blocks:
+                    - sql:
+                        tableName: 't1'
+                        columns: ['id', 'x']
+                        rows:
+                          - ['1', 'a']
+                        solution: 'SELECT * FROM t1'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 2'
+                  blocks:
+                    - sql:
+                        tableName: 't2'
+                        columns: ['id', 'y']
+                        rows:
+                          - ['1', 'b']
+                        solution: 'SELECT * FROM t2'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 3'
+                  blocks:
+                    - sql:
+                        tableName: 't3'
+                        columns: ['id', 'z']
+                        rows:
+                          - ['1', 'c']
+                        solution: 'SELECT * FROM t3'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 4'
+                  blocks:
+                    - sql:
+                        tableName: 't4'
+                        columns: ['id', 'w']
+                        rows:
+                          - ['1', 'd']
+                        solution: 'SELECT * FROM t4'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 5'
+                  blocks:
+                    - sql:
+                        tableName: 't5'
+                        columns: ['id', 'v']
+                        rows:
+                          - ['1', 'e']
+                        solution: 'SELECT * FROM t5'
+                        instructions: ''
+  - lesson:
+      button:
+        text: 'Arrays'
+      blocks:
+        - header:
+            level: 3
+            text: 'Video'
+        - video:
+            src: ''
+        - paragraph:
+            text: ''
+        - header:
+            level: 3
+            text: 'Example data'
+        - paragraph:
+            text: ''
+        - table:
+            headers: ['type', 'typical use', 'example literal']
+            rows:
+              - ['text[]', 'Lists of strings (tags, labels)', "'{a,b,c}'::text[]"]
+              - ['integer[]', 'Lists of numbers', "'{1,2,3}'::integer[]"]
+        - header:
+            level: 3
+            text: 'SQL interpreter'
+        - tabs:
+            tabs:
+              - tab:
+                  name: 'Exercise 1'
+                  blocks:
+                    - sql:
+                        tableName: 't1'
+                        columns: ['id', 'x']
+                        rows:
+                          - ['1', 'a']
+                        solution: 'SELECT * FROM t1'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 2'
+                  blocks:
+                    - sql:
+                        tableName: 't2'
+                        columns: ['id', 'y']
+                        rows:
+                          - ['1', 'b']
+                        solution: 'SELECT * FROM t2'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 3'
+                  blocks:
+                    - sql:
+                        tableName: 't3'
+                        columns: ['id', 'z']
+                        rows:
+                          - ['1', 'c']
+                        solution: 'SELECT * FROM t3'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 4'
+                  blocks:
+                    - sql:
+                        tableName: 't4'
+                        columns: ['id', 'w']
+                        rows:
+                          - ['1', 'd']
+                        solution: 'SELECT * FROM t4'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 5'
+                  blocks:
+                    - sql:
+                        tableName: 't5'
+                        columns: ['id', 'v']
+                        rows:
+                          - ['1', 'e']
+                        solution: 'SELECT * FROM t5'
+                        instructions: ''
+  - lesson:
+      button:
+        text: 'JSON and JSONB'
+      blocks:
+        - header:
+            level: 3
+            text: 'Video'
+        - video:
+            src: ''
+        - paragraph:
+            text: ''
+        - header:
+            level: 3
+            text: 'Example data'
+        - paragraph:
+            text: ''
+        - table:
+            headers: ['type', 'typical use', 'example literal']
+            rows:
+              - ['json', 'Stored as-is, text form', "'{\"name\": \"x\"}'::json"]
+              - ['jsonb', 'Binary, indexed, preferred', "'{\"name\": \"x\"}'::jsonb"]
+        - header:
+            level: 3
+            text: 'SQL interpreter'
+        - tabs:
+            tabs:
+              - tab:
+                  name: 'Exercise 1'
+                  blocks:
+                    - sql:
+                        tableName: 't1'
+                        columns: ['id', 'x']
+                        rows:
+                          - ['1', 'a']
+                        solution: 'SELECT * FROM t1'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 2'
+                  blocks:
+                    - sql:
+                        tableName: 't2'
+                        columns: ['id', 'y']
+                        rows:
+                          - ['1', 'b']
+                        solution: 'SELECT * FROM t2'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 3'
+                  blocks:
+                    - sql:
+                        tableName: 't3'
+                        columns: ['id', 'z']
+                        rows:
+                          - ['1', 'c']
+                        solution: 'SELECT * FROM t3'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 4'
+                  blocks:
+                    - sql:
+                        tableName: 't4'
+                        columns: ['id', 'w']
+                        rows:
+                          - ['1', 'd']
+                        solution: 'SELECT * FROM t4'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 5'
+                  blocks:
+                    - sql:
+                        tableName: 't5'
+                        columns: ['id', 'v']
+                        rows:
+                          - ['1', 'e']
+                        solution: 'SELECT * FROM t5'
+                        instructions: ''
+  - lesson:
+      button:
+        text: 'Range types'
+      blocks:
+        - header:
+            level: 3
+            text: 'Video'
+        - video:
+            src: ''
+        - paragraph:
+            text: ''
+        - header:
+            level: 3
+            text: 'Example data'
+        - paragraph:
+            text: ''
+        - table:
+            headers: ['type', 'typical use', 'example literal']
+            rows:
+              - ['int4range, int8range', 'Integer intervals', "'[1,10]'::int4range"]
+              - ['tstzrange, daterange', 'Time periods, date spans', "'[2026-01-01, 2026-12-31]'::daterange"]
+        - header:
+            level: 3
+            text: 'SQL interpreter'
+        - tabs:
+            tabs:
+              - tab:
+                  name: 'Exercise 1'
+                  blocks:
+                    - sql:
+                        tableName: 't1'
+                        columns: ['id', 'x']
+                        rows:
+                          - ['1', 'a']
+                        solution: 'SELECT * FROM t1'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 2'
+                  blocks:
+                    - sql:
+                        tableName: 't2'
+                        columns: ['id', 'y']
+                        rows:
+                          - ['1', 'b']
+                        solution: 'SELECT * FROM t2'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 3'
+                  blocks:
+                    - sql:
+                        tableName: 't3'
+                        columns: ['id', 'z']
+                        rows:
+                          - ['1', 'c']
+                        solution: 'SELECT * FROM t3'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 4'
+                  blocks:
+                    - sql:
+                        tableName: 't4'
+                        columns: ['id', 'w']
+                        rows:
+                          - ['1', 'd']
+                        solution: 'SELECT * FROM t4'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 5'
+                  blocks:
+                    - sql:
+                        tableName: 't5'
+                        columns: ['id', 'v']
+                        rows:
+                          - ['1', 'e']
+                        solution: 'SELECT * FROM t5'
+                        instructions: ''
+  - lesson_category:
+      text: 'Advanced topics'
+  - lesson:
+      button:
+        text: 'Subqueries (Optional Extension)'
+      blocks:
+        - header:
+            level: 3
+            text: 'Video'
+        - video:
+            src: ''
+        - paragraph:
+            text: ''
+        - header:
+            level: 3
+            text: 'Example data'
+        - paragraph:
+            text: ''
+        - table:
+            headers: ['col1', 'col2']
+            rows:
+              - ['a', 'b']
+        - header:
+            level: 3
+            text: 'SQL interpreter'
+        - tabs:
+            tabs:
+              - tab:
+                  name: 'Exercise 1'
+                  blocks:
+                    - sql:
+                        tableName: 't1'
+                        columns: ['id', 'x']
+                        rows:
+                          - ['1', 'a']
+                        solution: 'SELECT * FROM t1'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 2'
+                  blocks:
+                    - sql:
+                        tableName: 't2'
+                        columns: ['id', 'y']
+                        rows:
+                          - ['1', 'b']
+                        solution: 'SELECT * FROM t2'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 3'
+                  blocks:
+                    - sql:
+                        tableName: 't3'
+                        columns: ['id', 'z']
+                        rows:
+                          - ['1', 'c']
+                        solution: 'SELECT * FROM t3'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 4'
+                  blocks:
+                    - sql:
+                        tableName: 't4'
+                        columns: ['id', 'w']
+                        rows:
+                          - ['1', 'd']
+                        solution: 'SELECT * FROM t4'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 5'
+                  blocks:
+                    - sql:
+                        tableName: 't5'
+                        columns: ['id', 'v']
+                        rows:
+                          - ['1', 'e']
+                        solution: 'SELECT * FROM t5'
+                        instructions: ''
+  - lesson:
+      button:
+        text: 'CTE (Common Table Expressions)'
+      blocks:
+        - header:
+            level: 3
+            text: 'Video'
+        - video:
+            src: ''
+        - paragraph:
+            text: ''
+        - header:
+            level: 3
+            text: 'Example data'
+        - paragraph:
+            text: ''
+        - table:
+            headers: ['col1', 'col2']
+            rows:
+              - ['a', 'b']
+        - header:
+            level: 3
+            text: 'SQL interpreter'
+        - tabs:
+            tabs:
+              - tab:
+                  name: 'Exercise 1'
+                  blocks:
+                    - sql:
+                        tableName: 't1'
+                        columns: ['id', 'x']
+                        rows:
+                          - ['1', 'a']
+                        solution: 'SELECT * FROM t1'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 2'
+                  blocks:
+                    - sql:
+                        tableName: 't2'
+                        columns: ['id', 'y']
+                        rows:
+                          - ['1', 'b']
+                        solution: 'SELECT * FROM t2'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 3'
+                  blocks:
+                    - sql:
+                        tableName: 't3'
+                        columns: ['id', 'z']
+                        rows:
+                          - ['1', 'c']
+                        solution: 'SELECT * FROM t3'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 4'
+                  blocks:
+                    - sql:
+                        tableName: 't4'
+                        columns: ['id', 'w']
+                        rows:
+                          - ['1', 'd']
+                        solution: 'SELECT * FROM t4'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 5'
+                  blocks:
+                    - sql:
+                        tableName: 't5'
+                        columns: ['id', 'v']
+                        rows:
+                          - ['1', 'e']
+                        solution: 'SELECT * FROM t5'
+                        instructions: ''
+  - lesson:
+      button:
+        text: 'Window functions'
+      blocks:
+        - header:
+            level: 3
+            text: 'Video'
+        - video:
+            src: ''
+        - paragraph:
+            text: ''
+        - header:
+            level: 3
+            text: 'Example data'
+        - paragraph:
+            text: ''
+        - table:
+            headers: ['col1', 'col2']
+            rows:
+              - ['a', 'b']
+        - header:
+            level: 3
+            text: 'SQL interpreter'
+        - tabs:
+            tabs:
+              - tab:
+                  name: 'Exercise 1'
+                  blocks:
+                    - sql:
+                        tableName: 't1'
+                        columns: ['id', 'x']
+                        rows:
+                          - ['1', 'a']
+                        solution: 'SELECT * FROM t1'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 2'
+                  blocks:
+                    - sql:
+                        tableName: 't2'
+                        columns: ['id', 'y']
+                        rows:
+                          - ['1', 'b']
+                        solution: 'SELECT * FROM t2'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 3'
+                  blocks:
+                    - sql:
+                        tableName: 't3'
+                        columns: ['id', 'z']
+                        rows:
+                          - ['1', 'c']
+                        solution: 'SELECT * FROM t3'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 4'
+                  blocks:
+                    - sql:
+                        tableName: 't4'
+                        columns: ['id', 'w']
+                        rows:
+                          - ['1', 'd']
+                        solution: 'SELECT * FROM t4'
+                        instructions: ''
+              - tab:
+                  name: 'Exercise 5'
+                  blocks:
+                    - sql:
+                        tableName: 't5'
+                        columns: ['id', 'v']
+                        rows:
+                          - ['1', 'e']
+                        solution: 'SELECT * FROM t5'
+                        instructions: ''

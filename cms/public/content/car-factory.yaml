@@ -1,0 +1,10 @@
+# Car Factory – placeholder; add lessons as needed
+lessons:
+  - lesson:
+      button:
+        text: 'Introduction'
+      blocks:
+        - header:
+            text: 'Introduction'
+        - paragraph:
+            text: ''
